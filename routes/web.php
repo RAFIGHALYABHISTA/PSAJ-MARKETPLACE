@@ -7,8 +7,28 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\AuthController;
 
-Route::prefix('admin')->name('admin.')->group(function () {
+// Home route - redirect based on auth status
+Route::get('/', function () {
+    return auth()->check() ? redirect()->route('admin.dashboard') : redirect()->route('auth.login');
+})->name('home');
+
+// Redirect /admin to /admin dashboard if authenticated, else to login
+Route::get('/admin/login', function () {
+    return redirect()->route('auth.login');
+})->name('admin.login');
+
+// Auth Routes (for guests only)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.login');
+    Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
+    Route::post('/register', [AuthController::class, 'register'])->name('auth.register.store');
+});
+
+// Admin Routes (protected by auth middleware)
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('produk', ProductController::class, [
@@ -87,7 +107,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.pengaturan-komisi');
     })->name('pengaturan-komisi');
 
-    Route::post('/logout', function () {
-        return redirect('/');
-    })->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
