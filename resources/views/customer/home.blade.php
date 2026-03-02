@@ -286,7 +286,7 @@
 
     <!-- MENU -->
     <div class="space-y-3 text-sm">
-      <a href="#"
+      <a href="{{ url('/edit-profil') }}"
         class="flex items-center justify-center gap-2 rounded-full
                border border-gray-300 py-2
                hover:bg-pink-500 hover:text-white hover:border-pink-500

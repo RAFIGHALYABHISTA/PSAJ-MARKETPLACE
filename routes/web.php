@@ -8,6 +8,9 @@ Route::get('/', function () {
 Route::get('/produk', function () {
     return view('customer.produk');
 });
+Route::get('/detail', function () {
+    return view('customer.detail');
+});
 Route::get('/keranjang', function () {
     return view('customer.keranjang');
 });
@@ -16,4 +19,7 @@ Route::get('/login', function () {
 });
 Route::get('/regis', function () {
     return view('customer.regis');
+});
+Route::get('/edit-profil', function () {
+    return view('customer.edit_profil');
 });

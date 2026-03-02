@@ -171,7 +171,7 @@
                             {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
                             <div class="flex items-center justify-between mt-3">
                                 <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
+                                <a href="{{ url('/detail') }}" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                             {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
                             <div class="flex items-center justify-between mt-3">
                                 <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
+                                <a href="{{ url('/detail') }}" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                             {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
                             <div class="flex items-center justify-between mt-3">
                                 <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
+                                <a href="{{ url('/detail') }}" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,8 @@
                             {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
                             <div class="flex items-center justify-between mt-3">
                                 <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
+                                {{-- <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button> --}}
+                                <a href="{{ url('/detail') }}" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -215,7 +216,9 @@
                             {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
                             <div class="flex items-center justify-between mt-3">
                                 <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
+                                {{-- <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button> --}}
+                                <a href="{{ url('/detail') }}" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</a>
+                                {{-- <a href="{{ url('/keranjang') }}" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</a> --}}
                             </div>
                         </div>
                     </div>
@@ -284,7 +287,7 @@
                 <p class="text-sm text-gray-500">user@email.com</p>
             </div>
             <div class="space-y-3 text-sm">
-                <a href="#" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Edit Profil</a>
+                <a href="{{url('/edit-profil')}}" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Edit Profil</a>
                 <a href="#" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Pesanan Saya</a>
                 <a href="#" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Daftar afiliator</a>
                 <a href="#" class="block rounded-full border py-2 text-center text-red-500 hover:bg-red-500 hover:text-white transition">Logout</a>

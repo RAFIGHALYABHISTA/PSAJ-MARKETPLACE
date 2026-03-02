@@ -22,13 +22,9 @@
       <h1 class="text-2xl font-semibold">Keranjang Belanja</h1>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- LIST PRODUK -->
-      <div class="md:col-span-2 space-y-4">
-
+    <div class="grid grid-cols-1 gap-6">
         <!-- ITEM -->
-        <div class="bg-white rounded-xl shadow-sm p-4 flex gap-4">
+        <div class="bg-white w-full rounded-xl shadow-sm p-4 flex gap-4">
           <img src="{{ asset('images/produk.png') }}"
             class="w-28 h-28 object-contain rounded-lg bg-gray-50">
 
@@ -41,13 +37,16 @@
             </div>
 
             <div class="flex items-center justify-between mt-4">
+              <p class="text-sm text-gray-500">1 Produk</p>
+            </div>
+            <div class="flex items-center justify-between mt-4">
               <p class="font-semibold text-pink-600">Rp 45.000</p>
 
               <!-- QTY -->
-              <div class="flex items-center gap-2">
+              {{-- <div class="flex items-center gap-2">
                 <input type="number" value="1" min="1"
                   class="w-16 text-center border rounded-lg">
-              </div>
+              </div> --}}
             </div>
           </div>
 
@@ -59,38 +58,6 @@
             Hapus
           </button>
         </div>
-
-        <!-- ITEM 2 -->
-
-      </div>
-
-      <!-- RINGKASAN -->
-      <div class="bg-white rounded-xl shadow-sm p-6 h-fit">
-        <h3 class="font-semibold text-lg mb-4">Ringkasan Belanja</h3>
-
-        <div class="space-y-2 text-sm">
-          <div class="flex justify-between">
-            <span>Subtotal</span>
-            <span>Rp 100.000</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Ongkir</span>
-            <span>Rp 10.000</span>
-          </div>
-          <hr>
-          <div class="flex justify-between font-semibold text-base">
-            <span>Total</span>
-            <span class="text-pink-600">Rp 110.000</span>
-          </div>
-        </div>
-
-        <button
-          class="mt-6 w-full bg-pink-500 text-white py-3 rounded-lg hover:bg-pink-600 transition">
-          🛍️ Checkout Sekarang
-        </button>
-      </div>
-
-    </div>
   </div>
 </body>
 </html>
