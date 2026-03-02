@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin Dashboard | Sariayu x Smega</title>
+        <title>Afiliator Dashboard | Sariayu x Smega</title>
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
         <script src="https://unpkg.com/alpinejs" defer></script>
@@ -12,7 +12,7 @@
     </head>
     <body class="bg-gray-50">
         <div class="flex h-screen overflow-hidden">
-            @include('layouts.sidebar')
+            @include('layouts.afiliator.sidebar')
             <main class="flex-1 overflow-auto">
                 @yield('content')
             </main>

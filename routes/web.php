@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\CommissionController;
+use App\Http\Controllers\Afiliator\DashboardController as AfiliatorDashboardController;
 
+// Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -91,3 +93,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return redirect('/');
     })->name('logout');
 });
+
+// Afiliator Routes
+Route::prefix('afiliator')->name('afiliator.')->group(function () {
+    Route::get('/', [AfiliatorDashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('/commissions', function () {
+        return view('afiliator.commissions');
+    })->name('commissions');
+    
+    Route::post('/commissions/withdraw', function () {
+        // placeholder: implement withdrawal logic in controller
+        return redirect()->route('afiliator.commissions')->with('status', 'Permintaan penarikan dikirim.');
+    })->name('commissions.withdraw');
+
+    Route::post('/logout', function () {
+        return redirect('/');
+    })->name('logout');
+});
+

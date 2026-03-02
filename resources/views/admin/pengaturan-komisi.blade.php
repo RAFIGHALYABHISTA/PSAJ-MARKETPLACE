@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.admin.header')
 
 @section('content')
 <div class="flex-1 bg-gray-50 min-h-screen">
