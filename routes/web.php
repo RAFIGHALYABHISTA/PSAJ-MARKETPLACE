@@ -14,6 +14,15 @@ Route::get('/', function () {
     return auth()->check() ? redirect()->route('admin.dashboard') : redirect()->route('auth.login');
 })->name('home');
 
+// Customer facing routes
+Route::get('/produk', function () {
+    return view('customer.produk');
+})->name('customer.produk');
+
+Route::get('/keranjang', function () {
+    return view('customer.keranjang');
+})->name('customer.keranjang');
+
 // Redirect /admin to /admin dashboard if authenticated, else to login
 Route::get('/admin/login', function () {
     return redirect()->route('auth.login');
@@ -25,6 +34,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
     Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register.store');
+    Route::get('/regis', function () {
+        return view('customer.regis');
+    })->name('customer.regis');
 });
 
 // Admin Routes (protected by auth middleware)
