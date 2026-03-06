@@ -17,6 +17,9 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('customer.home');
 })->name('home');
+Route::get('/transaksi', function () {
+    return view('customer.transaksi');
+})->name('customer.transaksi');
 
 // Customer facing routes
 Route::get('/produk', function () {

@@ -29,6 +29,24 @@
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-800 transition-all group-hover:w-full"></span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/produk') }}" class="text-[13px] font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors relative group">
+                        Artikel
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-800 transition-all group-hover:w-full"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/produk') }}" class="text-[13px] font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors relative group">
+                        Testimoni
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-800 transition-all group-hover:w-full"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/produk') }}" class="text-[13px] font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors relative group">
+                        Contact us
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-800 transition-all group-hover:w-full"></span>
+                    </a>
+                </li>
             </ul>
 
             <div class="flex items-center space-x-5">
@@ -49,10 +67,10 @@
 
                 @if (auth()->check())
                     <div class="flex items-center gap-3">
-                        <div class="hidden lg:block text-right">
+                        {{-- <div class="hidden lg:block text-right">
                             <p class="text-[10px] text-stone-400 font-bold uppercase tracking-tighter">Selamat Datang,</p>
                             <p class="text-xs font-black text-stone-800">{{ auth()->user()->name }}</p>
-                        </div>
+                        </div> --}}
                         <form action="{{ route('auth.logout') }}" method="POST" class="inline">
                             @csrf
                             <button type="submit" class="p-2 rounded-full border border-stone-100 text-stone-400 hover:text-red-500 hover:bg-red-50 transition-all group">
@@ -65,6 +83,7 @@
                         Masuk
                     </a>
                 @endif
-            </div> </div>
+            </div> 
+        </div>
     </div>
 </nav>

@@ -20,7 +20,7 @@
         <div class="relative flex justify-end group">
             <div class="absolute -inset-4 bg-green-700/10 rounded-[50px] blur-2xl group-hover:bg-green-700/20 transition duration-500"></div>
             <div class="rounded-[40px] overflow-hidden shadow-2xl relative">
-                <img src="/images/sariayu.jpg" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition duration-700">
+                <img src="/images/zahira.jpg" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition duration-700">
             </div>
         </div>
     </section>
@@ -37,64 +37,126 @@
         </div>
     </section>
 
-    <section class="bg-[#FFEADB] py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-center text-4xl font-serif text-[#5B2C04] mb-24 relative inline-block w-full">
-                Beauty Tips
-                <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-[#5B2C04]"></span>
-            </h2>
+ <section class="relative bg-[#E9DADA] py-24 px-6 overflow-hidden">
 
-            <div class="space-y-40">
-                <div class="grid md:grid-cols-2 items-center gap-16 group">
-                    <div class="order-2 md:order-1">
-                        <div class="flex items-center gap-4 mb-6">
-                            <h3 class="text-2xl font-serif text-[#5B2C04]">Make Up</h3>
-                            <span class="flex-1 h-px bg-stone-400"></span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed text-lg">
-                            <span class="font-bold text-green-800">Kilau Alami yang Melindungi.</span> Tampil cantik bukan cuma soal warna, tapi juga tentang kesehatan. Temukan rahasia glow natural yang ringan dipakai seharian sekaligus menjaga kelembapan.
-                        </p>
-                    </div>
-                    <div class="relative order-1 md:order-2">
-                        <div class="absolute -right-4 -bottom-4 w-full h-full bg-stone-300 rounded-[40px] -z-10 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-all duration-500"></div>
-                        <img src="/images/gambar1.png" class="rounded-[40px] w-full h-[350px] object-cover shadow-xl">
-                    </div>
-                </div>
+  <!-- ORNAMEN DAUN -->
+  <img src="{{ asset('images/daun.png') }}"
+       class="absolute top-0 right-0 w-40 opacity-80 pointer-events-none">
 
-                <div class="grid md:grid-cols-2 items-center gap-16 group">
-                    <div class="relative">
-                        <div class="absolute -left-4 -top-4 w-full h-full bg-[#9C4A1A]/20 rounded-[40px] -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-500"></div>
-                        <img src="/images/gambar2.png" class="rounded-[40px] w-full h-[350px] object-cover shadow-xl border-4 border-white/50">
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <h3 class="text-2xl font-serif text-[#5B2C04]">Skin Care</h3>
-                            <span class="flex-1 h-px bg-stone-400"></span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed text-lg">
-                            <span class="font-bold text-[#9C4A1A]">Keajaiban Jeruk Nipis.</span> Kaya akan vitamin C dan antioksidan untuk mencerahkan kulit secara alami, mengontrol minyak, dan menyamarkan noda hitam dengan lembut.
-                        </p>
-                    </div>
-                </div>
+  <img src="{{ asset('images/daun1.png') }}"
+       class="absolute bottom-0 left-0 w-48 opacity-80 pointer-events-none">
 
-                <div class="grid md:grid-cols-2 items-center gap-16 group">
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <h3 class="text-2xl font-serif text-[#5B2C04]">Skin Care</h3>
-                            <span class="flex-1 h-px bg-stone-400"></span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed text-lg">
-                            <span class="font-bold text-blue-800 text-lg">Intensif Belerang.</span> Solusi untuk kulit berjerawat. Membantu mengontrol produksi sebum berlebih, membersihkan pori secara mendalam, dan meredakan peradangan.
-                        </p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -right-4 -bottom-4 w-full h-full bg-blue-100 rounded-[40px] -z-10 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-all duration-500"></div>
-                        <img src="/images/gambar3.png" class="rounded-[40px] w-full h-[350px] object-cover shadow-xl">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="max-w-6xl mx-auto">
+
+    <!-- HEADER -->
+    <div class="text-center mb-20">
+      <p class="text-[#C47A00] font-medium">Keunggulan Kami</p>
+
+      <h2 class="text-4xl font-serif text-[#1E5B32] mt-2">
+        Bahan-Bahan Pilihan Alam
+      </h2>
+
+      <p class="text-gray-600 max-w-2xl mx-auto mt-4 text-sm leading-relaxed">
+        Setiap tetes produk kami memiliki bahan pilihan yang berkualitas premium,
+        dipetik dari kekayaan alam Nusantara hingga berbagai penjuru dunia,
+        menghadirkan sentuhan kemewahan alami.
+      </p>
+    </div>
+
+
+    <!-- ITEM 1 -->
+    <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
+        <h3 class="font-semibold text-lg">
+          Buah Langsat (Lansium domesticum)
+        </h3>
+
+        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+          Digunakan dalam seri Bright Skin Putih Langsat
+          untuk mencerahkan kulit, kaya antioksidan
+          dan Vitamin C.
+        </p>
+      </div>
+
+      <div class="flex justify-center">
+        <img src="{{ asset('images/langsat.png') }}"
+             class="w-60">
+      </div>
+
+    </div>
+
+
+    <!-- ITEM 2 -->
+    <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+
+      <div class="flex justify-center md:order-1">
+        <img src="{{ asset('images/pegagan.png') }}"
+             class="w-52">
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md md:ml-auto md:order-2">
+        <h3 class="font-semibold text-lg">
+          Pegagan / Gotu Kola (Centella asiatica)
+        </h3>
+
+        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+          Digunakan pada rangkaian Acne Care karena
+          kemampuannya menstimulasi kolagen,
+          regenerasi sel, dan antibakteri.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- ITEM 3 -->
+    <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
+        <h3 class="font-semibold text-lg">
+          Bunga Kenanga (Cananga odorata)
+        </h3>
+
+        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+          Digunakan dalam Cleansing Milk dan
+          Refreshing Toner untuk mencerahkan kulit
+          serta antiseptik alami.
+        </p>
+      </div>
+
+      <div class="flex justify-center">
+        <img src="{{ asset('images/kenanga.png') }}"
+             class="w-44">
+      </div>
+
+    </div>
+
+
+    <!-- ITEM 4 -->
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+
+      <div class="flex justify-center md:order-1">
+        <img src="{{ asset('images/lidah.png') }}"
+             class="w-64">
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md md:ml-auto md:order-2">
+        <h3 class="font-semibold text-lg">
+          Lidah Buaya (Aloe vera)
+        </h3>
+
+        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+          Bahan utama dalam banyak produk
+          untuk hidrasi kulit dan rambut,
+          mengandung vitamin A, C, dan E.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
     <section class="bg-stone-50 py-24">
         <div class="max-w-7xl mx-auto px-6">

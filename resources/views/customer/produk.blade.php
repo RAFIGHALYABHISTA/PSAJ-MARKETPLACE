@@ -18,8 +18,8 @@
         </div>
     </section>
 
-    <section class="sticky top-[80px] z-20 bg-white/80 backdrop-blur-md border-b border-stone-100 px-6 shadow-sm">
-        <div class="max-w-7xl mx-auto py-4 overflow-x-auto no-scrollbar">
+    <section class="bg-white/80 backdrop-blur-md border-b border-stone-100 px-6 shadow-sm">
+        <div class="max-w-7xl mx-auto py-4 overflow-x-auto scrollbar">
             <div class="flex md:justify-center gap-4 min-w-max md:min-w-0">
                 @php
                     $categories = [
@@ -144,11 +144,11 @@
                                 
                                 <div class="mt-auto pt-3 border-t border-stone-50 flex items-center justify-between">
                                     <p class="font-serif text-lg text-[#5B2C04]">Rp {{ $prod['price'] }}</p>
-                                    <button class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                                    <a href="{{ url('/transaksi') }}" class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                         </svg>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 
