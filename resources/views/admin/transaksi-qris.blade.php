@@ -6,7 +6,7 @@
     <header class="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-30 p-4 px-8 flex justify-between items-center">
         <div>
             <h1 class="text-xl font-bold text-slate-800 dark:text-white uppercase tracking-tight">Log Transaksi</h1>
-            <p class="text-xs text-slate-400 font-medium italic">Audit pembayaran <span class="text-indigo-600">QRIS & Manual</span></p>
+            <p class="text-xs text-slate-400 font-medium italic">Transaksi Penjualan <span class="text-indigo-600"></span></p>
         </div>
         <button class="bg-slate-900 dark:bg-indigo-600 text-white px-4 py-2 rounded text-xs font-bold hover:opacity-90 transition shadow-sm flex items-center">
             <i class="fas fa-download mr-2 text-[10px]"></i> UNDUH LAPORAN

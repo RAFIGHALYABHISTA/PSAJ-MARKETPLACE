@@ -134,5 +134,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         return view('admin.pengaturan-komisi');
     })->name('pengaturan-komisi');
 
+    Route::get('/rekap-penjualan', function () {
+        return view('admin.rekap-penjualan');
+    })->name('rekap-penjualan');
+
+    Route::get('/manajemen-produk', function () {
+        return view('admin.manajemen-produk');
+    })->name('manajemen-produk');
+
+    Route::get('/katalog-produk', function () {
+        return view('admin.katalog-produk');
+    })->name('katalog-produk');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
