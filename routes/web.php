@@ -98,9 +98,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('afiliator')->name('afiliator.')->group(function () {
     Route::get('/', [AfiliatorDashboardController::class, 'index'])->name('dashboard');
     
-    Route::get('/commissions', function () {
-        return view('afiliator.commissions');
-    })->name('commissions');
+    Route::get('/riwayat-penjualan', [AfiliatorDashboardController::class, 'salesHistory'])->name('sales-history');
+    
+    Route::get('/commissions', [AfiliatorDashboardController::class, 'commissions'])->name('commissions');
     
     Route::post('/commissions/withdraw', function () {
         // placeholder: implement withdrawal logic in controller

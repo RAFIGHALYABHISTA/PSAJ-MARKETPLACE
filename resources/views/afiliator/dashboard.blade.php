@@ -1,129 +1,57 @@
 @extends('layouts.afiliator.header')
 
 @section('content')
-    <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-bold">Dashboard Afiliator</h1>
-        <div class="text-sm text-gray-600">Halo, {{ auth()->user()->name ?? 'Afiliator' }}</div>
-    </div>
+<div class="max-w-6xl mx-auto">
+    <h3 class="text-3xl font-serif text-brand-olive mb-8">Ringkasan Performa</h3>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-sm font-semibold text-gray-600 mb-2">Total Produk</h2>
-            <p class="text-2xl font-bold">{{ $totalProducts ?? 0 }}</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-sm font-semibold text-gray-600 mb-2">Total Pesanan</h2>
-            <p class="text-2xl font-bold">{{ $totalOrders ?? 0 }}</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-sm font-semibold text-gray-600 mb-2">Total Komisi</h2>
-            <p class="text-2xl font-bold text-green-600">Rp {{ number_format($totalCommissions ?? 0, 0, ',', '.') }}</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-sm font-semibold text-gray-600 mb-2">Konversi</h2>
-            <p class="text-2xl font-bold">{{ isset($conversionRate) ? $conversionRate . '%' : '—' }}</p>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded shadow p-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold">Pesanan Terbaru</h2>
-                {{-- <a href="{{ route('afiliator.orders') }}" class="text-sm text-blue-600">Lihat semua</a> --}}
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                    <thead class="text-gray-600">
-                        <tr>
-                            <th class="py-2">#</th>
-                            <th class="py-2">Pelanggan</th>
-                            <th class="py-2">Total</th>
-                            <th class="py-2">Status</th>
-                            <th class="py-2">Tanggal</th>
-                            <th class="py-2">Komisi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($recentOrders ?? [] as $order)
-                            <tr class="border-t">
-                                <td class="py-2">{{ $order->id }}</td>
-                                <td class="py-2">{{ $order->customer_name ?? $order->user->name ?? '—' }}</td>
-                                <td class="py-2">Rp {{ number_format($order->total ?? 0, 0, ',', '.') }}</td>
-                                <td class="py-2">{{ ucfirst($order->status ?? '—') }}</td>
-                                <td class="py-2">{{ $order->created_at->format('d M Y') ?? '—' }}</td>
-                                <td class="py-2">Rp {{ number_format($order->commission ?? 0, 0, ',', '.') }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td class="py-4 text-center text-gray-500" colspan="6">Belum ada pesanan.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-cream">
+            <p class="text-sm text-gray-500 mb-1">Total Produk Terjual</p>
+            <h4 class="text-3xl font-bold">{{ number_format($totalProductsSold) }}</h4>
+            <div class="mt-2 text-xs text-green-600 font-medium">Melalui Referral Anda</div>
         </div>
 
-        <div class="bg-white rounded shadow p-4">
-            <h2 class="text-lg font-semibold mb-3">Ringkasan Komisi</h2>
-            @if(!empty($recentCommissions ?? []))
-                <ul class="space-y-3">
-                    @foreach($recentCommissions as $c)
-                        <li class="flex justify-between items-start">
-                            <div>
-                                <div class="text-sm font-medium">{{ $c->source ?? 'Transaksi' }}</div>
-                                <div class="text-xs text-gray-500">{{ $c->created_at->format('d M Y') }}</div>
-                            </div>
-                            <div class="text-right text-green-600 font-semibold">Rp {{ number_format($c->amount ?? 0, 0, ',', '.') }}</div>
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <div class="text-sm text-gray-500">Belum ada komisi.</div>
-            @endif
-
-            <div class="mt-4">
-                {{-- <a href="{{ route('afiliator.commissions') }}" class="text-sm text-blue-600">Lihat riwayat komisi</a> --}}
-            </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-cream">
+            <p class="text-sm text-gray-500 mb-1">Total Komisi</p>
+            <h4 class="text-3xl font-bold text-brand-terracotta">Rp {{ number_format($totalCommissions, 0, ',', '.') }}</h4>
+            <div class="mt-2 text-xs text-gray-400 uppercase tracking-tighter">Saldo Tersedia</div>
         </div>
-    </div>
 
-    <div class="mt-6 bg-white rounded shadow p-4">
-        <h2 class="text-lg font-semibold mb-4">Performa (7 hari terakhir)</h2>
-        <canvas id="affiliateChart" height="80"></canvas>
-    </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-cream">
+            <p class="text-sm text-gray-500 mb-1">Komisi Bulan Ini</p>
+            <h4 class="text-3xl font-bold text-brand-olive">Rp {{ number_format($currentMonthCommissions, 0, ',', '.') }}</h4>
+            <div class="mt-2 text-xs text-gray-400 font-medium">{{ \Carbon\Carbon::now()->format('F Y') }}</div>
+        </div>
 
-@endsection
+</div>
 
-{{-- @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        (function() {
-            const ctx = document.getElementById('affiliateChart');
-            if (!ctx) return;
-
-            const labels = {!! json_encode($chartLabels ?? []) !!};
-            const data = {!! json_encode($chartData ?? []) !!};
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Komisi (Rp)',
-                        data: data,
-                        borderColor: '#34D399',
-                        backgroundColor: 'rgba(52,211,153,0.08)',
-                        tension: 0.3,
-                        fill: true
-                    }]
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @json($chartLabels),
+            datasets: [{
+                label: 'Produk Terjual',
+                data: @json($chartData),
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
                 },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { ticks: { callback: function(v){ return 'Rp ' + v.toLocaleString(); } } } }
+                title: {
+                    display: true,
+                    text: 'Penjualan Melalui Referral Kode'
                 }
-            });
-        })();
-    </script>
-@endpush --}}
+            }
+        }
+    });
+</script>
+@endsection
