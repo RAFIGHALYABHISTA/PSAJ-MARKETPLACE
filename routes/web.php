@@ -9,9 +9,13 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\AuthController;
 
-// Home route - redirect based on auth status
+// ==================================
+// PUBLIC ROUTES (Customer)
+// ==================================
+
+// Home route - show if not authenticated
 Route::get('/', function () {
-    return auth()->check() ? redirect()->route('admin.dashboard') : redirect()->route('auth.login');
+    return view('customer.home');
 })->name('home');
 
 // Customer facing routes
@@ -19,28 +23,39 @@ Route::get('/produk', function () {
     return view('customer.produk');
 })->name('customer.produk');
 
+Route::get('/about', function () {
+    return view('customer.about');
+})->name('customer.about');
+
 Route::get('/keranjang', function () {
     return view('customer.keranjang');
 })->name('customer.keranjang');
 
-// Redirect /admin to /admin dashboard if authenticated, else to login
-Route::get('/admin/login', function () {
-    return redirect()->route('auth.login');
-})->name('admin.login');
-
-// Auth Routes (for guests only)
+// ==================================
+// AUTH ROUTES (Guest only)
+// ==================================
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
+    
     Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register.store');
+    
+    // Alias untuk /regis
     Route::get('/regis', function () {
-        return view('customer.regis');
-    })->name('customer.regis');
+        return redirect()->route('auth.register');
+    });
 });
 
-// Admin Routes (protected by auth middleware)
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+// ==================================
+// LOGOUT (Protected)
+// ==================================
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+// Admin Routes (protected by auth + admin middleware)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('produk', ProductController::class, [

@@ -1,356 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Produk</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    {{-- @vite('resources/css/app.css') --}}
-</head>
-<body class="bg-stone-100">
-    <nav class="bg-white shadow-md sticky top-0 z-30">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex h-16 items-center justify-between">
-                <!-- LEFT : Logo -->
-                <div class="flex items-center">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-30 w-auto mt-5" />
-                </div>
-                <!-- CENTER : Menu -->
-                <ul class="hidden md:flex items-center space-x-8 font-medium">
-                    <li>
-                        <a href="{{ url('/') }}" class="text-gray-700 hover:text-yellow-600 transition">Home</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-700 hover:text-yellow-600 transition">About Us</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/produk') }}" class="text-gray-700 hover:text-yellow-600 transition">Product</a>
-                    </li>
-                </ul>
-                <!-- RIGHT : Icons + Button -->
-                <div class="flex items-center space-x-4">
-                    <!-- Cart -->
-                    <a href="{{ url('/keranjang') }}" class="text-gray-700 hover:text-yellow-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25 a1.125 1.125 0 0 1-1.12-1.243l1.264-12 A1.125 1.125 0 0 1 5.513 7.5h12.974 c.576 0 1.059.435 1.119 1.007Z"/>
-                        </svg>
-                    </a>
-                    <!-- Profile -->
-                    <button onclick="openProfile()" class="text-gray-700 hover:text-yellow-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118 a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75 c-2.676 0-5.216-.584-7.499-1.632Z"/>
-                        </svg>
-                    </button>
-                    <!-- Login Button -->
-                    <a href="{{ url('/login') }}" class="ml-2 px-4 py-1.5 rounded-full bg-yellow-500 text-white text-sm font-medium hover:bg-yellow-600 transition">Masuk</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-<!-- HERO -->
-    <section class="bg-gradient-to-r from-yellow-900 via-yellow-700 to-yellow-500 text-white py-16 px-6 mt-8">
-        <div class="max-w-7xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-serif leading-tight">
+@extends('layouts.customer')
+
+@section('title', 'Produk')
+
+@section('content')
+    <section class="relative bg-[#F9F1E7] overflow-hidden py-20 px-6">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-green-800/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#B96710]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto text-center md:text-left relative z-10">
+            <h1 class="text-5xl md:text-6xl font-serif text-[#5B2C04] leading-tight mb-4">
                 Discover Your <br>
-                <span class="text-pink-300">Glow</span> Collection
+                <span class="text-[#738029] italic">Natural Glow</span> Collection
             </h1>
-            <p class="mt-4 text-sm opacity-90">
-                Semua orang berhak memiliki kulit yang sehat dan cerah
+            <p class="text-stone-600 text-lg max-w-xl md:mx-0 mx-auto">
+                Rangkaian perawatan kulit dan kecantikan yang diformulasikan dari kekayaan alam Indonesia untuk memancarkan pesona sejatimu.
             </p>
         </div>
     </section>
 
-    <!-- SEARCH & CATEGORY -->
-    <section class="bg-stone-100 py-6 px-6 mt-4">
-        <div class="max-w-7xl mx-auto space-y-4">
-            <!-- Search -->
-            <div class="flex gap-4">
-                <!-- Categories -->
-                <div class="flex flex-1 bg-white rounded-lg px-6 py-3 gap-10 text-sm justify-around shadow-md hover:shadow-xl">
-                    <!-- Skin Care -->
-                    <button data-filter="skincare" class="category-btn flex items-center gap-2 text-black hover:text-pink-500 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c2.755 0 5 2.245 5 5 0 3.866-5 8-5 8s-5-4.134-5-8c0-2.755 2.245-5 5-5z"/>
-                        </svg>
-                        Skin Care
-                    </button>
-                    <!-- Body Care -->
-                    <button data-filter="body-care" class="category-btn flex items-center gap-2 text-black hover:text-pink-500 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 2h6v4H9zM7 6h10v14H7z"/>
-                        </svg>
-                        Body Care
-                    </button>
-                    <!-- Decorative -->
-                    <button data-filter="decorative" class="category-btn flex items-center gap-2 text-black hover:text-pink-500 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10l-1-7H8l-1 7zM12 3v11"/>
-                        </svg>
-                        Decorative
-                    </button>
-                    <!-- Hair Care -->
-                    <button data-filter="hair-care" class="category-btn flex items-center gap-2 text-black hover:text-pink-500 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2a6 6 0 016 6c0 4-6 12-6 12S6 12 6 8a6 6 0 016-6z"/>
-                        </svg>
-                        Hair Care
-                    </button>
-                    <!-- Make Up Base -->
-                    <button data-filter="make-up-base" class="category-btn flex items-center gap-2 text-black hover:text-pink-500 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 3h8l-1 10H9L8 3zM7 21h10"/>
-                        </svg>
-                        Make Up Base
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="sticky top-[80px] z-20 bg-white/80 backdrop-blur-md border-b border-stone-100 px-6 shadow-sm">
+        <div class="max-w-7xl mx-auto py-4 overflow-x-auto no-scrollbar">
+            <div class="flex md:justify-center gap-4 min-w-max md:min-w-0">
+                @php
+                    $categories = [
+                        ['id' => 'skincare', 'name' => 'Skin Care', 'icon' => 'M12 3c2.755 0 5 2.245 5 5 0 3.866-5 8-5 8s-5-4.134-5-8c0-2.755 2.245-5 5-5z'],
+                        ['id' => 'body-care', 'name' => 'Body Care', 'icon' => 'M9 2h6v4H9zM7 6h10v14H7z'],
+                        ['id' => 'decorative', 'name' => 'Decorative', 'icon' => 'M7 21h10l-1-7H8l-1 7zM12 3v11'],
+                        ['id' => 'hair-care', 'name' => 'Hair Care', 'icon' => 'M12 2a6 6 0 016 6c0 4-6 12-6 12S6 12 6 8a6 6 0 016-6z'],
+                        ['id' => 'makeup-base', 'name' => 'Make Up Base', 'icon' => 'M8 3h8l-1 10H9L8 3zM7 21h10'],
+                    ];
+                @endphp
 
-    <!-- CONTENT -->
-    <section class="px-6 py-10 min-h-screen bg-stone-100">
-        <div class="max-w-7xl mx-auto flex gap-8">
-            <details class="relative">
-                <summary class="list-none cursor-pointer flex items-center gap-2 rounded-full border border-pink-300 px-4 py-2 text-pink-500 hover:bg-pink-500 hover:text-white">
-                    <!-- icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18l-7 8v6l-4 2v-8L3 4z"/>
+                @foreach($categories as $cat)
+                <button data-filter="{{ $cat['id'] }}" class="group flex items-center gap-2 px-5 py-2.5 rounded-full border border-transparent hover:border-[#738029]/30 hover:bg-[#F9F1E7] transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400 group-hover:text-[#738029] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="{{ $cat['icon'] }}"/>
                     </svg>
-                    Filter
-                </summary>
-                <!-- SIDEBAR (FIXED) -->
-                <aside class="bg-white rounded-2xl p-6 shadow-xl w-72 space-y-8">
-                    <!-- FILTER PRODUCT -->
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Filter Product</h3>
-                        <div class="space-y-3">
-                            <a href="#" class="block w-full text-center rounded-full border border-pink-300 py-2 text-pink-500 transition-all duration-300 hover:bg-pink-500 hover:text-white hover:border-pink-500 hover:shadow-md active:scale-95">New Product</a>
-                            <a href="#" class="block w-full text-center rounded-full border border-pink-300 py-2 text-pink-500 transition-all duration-300 hover:bg-pink-500 hover:text-white hover:border-pink-500 hover:shadow-md active:scale-95">Best Seller</a>
-                            <a href="#" class="block w-full text-center rounded-full border border-pink-300 py-2 text-pink-500 transition-all duration-300 hover:bg-pink-500 hover:text-white hover:border-pink-500 hover:shadow-md active:scale-95">New Product</a>
+                    <span class="text-sm font-medium text-stone-600 group-hover:text-[#5B2C04]">{{ $cat['name'] }}</span>
+                </button>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 py-12 min-h-screen bg-stone-50">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+            
+            <div class="w-full lg:w-72 shrink-0">
+                <details class="group bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden sticky top-32">
+                    <summary class="list-none cursor-pointer flex items-center justify-between gap-2 p-5 bg-white hover:bg-stone-50 transition select-none">
+                        <span class="flex items-center gap-2 font-serif text-lg text-[#5B2C04]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18l-7 8v6l-4 2v-8L3 4z"/>
+                            </svg>
+                            Filter Produk
+                        </span>
+                        <span class="text-stone-400 transition-transform group-open:rotate-180">▼</span>
+                    </summary>
+                    
+                    <div class="p-6 space-y-8 border-t border-stone-100">
+                        <div>
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Kategori Cepat</h3>
+                            <div class="space-y-2">
+                                <a href="#" class="block w-full text-center rounded-lg border border-stone-200 py-2.5 text-sm text-stone-600 hover:border-[#738029] hover:text-[#738029] hover:bg-[#F9F1E7] transition-all">New Arrival</a>
+                                <a href="#" class="block w-full text-center rounded-lg border border-stone-200 py-2.5 text-sm text-stone-600 hover:border-[#738029] hover:text-[#738029] hover:bg-[#F9F1E7] transition-all">Best Seller</a>
+                            </div>
                         </div>
-                    </div>
-                    <!-- SORT -->
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Urutkan</h3>
-                        <div class="space-y-3 text-sm">
-                            <label class="flex items-center gap-3 border border-pink-300 rounded-full py-2 px-4 text-pink-500"><input type="radio" name="sort" class="accent-pink-500"> Harga Terendah</label>
-                            <label class="flex items-center gap-3 border border-pink-300 rounded-full py-2 px-4 text-pink-500 "><input type="radio" name="sort" class="accent-pink-500"> Harga Tertinggi</label>
-                            <label class="flex items-center gap-3 border border-pink-300 rounded-full py-2 px-4 text-pink-500"><input type="radio" name="sort" class="accent-pink-500"> Rating Terbaik</label>
-                            <label class="flex items-center gap-3 border border-pink-300 rounded-full py-2 px-4 text-pink-500 "><input type="radio" name="sort" class="accent-pink-500"> Urutan Produk Dari A - Z</label>
+
+                        <div>
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Urutkan</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
+                                    <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga Terendah</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
+                                    <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga Tertinggi</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
+                                    <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Rating Terbaik</span>
+                                </label>
+                            </div>
                         </div>
+
+                        <div>
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Rentang Harga</h3>
+                            <div class="flex justify-between text-[#738029] font-bold text-xs mb-4">
+                                <span>Rp 20rb</span>
+                                <span>Rp 800rb</span>
+                            </div>
+                            <input type="range" min="20000" max="800000" step="10000" class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
+                        </div>
+
+                        <button class="w-full py-3 text-xs font-bold uppercase tracking-widest text-stone-500 border-t border-stone-100 hover:text-red-500 transition mt-4">
+                            Reset Filter
+                        </button>
                     </div>
-                    <!-- PRICE RANGE -->
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Rentang Harga</h3>
-                        <div class="flex justify-between text-pink-500 text-sm mb-4"><span>Rp20.000</span><span>Rp800.000</span></div>
-                        <input type="range" min="20000" max="800000" step="10000" class="w-full accent-pink-500 cursor-pointer">
-                    </div>
-                    <!-- RESET -->
-                    <a href="#" class="block w-full text-center rounded-full border border-pink-300 py-2 text-pink-500 transition-all duration-300 hover:bg-pink-500 hover:text-white hover:border-pink-500 hover:shadow-md active:scale-95">Reset Semua Produk</a>
-                </aside>
-            </details>
-            <!-- PRODUCT GRID -->
-            <div class="flex-1 pr-4">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-black mb-4">All Product</h2>
-                    <div class="flex items-center bg-white rounded-lg px-4 py-3 w-80 shadow-md hover:shadow-xl gap-2">
-                        <input type="text" placeholder="Search Product" class="w-full outline-none text-sm">
-                        <!-- Search Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
+                </details>
+            </div>
+
+            <div class="flex-1">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                    <h2 class="text-2xl font-serif text-[#5B2C04]">Katalog Produk</h2>
+                    
+                    <div class="relative group w-full md:w-80">
+                        <input type="text" placeholder="Cari produk kecantikan..." class="w-full pl-4 pr-10 py-3 rounded-full bg-white border border-stone-200 focus:outline-none focus:border-[#738029] focus:ring-1 focus:ring-[#738029] transition-all text-sm text-stone-600 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#738029] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
                         </svg>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- CARD -->
-                    <div class="product-card" data-category="skincare">
-                        <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <img src="{{ asset('images/produk.png') }}" class="mx-auto h-40 object-contain">
-                            <h3 class="mt-3 text-sm font-semibold">SARIAYU Facial Foam Series</h3>
-                            {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-6">
+                    
+                    @php
+                        $products = [
+                            ['name' => 'Sariayu Facial Foam', 'cat' => 'skincare', 'price' => '25.500'],
+                            ['name' => 'Body Scrub Olive', 'cat' => 'body-care', 'price' => '42.000'],
+                            ['name' => 'Shampoo Lidah Buaya', 'cat' => 'hair-care', 'price' => '32.500'],
+                            ['name' => 'Lip Cream Matte', 'cat' => 'decorative', 'price' => '65.000'],
+                            ['name' => 'Tinted Moisturizer', 'cat' => 'makeup-base', 'price' => '48.000'],
+                            ['name' => 'Kenanga Body Lotion', 'cat' => 'body-care', 'price' => '28.500'],
+                        ];
+                    @endphp
+
+                    @foreach($products as $prod)
+                    <div class="product-card group" data-category="{{ $prod['cat'] }}">
+                        <div class="bg-white rounded-[20px] p-4 border border-stone-100 shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+                            
+                            <div class="bg-[#F9F1E7] rounded-[15px] h-48 flex items-center justify-center mb-4 relative overflow-hidden">
+                                <img src="{{ asset('images/produk.png') }}" class="h-32 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                                
+                                <button onclick="openDetail()" class="absolute bottom-3 right-3 bg-white w-8 h-8 rounded-full shadow flex items-center justify-center text-[#738029] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#738029] hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                </button>
                             </div>
+
+                            <div class="flex-1 flex flex-col">
+                                <p class="text-[10px] text-[#9C4A1A] font-bold uppercase tracking-wider mb-1">{{ str_replace('-', ' ', $prod['cat']) }}</p>
+                                <h3 class="text-sm font-bold text-[#5B2C04] leading-snug mb-2 line-clamp-2">{{ $prod['name'] }}</h3>
+                                
+                                <div class="mt-auto pt-3 border-t border-stone-50 flex items-center justify-between">
+                                    <p class="font-serif text-lg text-[#5B2C04]">Rp {{ $prod['price'] }}</p>
+                                    <button class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="product-card" data-category="body-care">
-                        <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <img src="{{ asset('images/produk.png') }}" class="mx-auto h-40 object-contain">
-                            <h3 class="mt-3 text-sm font-semibold">ulum</h3>
-                            {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card" data-category="hair-care">
-                        <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <img src="{{ asset('images/produk.png') }}" class="mx-auto h-40 object-contain">
-                            <h3 class="mt-3 text-sm font-semibold">rafi</h3>
-                            {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card" data-category="decorative">
-                        <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <img src="{{ asset('images/produk.png') }}" class="mx-auto h-40 object-contain">
-                            <h3 class="mt-3 text-sm font-semibold">sigit</h3>
-                            {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card" data-category="make-up-base">
-                        <div class="bg-white rounded-xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <img src="{{ asset('images/produk.png') }}" class="mx-auto h-40 object-contain">
-                            <h3 class="mt-3 text-sm font-semibold">kevin</h3>
-                            {{-- <p class="text-xs text-gray-500">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="font-semibold mt-1">Rp 25.500</p>
-                                <button onclick="openDetail()" class="text-xs px-3 py-1.5 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition">Detail</button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
     </section>
-<footer class="bg-gradient-to-r from-[#B3C247] to-[#7E640F] text-white mt-16">
-        <div class="max-w-7xl mx-auto px-6 py-10">
-            <!-- TOP FOOTER -->
-            <div class="flex flex-col md:flex-row justify-between items-start gap-6">
-                <!-- LEFT -->
-                <div class="max-w-md space-y-3">
-                    <img src="{{ asset('images/logo.png') }}" alt="Sariayu" class="h-28" />
-                    <p class="text-black text-sm leading-relaxed">
-                        Merawat kecantikan alami Anda dengan formula terpercaya berbasis sains dan alam Indonesia.
-                    </p>
-                </div>
-                <!-- RIGHT -->
-                <div class="text-right space-y-3">
-                    <p class="font-medium text-black">Ikuti kami</p>
-                    <div class="flex justify-end gap-3">
-                        <!-- Instagram -->
-                        <a href="#" class="text-black hover:text-white transition" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4z" />
-                                <circle cx="12" cy="12" r="3" />
-                                <circle cx="17.5" cy="6.5" r="0.5" />
-                            </svg>
-                        </a>
-                        <!-- Facebook -->
-                        <a href="#" class="text-black hover:text-white transition" aria-label="Facebook">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 3h-3a4 4 0 00-4 4v3H6v4h2v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3V3z" />
-                            </svg>
-                        </a>
-                        <!-- Twitter -->
-                        <a href="#" class="text-black hover:text-white transition" aria-label="Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016 3a4.48 4.48 0 00-4.47 5.49A12.94 12.94 0 013 4s-4 9 5 13a13.07 13.07 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- DIVIDER -->
-            <hr class="my-6 border-black/60">
-            <!-- BOTTOM -->
-            <p class="text-center text-sm text-black opacity-90">
-                © 2025 SariayuXsmkn10sby. All rights reserved.
-            </p>
-        </div>
-    </footer>
-
-    <aside id="profilePanel" class="w-80 bg-white shadow-xl fixed right-0 top-0 h-full translate-x-full transition-transform duration-300 z-40">
-        <!-- HEADER -->
-        <div class="p-6 border-b flex justify-between items-center">
-            <h2 class="text-lg font-semibold">Profil</h2>
-            <button onclick="closeProfile()" class="text-gray-400 hover:text-gray-600">✕</button>
-        </div>
-        <!-- PROFILE CONTENT -->
-        <div class="p-6 space-y-6">
-            <div class="text-center">
-                <img src="{{ asset('images/sariayu.jpg') }}" alt="User Profile" class="w-24 h-24 rounded-full mx-auto shadow">
-                <h3 class="mt-3 font-semibold">Nama User</h3>
-                <p class="text-sm text-gray-500">user@email.com</p>
-            </div>
-            <div class="space-y-3 text-sm">
-                <a href="#" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Edit Profil</a>
-                <a href="#" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Pesanan Saya</a>
-                <a href="#" class="block rounded-full border py-2 text-center hover:bg-pink-500 hover:text-white transition">Daftar afiliator</a>
-                <a href="#" class="block rounded-full border py-2 text-center text-red-500 hover:bg-red-500 hover:text-white transition">Logout</a>
-            </div>
-        </div>
-    </aside>
-
-    <!-- MODAL BACKDROP -->
-    <div id="detailModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white w-full max-w-md rounded-xl p-6 relative animate-fadeIn">
-            <button onclick="closeDetail()" class="absolute top-3 right-3 text-gray-400 hover:text-black">✕</button>
-            <img src="{{ asset('images/produk.png') }}" class="mx-auto h-40 object-contain">
-            <h2 class="mt-4 text-lg font-semibold text-center">SARIAYU Facial Foam Series</h2>
-            {{-- <p class="text-sm text-gray-500 text-center mt-1">⭐⭐⭐⭐☆ 412 ulasan</p> --}}
-            <p class="text-center text-pink-600 font-semibold text-xl mt-3">Rp 25.500</p>
-            <p class="text-sm text-gray-600 mt-4 text-center">
-                Facial foam dengan formula lembut untuk membersihkan wajah dan menjaga kelembapan alami kulit.
-            </p>
-            <div class="mt-6 flex justify-center gap-3">
-                <button class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600"> 🛒 Tambah Keranjang</button>
-                <button class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600">  ⚡ Beli Sekarangg</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openProfile() {
-            document.getElementById('profilePanel').classList.remove('translate-x-full');
-            document.getElementById('mainContent').classList.add('-translate-x-80');
-        }
-
-        function closeProfile() {
-            document.getElementById('profilePanel').classList.add('translate-x-full');
-            document.getElementById('mainContent').classList.remove('-translate-x-80');
-        }
-
-        function openDetail() {
-            document.getElementById('detailModal').classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeDetail() {
-            document.getElementById('detailModal').classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        const buttons = document.querySelectorAll('.category-btn');
-        const products = document.querySelectorAll('.product-card');
-
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.dataset.filter;
-
-                products.forEach(product => {
-                    if (product.dataset.category === category) {
-                        product.classList.remove('hidden');
-                    } else {
-                        product.classList.add('hidden');
-                    }
-                });
-
-                // active state
-                buttons.forEach(b => b.classList.remove('text-pink-500','font-semibold'));
-                btn.classList.add('text-pink-500','font-semibold');
-            });
-        });
-    </script>
-</body>
-</html>
+@endsection

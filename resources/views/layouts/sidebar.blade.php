@@ -27,16 +27,27 @@
             <i class="fas fa-box w-5 mr-3 {{ request()->routeIs('admin.produk') ? 'text-indigo-600' : 'text-gray-400 group-hover:text-slate-600' }}"></i>
             <span class="text-sm font-medium">Produk</span>
         </a>
+        <a href="{{ route('admin.produk') }}" 
+           class="flex items-center px-3 py-2.5 rounded transition-colors group {{ request()->routeIs('admin.produk') ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 hover:bg-gray-50 dark:text-slate-400 dark:hover:bg-slate-800' }}">
+            <i class="fas fa-box w-5 mr-3 {{ request()->routeIs('admin.produk') ? 'text-indigo-600' : 'text-gray-400 group-hover:text-slate-600' }}"></i>
+            <span class="text-sm font-medium">Laporan Produk</span>
+        </a>
+        
 
         <a href="{{ route('admin.transaksi-qris') }}" 
            class="flex items-center px-3 py-2.5 rounded transition-colors group {{ request()->routeIs('admin.transaksi-qris') ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 hover:bg-gray-50 dark:text-slate-400 dark:hover:bg-slate-800' }}">
             <i class="fas fa-credit-card w-5 mr-3 {{ request()->routeIs('admin.transaksi-qris') ? 'text-indigo-600' : 'text-gray-400 group-hover:text-slate-600' }}"></i>
-            <span class="text-sm font-medium">Transaksi QRIS</span>
+            <span class="text-sm font-medium">Transaksi Penjualan</span>
         </a>
 
         <div class="my-4 border-t border-gray-100 dark:border-slate-800"></div>
         <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 py-4">Keuangan</p>
 
+        <a href="{{ route('admin.pencairan') }}" 
+           class="flex items-center px-3 py-2.5 rounded transition-colors group {{ request()->routeIs('admin.pencairan') ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 hover:bg-gray-50 dark:text-slate-400 dark:hover:bg-slate-800' }}">
+            <i class="fas fa-wallet w-5 mr-3 text-gray-400 group-hover:text-slate-600"></i>
+            <span class="text-sm font-medium">Laporan Keuangan</span>
+        </a>
         <a href="{{ route('admin.pencairan') }}" 
            class="flex items-center px-3 py-2.5 rounded transition-colors group {{ request()->routeIs('admin.pencairan') ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 hover:bg-gray-50 dark:text-slate-400 dark:hover:bg-slate-800' }}">
             <i class="fas fa-wallet w-5 mr-3 text-gray-400 group-hover:text-slate-600"></i>

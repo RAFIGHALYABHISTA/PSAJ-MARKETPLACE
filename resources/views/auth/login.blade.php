@@ -96,7 +96,7 @@
             <div class="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
                 <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">
                     Belum memiliki akun? 
-                    <a href="{{ route('auth.register') }}" class="text-slate-800 dark:text-white font-black hover:underline ml-1">Daftar Afiliator</a>
+                    <a href="{{ route('auth.register') }}" class="text-slate-800 dark:text-white font-black hover:underline ml-1">Daftar Sekarang</a>
                 </p>
             </div>
         </div>

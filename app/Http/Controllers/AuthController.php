@@ -18,7 +18,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle login request.
+     * Handle login request (Customer).
      */
     public function authenticate(Request $request)
     {
@@ -29,7 +29,15 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->route('admin.dashboard');
+            
+            // Redirect based on user role
+            $user = Auth::user();
+            if (in_array($user->role, ['admin', 'superadmin', 'afiliator'])) {
+                return redirect()->route('admin.dashboard');
+            }
+            
+            // Customer redirect to home
+            return redirect()->route('home');
         }
 
         return back()->withErrors([
@@ -57,12 +65,14 @@ class AuthController extends Controller
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+        $validated['role'] = 'customer'; // Default role for new users
 
         $user = User::create($validated);
 
         Auth::login($user);
 
-        return redirect()->route('admin.dashboard');
+        // Redirect customer to home
+        return redirect()->route('home');
     }
 
     /**
