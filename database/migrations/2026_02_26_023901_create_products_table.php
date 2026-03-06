@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->text('description')->nullable();
             $table->decimal('price', 12, 2);
             $table->string('image_url')->nullable();
             $table->integer('stock')->default(0);
             $table->boolean('is_active')->default(true);
+            $table->timestamps();
         });  
     }
 

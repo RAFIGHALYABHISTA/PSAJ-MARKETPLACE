@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CommissionController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\CommissionController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Afiliator\DashboardController as AfiliatorDashboardController;
 
 // ==================================
 // PUBLIC ROUTES (Customer)
@@ -148,3 +149,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+// Afiliator Routes
+Route::prefix('afiliator')->name('afiliator.')->group(function () {
+    Route::get('/', [AfiliatorDashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('/riwayat-penjualan', [AfiliatorDashboardController::class, 'salesHistory'])->name('sales-history');
+    
+    Route::get('/commissions', [AfiliatorDashboardController::class, 'commissions'])->name('commissions');
+    
+    Route::post('/commissions/withdraw', function () {
+        // placeholder: implement withdrawal logic in controller
+        return redirect()->route('afiliator.commissions')->with('status', 'Permintaan penarikan dikirim.');
+    })->name('commissions.withdraw');
+
+    Route::post('/logout', function () {
+        return redirect('/');
+    })->name('logout');
+});
+

@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.admin.header')
 
 @section('content')
 <div class="min-h-screen transition-colors duration-300 dark:bg-slate-950 bg-[#F8FAFC]">
