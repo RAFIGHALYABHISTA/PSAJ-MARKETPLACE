@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\CommissionController;
-use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Afiliator\DashboardController as AfiliatorDashboardController;
 
 // ==================================
@@ -162,6 +162,10 @@ Route::prefix('afiliator')->name('afiliator.')->group(function () {
         // placeholder: implement withdrawal logic in controller
         return redirect()->route('afiliator.commissions')->with('status', 'Permintaan penarikan dikirim.');
     })->name('commissions.withdraw');
+
+    Route::get('/register', [\App\Http\Controllers\AfiliatorController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [\App\Http\Controllers\AfiliatorController::class, 'store'])->name('store'); // Tambahkan route ini
+
 
     Route::post('/logout', function () {
         return redirect('/');

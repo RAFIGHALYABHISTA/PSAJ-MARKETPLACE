@@ -47,7 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    
+    public function affiliatorProfile(){
+        return $this->hasOne(Affiliator::class, 'user_id');
+    }
     /**
      * Get all orders placed by this user as a customer.
      */

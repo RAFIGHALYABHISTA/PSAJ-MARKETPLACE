@@ -13,7 +13,7 @@
     <body class="bg-slate-50 dark:bg-slate-950">
         <div class="flex h-screen bg-slate-50 dark:bg-slate-950">
             {{-- Sidebar --}}
-            @include('layouts.sidebar')
+            @include('layouts.admin.sidebar')
             
             {{-- Main Content --}}
             <main class="flex-1 overflow-auto">
