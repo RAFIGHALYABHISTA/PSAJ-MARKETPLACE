@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -56,26 +57,18 @@ class User extends Authenticatable
     }
 
     /**
-     * Get all orders where this user is the affiliator.
-     */
-    public function affiliatedOrders(): HasMany
-    {
-        return $this->hasMany(Order::class, 'affiliator_id');
-    }
-
-    /**
-     * Get all commissions for this user as an affiliator.
-     */
-    public function commissions(): HasMany
-    {
-        return $this->hasMany(Commission::class, 'affiliator_id');
-    }
-
-    /**
      * Get all payments verified by this user.
      */
     public function verifiedPayments(): HasMany
     {
         return $this->hasMany(Payment::class, 'verified_by');
+    }
+
+    /**
+     * Get the affiliator profile for this user.
+     */
+    public function affiliator(): HasOne
+    {
+        return $this->hasOne(Affiliator::class);
     }
 }

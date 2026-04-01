@@ -47,11 +47,11 @@ class Order extends Model
     }
 
     /**
-     * Get the affiliator (user) for this order.
+     * Get the affiliator for this order.
      */
     public function affiliator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'affiliator_id');
+        return $this->belongsTo(Affiliator::class, 'affiliator_id');
     }
 
     /**

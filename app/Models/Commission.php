@@ -37,10 +37,10 @@ class Commission extends Model
     }
 
     /**
-     * Get the affiliator (user) for this commission.
+     * Get the affiliator for this commission.
      */
     public function affiliator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'affiliator_id');
+        return $this->belongsTo(Affiliator::class, 'affiliator_id');
     }
 }
