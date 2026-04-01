@@ -48,7 +48,7 @@
         </button>
       </div>
       <!-- Description -->
-      <p id="deskripsi" class="tab-content text-sm text-gray-600 leading-relaxed">
+      {{-- <p id="deskripsi" class="tab-content text-sm text-gray-600 leading-relaxed">
         Sariayu Kenanga Refreshing Toner mengandung kenanga oil dan peppermint oil
         serta ekstrak gardenia sebagai antioksidan. Menyegarkan wajah, membantu
         menjaga kelembutan alami kulit wajah.
@@ -56,7 +56,7 @@
       <p id="spesifikasi" class="tab-content text-sm text-gray-600 leading-relaxed hidden ">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, totam atque ex illum rem nisi sit perspiciatis
         quo corrupti, facilis in cumque veniam commodi suscipit mollitia accusamus dolores consequatur doloribus?
-      </p>
+      </p> --}}
     </div>
     <!-- RIGHT: BUY CARD -->
     <div class="bg-white rounded-xl shadow-md p-6 h-fit space-y-5">

@@ -46,116 +46,87 @@
   <img src="{{ asset('images/daun1.png') }}"
        class="absolute bottom-0 left-0 w-48 opacity-80 pointer-events-none">
 
-  <div class="max-w-6xl mx-auto">
-
-    <!-- HEADER -->
-    <div class="text-center mb-20">
-      <p class="text-[#C47A00] font-medium">Keunggulan Kami</p>
-
-      <h2 class="text-4xl font-serif text-[#1E5B32] mt-2">
-        Bahan-Bahan Pilihan Alam
-      </h2>
-
-      <p class="text-gray-600 max-w-2xl mx-auto mt-4 text-sm leading-relaxed">
-        Setiap tetes produk kami memiliki bahan pilihan yang berkualitas premium,
-        dipetik dari kekayaan alam Nusantara hingga berbagai penjuru dunia,
-        menghadirkan sentuhan kemewahan alami.
-      </p>
+  <div class="max-w-6xl mx-auto relative">
+    <div class="text-center mb-20"> 
+      <h2 class="text-[#036415] text-2xl">Kenapa harus memilih Kami ?</h2>
+       <p class="text-[#000000] text-lg ">Setiap tetes produk kami memiliki bahan pilihan yang berkualitas premium, 
+dipetik dengan cermat dari kekayaan alam Nusantara hingga berbagai penjuru dunia, 
+menghadirkan sentuhan kemewahan alami yang merawat kulit dengan kelembutan dan keanggunan.</p>
     </div>
+  <!-- SLIDER WRAPPER -->
+  <div id="slider" class="flex transition-transform duration-500">
 
-
-    <!-- ITEM 1 -->
-    <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
-
+    <!-- SLIDE 1 -->
+    <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
       <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
         <h3 class="font-semibold text-lg">
           Buah Langsat (Lansium domesticum)
         </h3>
-
-        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-          Digunakan dalam seri Bright Skin Putih Langsat
-          untuk mencerahkan kulit, kaya antioksidan
-          dan Vitamin C.
+        <p class="text-gray-600 text-sm mt-3">
+          Digunakan untuk mencerahkan kulit, kaya antioksidan dan Vitamin C.
         </p>
       </div>
-
       <div class="flex justify-center">
-        <img src="{{ asset('images/langsat.png') }}"
-             class="w-60">
+        <img src="{{ asset('images/langsat.png') }}" class="w-60">
       </div>
-
     </div>
 
-
-    <!-- ITEM 2 -->
-    <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
-
-      <div class="flex justify-center md:order-1">
-        <img src="{{ asset('images/pegagan.png') }}"
-             class="w-52">
+    <!-- SLIDE 2 -->
+    <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
+      <div class="flex justify-center">
+        <img src="{{ asset('images/pegagan.png') }}" class="w-52">
       </div>
-
-      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md md:ml-auto md:order-2">
-        <h3 class="font-semibold text-lg">
-          Pegagan / Gotu Kola (Centella asiatica)
-        </h3>
-
-        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-          Digunakan pada rangkaian Acne Care karena
-          kemampuannya menstimulasi kolagen,
-          regenerasi sel, dan antibakteri.
-        </p>
-      </div>
-
-    </div>
-
-
-    <!-- ITEM 3 -->
-    <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
-
       <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
         <h3 class="font-semibold text-lg">
-          Bunga Kenanga (Cananga odorata)
+          Pegagan (Centella asiatica)
         </h3>
-
-        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-          Digunakan dalam Cleansing Milk dan
-          Refreshing Toner untuk mencerahkan kulit
-          serta antiseptik alami.
+        <p class="text-gray-600 text-sm mt-3">
+          Membantu regenerasi sel dan antibakteri.
         </p>
       </div>
-
-      <div class="flex justify-center">
-        <img src="{{ asset('images/kenanga.png') }}"
-             class="w-44">
-      </div>
-
     </div>
 
-
-    <!-- ITEM 4 -->
-    <div class="grid md:grid-cols-2 gap-16 items-center">
-
-      <div class="flex justify-center md:order-1">
-        <img src="{{ asset('images/lidah.png') }}"
-             class="w-64">
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md md:ml-auto md:order-2">
+    <!-- SLIDE 3 -->
+    <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
         <h3 class="font-semibold text-lg">
-          Lidah Buaya (Aloe vera)
+          Bunga Kenanga
         </h3>
-
-        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-          Bahan utama dalam banyak produk
-          untuk hidrasi kulit dan rambut,
-          mengandung vitamin A, C, dan E.
+        <p class="text-gray-600 text-sm mt-3">
+          Membantu mencerahkan kulit dan antiseptik alami.
         </p>
       </div>
+      <div class="flex justify-center">
+        <img src="{{ asset('images/kenanga.png') }}" class="w-44">
+      </div>
+    </div>
 
+    <!-- SLIDE 4 -->
+    <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
+      <div class="flex justify-center">
+        <img src="{{ asset('images/lidah.png') }}" class="w-64">
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
+        <h3 class="font-semibold text-lg">
+          Lidah Buaya
+        </h3>
+        <p class="text-gray-600 text-sm mt-3">
+          Memberikan hidrasi dan nutrisi kulit.
+        </p>
+      </div>
     </div>
 
   </div>
+
+  <!-- DOT NAVIGATION -->
+  <div class="flex justify-center mt-10 gap-3">
+    <button onclick="goSlide(0)" class="dot w-3 h-3 rounded-full bg-green-600"></button>
+    <button onclick="goSlide(1)" class="dot w-3 h-3 rounded-full bg-gray-400"></button>
+    <button onclick="goSlide(2)" class="dot w-3 h-3 rounded-full bg-gray-400"></button>
+    <button onclick="goSlide(3)" class="dot w-3 h-3 rounded-full bg-gray-400"></button>
+  </div>
+
+</div>
 </section>
 
     <section class="bg-stone-50 py-24">
@@ -202,4 +173,29 @@
             </div>
         </div>
     </section>
+    <script>
+    let index = 0;
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dot");
+    
+    function goSlide(i){
+        index = i;
+        updateSlide();
+    }
+    
+    function updateSlide(){
+        slider.style.transform = `translateX(-${index * 100}%)`;
+    
+        dots.forEach(dot => dot.classList.remove("bg-green-600"));
+        dots.forEach(dot => dot.classList.add("bg-gray-400"));
+        dots[index].classList.remove("bg-gray-400");
+        dots[index].classList.add("bg-green-600");
+    }
+    
+    // auto slide
+    setInterval(() => {
+        index = (index + 1) % 4;
+        updateSlide();
+    }, 4000);
+    </script>
 @endsection
