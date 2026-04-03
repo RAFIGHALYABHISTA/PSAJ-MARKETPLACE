@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-<body class="bg-stone-100 overflow-x-hidden text-stone-800">
+<body class="bg-stone-50 overflow-x-hidden text-stone-800">
 
     @include('components.navbar')
 

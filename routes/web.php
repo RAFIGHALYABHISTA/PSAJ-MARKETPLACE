@@ -33,6 +33,15 @@ Route::get('/about', function () {
 Route::get('/keranjang', function () {
     return view('customer.keranjang');
 })->name('customer.keranjang');
+Route::get('/testimoni', function () {
+    return view('customer.testimoni');
+})->name('customer.testimoni');
+Route::get('/contact', function () {
+    return view('customer.contact');
+})->name('customer.contact');
+Route::get('/artikel', function () {
+    return view('customer.artikel');
+})->name('customer.artikel');
 
 // ==================================
 // AUTH ROUTES (Guest only)
