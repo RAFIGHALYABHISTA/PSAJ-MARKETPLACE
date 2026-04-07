@@ -3,113 +3,144 @@
 @section('title', 'Home')
 
 @section('content')
-    {{-- Hero Section --}}
-    <section class="bg-[#FFEADB] w-full px-6 lg:px-16 py-16 grid md:grid-cols-2 gap-10 items-center overflow-hidden">
-        <div class="space-y-6 animate-fade-in-left">
-            <h1 class="text-5xl lg:text-6xl font-serif text-[#5B2C04] leading-tight">
-                Temukan <br>
-                <span class="text-green-800 italic">Kecantikan</span> Sejati
-            </h1>
-            <p class="text-base text-gray-700 max-w-md leading-relaxed">
-                Perawatan kulit yang terinspirasi dari kearifan lokal, diformulasikan dengan bahan-bahan organik pilihan untuk pancaran alami Anda.
+
+{{-- HERO SECTION --}}
+<section class="bg-[#FFEADB] w-full px-6 lg:px-16 py-16 grid md:grid-cols-2 gap-10 items-center overflow-hidden">
+    <div class="space-y-6 animate-fade-in-left">
+        <h1 class="text-5xl lg:text-6xl font-serif text-[#5B2C04] leading-tight">
+            Temukan <br>
+            <span class="text-green-800 italic">Kecantikan</span> Sejati
+        </h1>
+
+        <p class="text-base text-gray-700 max-w-md leading-relaxed">
+            Perawatan kulit yang terinspirasi dari kearifan lokal, diformulasikan dengan bahan-bahan organik pilihan untuk pancaran alami Anda.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+            <a href="{{ route('customer.produk') }}" class="bg-green-700 text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-green-800 transition-all shadow-lg hover:shadow-green-900/20 active:scale-95">
+                Jelajahi Produk Kami →
+            </a>
+
+            <a href="#" class="bg-white/50 backdrop-blur-sm px-7 py-3 rounded-full text-sm font-semibold border border-green-700/20 text-green-800 hover:bg-white transition-all active:scale-95">
+                Story Kolaborasi
+            </a>
+        </div>
+    </div>
+
+    <div class="relative flex justify-end group">
+        <div class="absolute -inset-4 bg-green-700/10 rounded-[50px] blur-2xl group-hover:bg-green-700/20 transition duration-500"></div>
+
+        <div class="rounded-[40px] overflow-hidden shadow-2xl relative">
+            <img src="/images/zahira.jpg" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition duration-700">
+        </div>
+    </div>
+</section>
+
+{{-- PHILOSOPHY --}}
+<section class="bg-stone-50 py-20 text-center border-y border-stone-200">
+    <div class="px-6">
+        <h2 class="text-3xl lg:text-4xl text-[#5B2C04] font-serif mb-4">Filosofi Kami</h2>
+
+        <div class="flex justify-center mb-6">
+            <div class="h-1 w-20 bg-green-700 rounded-full"></div>
+        </div>
+
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed italic font-light">
+            "Kami percaya bahwa kulit yang sehat adalah hasil dari harmoni yang sempurna antara kearifan alam dan inovasi ilmu pengetahuan."
+        </p>
+    </div>
+</section>
+
+{{-- INGREDIENTS SLIDER --}}
+<section class="relative bg-[#E9DADA] py-24 px-6 overflow-hidden">
+    <img src="{{ asset('images/daun.png') }}" class="absolute top-0 right-0 w-40 opacity-80 pointer-events-none">
+    <img src="{{ asset('images/daun1.png') }}" class="absolute bottom-0 left-0 w-48 opacity-80 pointer-events-none">
+
+    <div class="max-w-6xl mx-auto relative">
+        <div class="text-center mb-20">
+            <h2 class="text-[#036415] text-2xl font-bold mb-4">Kenapa harus memilih Kami ?</h2>
+            <p class="text-[#000000] text-lg max-w-4xl mx-auto">
+                Setiap tetes produk kami memiliki bahan pilihan yang berkualitas premium, dipetik dengan cermat dari kekayaan alam Nusantara hingga berbagai penjuru dunia.
             </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="#" class="bg-green-700 text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-green-800 transition-all shadow-lg hover:shadow-green-900/20 active:scale-95">Jelajahi Produk Kami →</a>
-                <a href="#" class="bg-white/50 backdrop-blur-sm px-7 py-3 rounded-full text-sm font-semibold border border-green-700/20 text-green-800 hover:bg-white transition-all active:scale-95">Story Kolaborasi</a>
-            </div>
         </div>
-        <div class="relative flex justify-end group">
-            <div class="absolute -inset-4 bg-green-700/10 rounded-[50px] blur-2xl group-hover:bg-green-700/20 transition duration-500"></div>
-            <div class="rounded-[40px] overflow-hidden shadow-2xl relative">
-                <img src="/images/sariayu.jpg" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition duration-700">
-            </div>
-        </div>
-    </section>
 
-    {{-- Philosophy Section --}}
-    <section class="bg-stone-50 py-20 text-center border-y border-stone-200">
-        <div class="px-6">
-            <h2 class="text-3xl lg:text-4xl text-[#5B2C04] font-serif mb-4">Filosofi Kami</h2>
-            <div class="flex justify-center mb-6">
-                <div class="h-1 w-20 bg-green-700 rounded-full"></div>
-            </div>
-            <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed italic font-light">
-                "Kami percaya bahwa kulit yang sehat adalah hasil dari harmoni yang sempurna antara kearifan alam dan inovasi ilmu pengetahuan."
-            </p> 
-        </div>
-    </section>
-
-    {{-- Beauty Tips Section --}}
-    <section class="bg-[#FFEADB] py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-center text-4xl font-serif text-[#5B2C04] mb-24 relative inline-block w-full">
-                Beauty Tips
-                <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-[#5B2C04]"></span>
-            </h2>
-
-            <div class="space-y-40">
-                {{-- Tip 1 --}}
-                <div class="grid md:grid-cols-2 items-center gap-16 group">
-                    <div class="order-2 md:order-1">
-                        <div class="flex items-center gap-4 mb-6">
-                            <h3 class="text-2xl font-serif text-[#5B2C04]">Make Up</h3>
-                            <span class="flex-1 h-px bg-stone-400"></span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed text-lg">
-                            <span class="font-bold text-green-800">Kilau Alami yang Melindungi.</span> Tampil cantik bukan cuma soal warna, tapi juga tentang kesehatan. Temukan rahasia glow natural yang ringan dipakai seharian sekaligus menjaga kelembapan.
-                        </p>
-                    </div>
-                    <div class="relative order-1 md:order-2">
-                        <div class="absolute -right-4 -bottom-4 w-full h-full bg-stone-300 rounded-[40px] -z-10 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-all duration-500"></div>
-                        <img src="/images/gambar1.png" class="rounded-[40px] w-full h-[350px] object-cover shadow-xl">
-                    </div>
+        <div id="slider" class="flex transition-transform duration-500">
+            <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
+                <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md ml-auto">
+                    <h3 class="font-semibold text-lg text-green-800">Buah Langsat (Lansium domesticum)</h3>
+                    <p class="text-gray-600 text-sm mt-3">Digunakan untuk mencerahkan kulit, kaya antioksidan dan Vitamin C.</p>
                 </div>
-
-                {{-- Tip 2 --}}
-                <div class="grid md:grid-cols-2 items-center gap-16 group">
-                    <div class="relative">
-                        <div class="absolute -left-4 -top-4 w-full h-full bg-[#9C4A1A]/20 rounded-[40px] -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-500"></div>
-                        <img src="/images/gambar2.png" class="rounded-[40px] w-full h-[350px] object-cover shadow-xl border-4 border-white/50">
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <h3 class="text-2xl font-serif text-[#5B2C04]">Skin Care</h3>
-                            <span class="flex-1 h-px bg-stone-400"></span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed text-lg">
-                            <span class="font-bold text-[#9C4A1A]">Keajaiban Jeruk Nipis.</span> Kaya akan vitamin C dan antioksidan untuk mencerahkan kulit secara alami, mengontrol minyak, dan menyamarkan noda hitam dengan lembut.
-                        </p>
-                    </div>
+                <div class="flex justify-start">
+                    <img src="{{ asset('images/langsat.png') }}" class="w-60">
                 </div>
+            </div>
 
-                {{-- Tip 3 --}}
-                <div class="grid md:grid-cols-2 items-center gap-16 group">
-                    <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <h3 class="text-2xl font-serif text-[#5B2C04]">Skin Care</h3>
-                            <span class="flex-1 h-px bg-stone-400"></span>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed text-lg">
-                            <span class="font-bold text-blue-800 text-lg">Intensif Belerang.</span> Solusi untuk kulit berjerawat. Membantu mengontrol produksi sebum berlebih, membersihkan pori secara mendalam, dan meredakan peradangan.
-                        </p>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute -right-4 -bottom-4 w-full h-full bg-blue-100 rounded-[40px] -z-10 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-all duration-500"></div>
-                        <img src="/images/gambar3.png" class="rounded-[40px] w-full h-[350px] object-cover shadow-xl">
-                    </div>
+            <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
+                <div class="flex justify-end">
+                    <img src="{{ asset('images/pegagan.png') }}" class="w-52">
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
+                    <h3 class="font-semibold text-lg text-green-800">Pegagan (Centella asiatica)</h3>
+                    <p class="text-gray-600 text-sm mt-3">Membantu regenerasi sel dan antibakteri alami untuk kulit sensitif.</p>
+                </div>
+            </div>
+            
+            <div class="min-w-full grid md:grid-cols-2 gap-16 items-center">
+                <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md ml-auto">
+                    <h3 class="font-semibold text-lg text-green-800">Bunga Kenanga</h3>
+                    <p class="text-gray-600 text-sm mt-3">Aroma relaksasi yang membantu menenangkan kulit dan mencerahkan.</p>
+                </div>
+                <div class="flex justify-start">
+                    <img src="{{ asset('images/kenanga.png') }}" class="w-44">
                 </div>
             </div>
         </div>
-    </section>
 
-    {{-- Collection Section (Dynamic) --}}
-    <section class="bg-stone-50 py-24">
+        <div class="flex justify-center mt-10 gap-3">
+            @for($i=0; $i<3; $i++)
+            <button onclick="goSlide({{ $i }})" class="dot w-3 h-3 rounded-full bg-gray-400 transition-colors"></button>
+            @endfor
+        </div>
+    </div>
+</section>
+
+{{-- PROMO & PRODUCTS SECTION --}}
+<section class="bg-stone-50 py-24">
+    <div class="max-w-7xl mx-auto px-6 space-y-20">
+
+        {{-- PROMO SLIDER --}}
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="mb-16">
+                <h2 class="text-3xl font-semibold text-green-700">Menarik untuk Anda</h2>
+                <p class="text-gray-600 mt-3 max-w-xl mx-auto">Promo menarik dan penawaran terbaik minggu ini.</p>
+            </div>
+
+            <div class="relative overflow-hidden">
+                <div id="promoSlider" class="flex transition-all duration-700">
+                    @foreach(['promo1.png', 'promo2.png', 'promo3.png'] as $index => $img)
+                    <div class="min-w-full flex flex-col items-center gap-6">
+                        <img src="{{ asset('images/'.$img) }}" class="h-72 w-auto rounded-2xl shadow-md">
+                        <p class="text-gray-500 text-sm">Penawaran Spesial Ke-{{ $index+1 }}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-3 mt-8">
+                @for($i=0; $i<3; $i++)
+                <button onclick="slidePromo({{ $i }})" class="dotPromo w-3 h-3 rounded-full bg-gray-400"></button>
+                @endfor
+            </div>
+        </div>
+
+        {{-- REALTIME PRODUCT SECTION --}}
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
                     <h2 class="text-4xl font-serif text-[#5B2C04] mb-2">Koleksi Kami</h2>
                     <p class="text-stone-500 text-lg italic">Pilih perawatan terbaik untuk pancaran kulit sehatmu.</p>
                 </div>
+
                 <div class="flex gap-4 p-1 bg-stone-200 rounded-full">
                     <button class="bg-[#B96710] text-white px-8 py-3 rounded-full text-xs font-bold shadow-lg shadow-orange-900/20 hover:scale-105 transition">NEW PRODUCT</button>
                     <button class="text-stone-600 px-8 py-3 rounded-full text-xs font-bold hover:bg-stone-300 transition">BEST SELLER</button>
@@ -119,15 +150,13 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 @forelse($products as $p)
                 <div class="bg-white rounded-[30px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 border border-stone-100 group">
-                    <div class="bg-stone-50 rounded-[20px] mb-4 overflow-hidden">
-                        {{-- Menangani gambar dari storage atau URL --}}
-                        <img src="{{ Str::startsWith($p->image, 'http') ? $p->image : asset('storage/' . $p->image) }}" 
-                             alt="{{ $p->name }}"
-                             class="w-full h-48 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                    <div class="bg-stone-50 rounded-[20px] mb-4 overflow-hidden h-48 flex items-center justify-center">
+                        <img src="{{ Str::startsWith($p->image, 'http') ? $p->image : asset('storage/' . $p->image) }}"
+                             class="max-h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
                     </div>
-                    
+
                     <h3 class="text-sm font-bold text-stone-800 mb-1 h-10 overflow-hidden line-clamp-2 uppercase tracking-tighter">
-                        {{ $p->description }}
+                        {{ $p->name }}
                     </h3>
 
                     <div class="flex items-center gap-1 mb-3">
@@ -139,6 +168,7 @@
                         <p class="font-bold text-[#5B2C04] text-lg">
                             Rp {{ number_format($p->price, 0, ',', '.') }}
                         </p>
+
                         <button class="p-2 bg-stone-100 rounded-lg hover:bg-green-700 hover:text-white transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -148,10 +178,96 @@
                 </div>
                 @empty
                 <div class="col-span-full py-20 text-center">
-                    <p class="text-stone-400 italic">Belum ada produk yang tersedia.</p>
+                    <p class="text-stone-400 italic font-serif">Koleksi sedang dipersiapkan...</p>
                 </div>
                 @endforelse
             </div>
+            
+            <div class="mt-16 text-center">
+                <a href="{{ route('customer.produk') }}" class="inline-block border-b-2 border-green-700 text-green-800 font-bold pb-1 hover:text-green-600 hover:border-green-500 transition-all">
+                    LIHAT SEMUA KOLEKSI
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
+
+{{-- POPUP IKLAN --}}
+<div id="popupIklan" onclick="closePopup(event)" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[100]">
+    <div class="relative w-[90%] max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl">
+        <button onclick="document.getElementById('popupIklan').style.display='none'" class="absolute top-4 right-4 z-10 bg-black/20 text-white rounded-full p-1 hover:bg-black/50 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <a href="#">
+            <img src="{{ asset('images/sariayu.png') }}" class="w-full h-auto object-cover">
+        </a>
+    </div>
+</div>
+
+<script>
+    // --- Ingredient Slider ---
+    let index = 0;
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dot");
+
+    function goSlide(i){
+        index = i;
+        updateSlide();
+    }
+
+    function updateSlide(){
+        if(!slider) return;
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle("bg-green-600", idx === index);
+            dot.classList.toggle("bg-gray-400", idx !== index);
+        });
+    }
+
+    setInterval(() => {
+        index = (index + 1) % 3;
+        updateSlide();
+    }, 5000);
+
+    // --- Promo Slider ---
+    let indexPromo = 0;
+    const pSlider = document.getElementById("promoSlider");
+    const pDots = document.querySelectorAll(".dotPromo");
+
+    window.slidePromo = function(i){
+        indexPromo = i;
+        updatePromoSlider();
+    }
+
+    function updatePromoSlider(){
+        if(!pSlider) return;
+        pSlider.style.transform = `translateX(-${indexPromo * 100}%)`;
+        pDots.forEach((dot, idx) => {
+            dot.classList.toggle("bg-green-600", idx === indexPromo);
+            dot.classList.toggle("bg-gray-400", idx !== indexPromo);
+        });
+    }
+
+    setInterval(() => {
+        indexPromo = (indexPromo + 1) % 3;
+        updatePromoSlider();
+    }, 4000);
+
+    // --- Popup Logic ---
+    function closePopup(e) {
+        if (e.target.id === "popupIklan") {
+            document.getElementById("popupIklan").style.display = "none";
+        }
+    }
+
+    window.onload = function () {
+        updateSlide();
+        updatePromoSlider();
+        setTimeout(() => {
+            const popup = document.getElementById("popupIklan");
+            if(popup) popup.style.display = "flex";
+        }, 1000);
+    };
+</script>
+
 @endsection

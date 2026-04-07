@@ -133,7 +133,7 @@
 
                             <div class="flex-1 flex flex-col">
                                 <p class="text-[10px] text-[#9C4A1A] font-bold uppercase tracking-wider mb-1">{{ $prod->category }}</p>
-                                <h3 class="text-sm font-bold text-[#5B2C04] leading-snug mb-2 line-clamp-2 uppercase tracking-tighter">{{ $prod->description }}</h3>
+                                <h3 class="text-sm font-bold text-[#5B2C04] leading-snug mb-2 line-clamp-2 uppercase tracking-tighter">{{ $prod->name }}</h3>
                                 
                                 <div class="mt-auto pt-3 border-t border-stone-50 flex items-center justify-between">
                                     <p class="font-serif text-lg text-[#5B2C04]">Rp {{ number_format($prod->price, 0, ',', '.') }}</p>
