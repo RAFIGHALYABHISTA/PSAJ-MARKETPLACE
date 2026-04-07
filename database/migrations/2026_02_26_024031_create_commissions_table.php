@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
-            $table->foreignId('affiliator_id')->constrained('users')->cascadeOnDelete();
-            $table->decimal('amount', 12, 2);
-            $table->enum('status', ['pending','approved', 'paid'])->default('pending');
+            $table->foreignId('affiliator_id')->constrained('affiliators')->cascadeOnDelete();
+            $table->foreignId('order_item_id')->constrained('order_items')->cascadeOnDelete();
+            $table->decimal('commission_amount', 5, 2);
+            $table->enum('status', ['proses', 'berhasil'])->default('proses');
             $table->timestamps();
         });
     }

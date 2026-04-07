@@ -3,6 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
+    {{-- Hero Section --}}
     <section class="bg-[#FFEADB] w-full px-6 lg:px-16 py-16 grid md:grid-cols-2 gap-10 items-center overflow-hidden">
         <div class="space-y-6 animate-fade-in-left">
             <h1 class="text-5xl lg:text-6xl font-serif text-[#5B2C04] leading-tight">
@@ -25,6 +26,7 @@
         </div>
     </section>
 
+    {{-- Philosophy Section --}}
     <section class="bg-stone-50 py-20 text-center border-y border-stone-200">
         <div class="px-6">
             <h2 class="text-3xl lg:text-4xl text-[#5B2C04] font-serif mb-4">Filosofi Kami</h2>
@@ -37,6 +39,7 @@
         </div>
     </section>
 
+    {{-- Beauty Tips Section --}}
     <section class="bg-[#FFEADB] py-24">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-center text-4xl font-serif text-[#5B2C04] mb-24 relative inline-block w-full">
@@ -45,6 +48,7 @@
             </h2>
 
             <div class="space-y-40">
+                {{-- Tip 1 --}}
                 <div class="grid md:grid-cols-2 items-center gap-16 group">
                     <div class="order-2 md:order-1">
                         <div class="flex items-center gap-4 mb-6">
@@ -61,6 +65,7 @@
                     </div>
                 </div>
 
+                {{-- Tip 2 --}}
                 <div class="grid md:grid-cols-2 items-center gap-16 group">
                     <div class="relative">
                         <div class="absolute -left-4 -top-4 w-full h-full bg-[#9C4A1A]/20 rounded-[40px] -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-500"></div>
@@ -77,6 +82,7 @@
                     </div>
                 </div>
 
+                {{-- Tip 3 --}}
                 <div class="grid md:grid-cols-2 items-center gap-16 group">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
@@ -96,6 +102,7 @@
         </div>
     </section>
 
+    {{-- Collection Section (Dynamic) --}}
     <section class="bg-stone-50 py-24">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -110,33 +117,40 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                @php
-                    $products = [
-                        ['name' => 'Facial Foam Acne', 'price' => '25.500', 'img' => 'produk.png'],
-                        ['name' => 'Bright Skin Serum', 'price' => '36.200', 'img' => 'produk.png'],
-                        ['name' => 'Rose Water Mist', 'price' => '25.500', 'img' => 'produk.png'],
-                        ['name' => 'Hydrating Toner', 'price' => '36.200', 'img' => 'produk.png'],
-                    ];
-                @endphp
-
-                @foreach($products as $p)
+                @forelse($products as $p)
                 <div class="bg-white rounded-[30px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 border border-stone-100 group">
                     <div class="bg-stone-50 rounded-[20px] mb-4 overflow-hidden">
-                        <img src="/images/{{ $p['img'] }}" class="w-full h-48 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                        {{-- Menangani gambar dari storage atau URL --}}
+                        <img src="{{ Str::startsWith($p->image, 'http') ? $p->image : asset('storage/' . $p->image) }}" 
+                             alt="{{ $p->name }}"
+                             class="w-full h-48 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
                     </div>
-                    <h3 class="text-sm font-bold text-stone-800 mb-1 h-10 overflow-hidden line-clamp-2 uppercase tracking-tighter">{{ $p['name'] }}</h3>
+                    
+                    <h3 class="text-sm font-bold text-stone-800 mb-1 h-10 overflow-hidden line-clamp-2 uppercase tracking-tighter">
+                        {{ $p->description }}
+                    </h3>
+
                     <div class="flex items-center gap-1 mb-3">
                         <span class="text-yellow-500 text-xs">★★★★☆</span>
                         <span class="text-[10px] text-stone-400 font-medium">(4.8)</span>
                     </div>
+
                     <div class="flex justify-between items-center">
-                        <p class="font-bold text-[#5B2C04] text-lg">Rp {{ $p['price'] }}</p>
+                        <p class="font-bold text-[#5B2C04] text-lg">
+                            Rp {{ number_format($p->price, 0, ',', '.') }}
+                        </p>
                         <button class="p-2 bg-stone-100 rounded-lg hover:bg-green-700 hover:text-white transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
                         </button>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <div class="col-span-full py-20 text-center">
+                    <p class="text-stone-400 italic">Belum ada produk yang tersedia.</p>
+                </div>
+                @endforelse
             </div>
         </div>
     </section>

@@ -72,41 +72,6 @@
                 <div class="pt-8 border-t border-stone-100 dark:border-stone-800">
                     <div class="flex items-center space-x-3 mb-6">
                         <span class="w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#2D1B0E] dark:text-stone-300 text-xs font-bold">02</span>
-                        <h3 class="text-sm font-black uppercase tracking-widest text-stone-800 dark:text-white">Identitas Bisnis</h3>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="space-y-2">
-                            <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Nama Toko Digital Anda <span class="text-red-500">*</span></label>
-                            <input type="text" name="store_name" placeholder="Misal: Cantik Bersama Smega" value="{{ old('store_name') }}" required
-                                   class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl focus:ring-2 ring-[#738029]/20 focus:border-[#738029] outline-none transition-all">
-                        </div>
-
-                        <div class="md:col-span-2 space-y-2">
-                            <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Deskripsi Toko <span class="text-red-500">*</span></label>
-                            <textarea name="store_description" rows="3" placeholder="Jelaskan tentang toko Anda..." required
-                                      class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl focus:ring-2 ring-[#738029]/20 focus:border-[#738029] outline-none transition-all @error('store_description') border-red-500 @enderror">{{ old('store_description') }}</textarea>
-                        </div>
-
-                        <div class="space-y-3">
-                            <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Platform Pemasaran Utama <span class="text-red-500">*</span></label>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                @foreach(['instagram' => 'Instagram', 'blog' => 'Blog', 'community' => 'Komunitas', 'other' => 'Lainnya'] as $value => $label)
-                                <label class="relative group cursor-pointer">
-                                    <input type="checkbox" name="platforms[]" value="{{ $value }}" class="peer hidden" @if(in_array($value, (array)old('platforms', []))) checked @endif>
-                                    <div class="py-3 px-4 bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl text-center text-xs font-bold text-stone-600 dark:text-stone-400 peer-checked:bg-[#738029] peer-checked:text-white peer-checked:border-[#738029] transition-all">
-                                        {{ $label }}
-                                    </div>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-8 border-t border-stone-100 dark:border-stone-800">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <span class="w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-[#2D1B0E] dark:text-stone-300 text-xs font-bold">03</span>
                         <h3 class="text-sm font-black uppercase tracking-widest text-stone-800 dark:text-white">Tujuan Pencairan Komisi</h3>
                     </div>
 
@@ -117,7 +82,7 @@
                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl outline-none @error('bank_name') border-red-500 @enderror">
                         </div>
                         <div class="space-y-2">
-                            <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Nomor Rekening <span class="text-red-500">*</span></label>
+                            <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Nomor Rekening / No HP <span class="text-red-500">*</span></label>
                             <input type="text" name="bank_account_number" placeholder="Nomor akun..." value="{{ old('bank_account_number') }}" required
                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl outline-none @error('bank_account_number') border-red-500 @enderror">
                         </div>

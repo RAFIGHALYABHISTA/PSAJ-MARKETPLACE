@@ -20,7 +20,7 @@ class AdminMiddleware
             return redirect()->route('auth.login');
         }
 
-        if (!in_array(auth()->user()->role, ['admin', 'superadmin', 'afiliator'])) {
+        if (!in_array(auth()->user()->role, ['admin', 'superadmin'])) {
             abort(403, 'Unauthorized. Only admin can access this page.');
         }
 

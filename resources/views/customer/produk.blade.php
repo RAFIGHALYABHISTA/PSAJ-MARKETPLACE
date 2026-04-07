@@ -3,6 +3,7 @@
 @section('title', 'Produk')
 
 @section('content')
+    {{-- Hero Section --}}
     <section class="relative bg-[#F9F1E7] overflow-hidden py-20 px-6">
         <div class="absolute top-0 right-0 w-64 h-64 bg-green-800/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#B96710]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
@@ -18,6 +19,7 @@
         </div>
     </section>
 
+    {{-- Category Sticky Bar --}}
     <section class="sticky top-[80px] z-20 bg-white/80 backdrop-blur-md border-b border-stone-100 px-6 shadow-sm">
         <div class="max-w-7xl mx-auto py-4 overflow-x-auto no-scrollbar">
             <div class="flex md:justify-center gap-4 min-w-max md:min-w-0">
@@ -43,11 +45,13 @@
         </div>
     </section>
 
+    {{-- Main Content Section --}}
     <section class="px-6 py-12 min-h-screen bg-stone-50">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
             
+            {{-- Left Sidebar Filter --}}
             <div class="w-full lg:w-72 shrink-0">
-                <details class="group bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden sticky top-32">
+                <details open class="group bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden sticky top-32">
                     <summary class="list-none cursor-pointer flex items-center justify-between gap-2 p-5 bg-white hover:bg-stone-50 transition select-none">
                         <span class="flex items-center gap-2 font-serif text-lg text-[#5B2C04]">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,20 +82,16 @@
                                     <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
                                     <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga Tertinggi</span>
                                 </label>
-                                <label class="flex items-center gap-3 cursor-pointer group">
-                                    <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
-                                    <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Rating Terbaik</span>
-                                </label>
                             </div>
                         </div>
 
                         <div>
                             <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Rentang Harga</h3>
                             <div class="flex justify-between text-[#738029] font-bold text-xs mb-4">
-                                <span>Rp 20rb</span>
-                                <span>Rp 800rb</span>
+                                <span>Rp 0</span>
+                                <span>Rp 1jt+</span>
                             </div>
-                            <input type="range" min="20000" max="800000" step="10000" class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
+                            <input type="range" min="0" max="1000000" step="10000" class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
                         </div>
 
                         <button class="w-full py-3 text-xs font-bold uppercase tracking-widest text-stone-500 border-t border-stone-100 hover:text-red-500 transition mt-4">
@@ -101,6 +101,7 @@
                 </details>
             </div>
 
+            {{-- Product Grid --}}
             <div class="flex-1">
                 <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
                     <h2 class="text-2xl font-serif text-[#5B2C04]">Katalog Produk</h2>
@@ -113,37 +114,29 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-6">
-                    
-                    @php
-                        $products = [
-                            ['name' => 'Sariayu Facial Foam', 'cat' => 'skincare', 'price' => '25.500'],
-                            ['name' => 'Body Scrub Olive', 'cat' => 'body-care', 'price' => '42.000'],
-                            ['name' => 'Shampoo Lidah Buaya', 'cat' => 'hair-care', 'price' => '32.500'],
-                            ['name' => 'Lip Cream Matte', 'cat' => 'decorative', 'price' => '65.000'],
-                            ['name' => 'Tinted Moisturizer', 'cat' => 'makeup-base', 'price' => '48.000'],
-                            ['name' => 'Kenanga Body Lotion', 'cat' => 'body-care', 'price' => '28.500'],
-                        ];
-                    @endphp
-
-                    @foreach($products as $prod)
-                    <div class="product-card group" data-category="{{ $prod['cat'] }}">
+                {{-- DYNAMIC GRID --}}
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    @forelse($products as $prod)
+                    <div class="product-card group" data-category="{{ $prod->category ?? 'uncategorized' }}">
                         <div class="bg-white rounded-[20px] p-4 border border-stone-100 shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                             
                             <div class="bg-[#F9F1E7] rounded-[15px] h-48 flex items-center justify-center mb-4 relative overflow-hidden">
-                                <img src="{{ asset('images/produk.png') }}" class="h-32 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                                {{-- Handling Image Realtime --}}
+                                <img src="{{ Str::startsWith($prod->image, 'http') ? $prod->image : asset('storage/' . $prod->image) }}" 
+                                     alt="{{ $prod->name }}"
+                                     class="h-32 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
                                 
-                                <button onclick="openDetail()" class="absolute bottom-3 right-3 bg-white w-8 h-8 rounded-full shadow flex items-center justify-center text-[#738029] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#738029] hover:text-white">
+                                <button class="absolute bottom-3 right-3 bg-white w-8 h-8 rounded-full shadow flex items-center justify-center text-[#738029] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#738029] hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                                 </button>
                             </div>
 
                             <div class="flex-1 flex flex-col">
-                                <p class="text-[10px] text-[#9C4A1A] font-bold uppercase tracking-wider mb-1">{{ str_replace('-', ' ', $prod['cat']) }}</p>
-                                <h3 class="text-sm font-bold text-[#5B2C04] leading-snug mb-2 line-clamp-2">{{ $prod['name'] }}</h3>
+                                <p class="text-[10px] text-[#9C4A1A] font-bold uppercase tracking-wider mb-1">{{ $prod->category }}</p>
+                                <h3 class="text-sm font-bold text-[#5B2C04] leading-snug mb-2 line-clamp-2 uppercase tracking-tighter">{{ $prod->description }}</h3>
                                 
                                 <div class="mt-auto pt-3 border-t border-stone-50 flex items-center justify-between">
-                                    <p class="font-serif text-lg text-[#5B2C04]">Rp {{ $prod['price'] }}</p>
+                                    <p class="font-serif text-lg text-[#5B2C04]">Rp {{ number_format($prod->price, 0, ',', '.') }}</p>
                                     <button class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -151,11 +144,13 @@
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                    @endforeach
-
+                    @empty
+                    <div class="col-span-full py-20 text-center">
+                        <p class="text-stone-400 italic">Belum ada produk yang tersedia saat ini.</p>
+                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

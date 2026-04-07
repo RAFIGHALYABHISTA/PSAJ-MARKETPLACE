@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', 12, 2);
             $table->string('image_url')->nullable();
             $table->integer('stock')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->enum('status', ['Stok Cukup', 'Stok Menipis', 'Stok Habis'])->default('Stok Cukup');
+            $table->integer('commission_percentage')->default(10);
             $table->timestamps();
         });  
     }
 
-    /**aku adalah orang terkayand]==]====]]\
+    /**
      * Reverse the migrations.
      */
     public function down(): void
