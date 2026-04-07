@@ -8,7 +8,7 @@
 </head>
 <body class="bg-brand-cream text-brand-text font-sans antialiased">
     <div class="min-h-screen flex">
-        <aside class="w-64 bg-white border-r border-gray-200 hidden md:block">
+        <aside class="w-64 bg-white border-r border-gray-200 hidden md:block sticky top-0 h-screen self-start overflow-y-auto">
             <div class="p-6">
                 <h1 class="text-2xl font-serif text-brand-olive font-bold tracking-tight">SARIAYU</h1>
                 <p class="text-[10px] uppercase tracking-widest text-gray-400">Affiliate Partner</p>
@@ -27,9 +27,9 @@
             </nav>
         </aside>
 
-        <main class="flex-1 overflow-y-auto">
+        <main class="flex-1">
             <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 p-4 border-b border-gray-100 flex justify-between items-center">
-                <h2 class="text-lg font-semibold">Selamat Datang, Partner</h2>
+                <h2 class="text-lg font-semibold text-brand-olive">Selamat Datang, Partner</h2>
                 <div class="w-10 h-10 rounded-full bg-brand-terracotta/20 flex items-center justify-center text-brand-terracotta">
                     <span class="font-bold">JD</span>
                 </div>
