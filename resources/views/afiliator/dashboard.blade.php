@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="max-w-6xl mx-auto px-4 py-8 font-sariayu-sans text-brand-text">
+    
     <div class="mb-10">
         <h3 class="text-4xl font-sariayu-serif text-brand-olive mb-2">Ringkasan Performa</h3>
         <p class="text-gray-500 italic">Pantau perkembangan langkah bisnismu di Dashboard</p>

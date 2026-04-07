@@ -9,11 +9,8 @@ class Affiliator extends Model
 {
     protected $fillable = [
         'user_id',
-        'store_name',
-        'store_description',
         'phone',
         'address',
-        'platforms',
         'bank_name',
         'bank_account_number',
         'bank_account_name',

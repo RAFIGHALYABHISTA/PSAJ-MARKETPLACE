@@ -11,23 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('affiliators', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('order_code')->unique();
-            $table->string('referral_code')->nullable();
-            $table->decimal('total_price', 12, 2);
-            $table->enum('status', ['waiting', 'ready', 'taken'])->default('waiting');
-            $table->string('invoice_number')->unique();
+            $table->string('referral_code')->unique();
+            $table->decimal('total_commissions', 12, 2)->default(0);
+            $table->enum('status', ['aktif', 'nonaktif'])->default('active');
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('affiliators');
     }
 };

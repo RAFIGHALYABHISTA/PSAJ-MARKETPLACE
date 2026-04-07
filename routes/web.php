@@ -9,20 +9,18 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\CommissionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Afiliator\DashboardController as AfiliatorDashboardController;
+use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\ProductsController;
+
 
 // ==================================
 // PUBLIC ROUTES (Customer)
 // ==================================
 
-// Home route - show if not authenticated
-Route::get('/', function () {
-    return view('customer.home');
-})->name('home');
 
-// Customer facing routes
-Route::get('/produk', function () {
-    return view('customer.produk');
-})->name('customer.produk');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/produk', [ProductsController::class, 'index'])->name('customer.produk');
 
 Route::get('/about', function () {
     return view('customer.about');

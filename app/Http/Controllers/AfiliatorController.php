@@ -30,10 +30,6 @@ class AfiliatorController extends Controller
         $validated = $request->validate([
             'phone' => 'required|string|min:10',
             'address' => 'required|string|min:10',
-            'store_name' => 'required|string|min:3|max:100',
-            'store_description' => 'required|string|min:20|max:500',
-            'platforms' => 'array|min:1',
-            'platforms.*' => 'in:instagram,blog,community,other',
             'bank_name' => 'required|string|min:3|max:50',
             'bank_account_number' => 'required|string|min:5|max:20',
             'bank_account_name' => 'required|string|min:3|max:100',
@@ -43,12 +39,6 @@ class AfiliatorController extends Controller
             'phone.min' => 'Nomor telepon minimal 10 digit',
             'address.required' => 'Alamat wajib diisi',
             'address.min' => 'Alamat minimal 10 karakter',
-            'store_name.required' => 'Nama toko wajib diisi',
-            'store_name.min' => 'Nama toko minimal 3 karakter',
-            'store_description.required' => 'Deskripsi toko wajib diisi',
-            'store_description.min' => 'Deskripsi minimal 20 karakter',
-            'platforms.required' => 'Pilih minimal satu platform marketing',
-            'platforms.min' => 'Pilih minimal satu platform marketing',
             'bank_name.required' => 'Nama bank wajib diisi',
             'bank_account_number.required' => 'Nomor rekening wajib diisi',
             'bank_account_name.required' => 'Nama pemilik rekening wajib diisi',
@@ -61,11 +51,8 @@ class AfiliatorController extends Controller
             // Create affiliator profile
             $affiliator = Affiliator::create([
                 'user_id' => auth()->id(),
-                'store_name' => $validated['store_name'],
-                'store_description' => $validated['store_description'],
                 'phone' => $validated['phone'],
                 'address' => $validated['address'],
-                'platforms' => $validated['platforms'],
                 'bank_name' => $validated['bank_name'],
                 'bank_account_number' => $validated['bank_account_number'],
                 'bank_account_name' => $validated['bank_account_name'],
@@ -77,7 +64,7 @@ class AfiliatorController extends Controller
 
             DB::commit();
 
-            return redirect()->route('home')
+            return redirect()->route('afiliator.dashboard')
                 ->with('success', 'Pendaftaran berhasil! Akun Anda sedang menunggu persetujuan dari admin. Anda akan mendapatkan notifikasi ketika akun diaktifkan.');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -93,15 +80,15 @@ class AfiliatorController extends Controller
     public function dashboard()
     {
         $user = auth()->user();
-        
-        // Get/Create affiliator profile
-        $affiliator = $user->affiliatorProfile()->firstOrCreate([
-            'user_id' => $user->id,
-        ], [
-            'store_name' => $user->name . '\'s Store',
-            'store_description' => 'Store',
-            'status' => 'active',
-        ]);
+    $affiliator = $user->affiliatorProfile;
+
+    if (!$affiliator) {
+        return redirect()->route('afiliator.register');
+    }
+
+    if ($affiliator->status === 'pending') {
+        return view('afiliator.waiting_approval'); // Buat view khusus "Mohon Tunggu"
+    }
 
         // Get commissions and sales data
         $allCommissions = $user->commissions()->get();
