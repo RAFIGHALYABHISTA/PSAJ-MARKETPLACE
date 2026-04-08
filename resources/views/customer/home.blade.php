@@ -193,14 +193,19 @@
 </section>
 
 {{-- POPUP IKLAN --}}
-<div id="popupIklan" onclick="closePopup(event)" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[100]">
-    <div class="relative w-[90%] max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl">
-        <button onclick="document.getElementById('popupIklan').style.display='none'" class="absolute top-4 right-4 z-10 bg-black/20 text-white rounded-full p-1 hover:bg-black/50 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
+<div id="popupIklan"
+     onclick="closePopup(event)"
+     class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+    <!-- POPUP BOX -->
+    <div class=" w-auto h-130 rounded-2xl overflow-hidden shadow-xl w-[90%] max-w-md">
+
+        <!-- GAMBAR IKLAN -->
         <a href="#">
-            <img src="{{ asset('images/sariayu.png') }}" class="w-full h-auto object-cover">
+            <img src="{{ asset('images/sariayu.png') }}"
+                 class="ml-8 w-auto h-full object-cover items-center">
         </a>
+
     </div>
 </div>
 

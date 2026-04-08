@@ -25,6 +25,7 @@
             <div class="flex md:justify-center gap-4 min-w-max md:min-w-0">
                 @php
                     $categories = [
+                        ['id' => 'all', 'name' => 'Semua', 'icon' => 'M4 6h16M4 12h16M4 18h16'],
                         ['id' => 'skincare', 'name' => 'Skin Care', 'icon' => 'M12 3c2.755 0 5 2.245 5 5 0 3.866-5 8-5 8s-5-4.134-5-8c0-2.755 2.245-5 5-5z'],
                         ['id' => 'body-care', 'name' => 'Body Care', 'icon' => 'M9 2h6v4H9zM7 6h10v14H7z'],
                         ['id' => 'decorative', 'name' => 'Decorative', 'icon' => 'M7 21h10l-1-7H8l-1 7zM12 3v11'],
@@ -75,11 +76,11 @@
                             <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Urutkan</h3>
                             <div class="space-y-3">
                                 <label class="flex items-center gap-3 cursor-pointer group">
-                                    <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
+                                    <input type="radio" name="sort" value="low" class="accent-[#738029] w-4 h-4"> 
                                     <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga Terendah</span>
                                 </label>
                                 <label class="flex items-center gap-3 cursor-pointer group">
-                                    <input type="radio" name="sort" class="accent-[#738029] w-4 h-4"> 
+                                    <input type="radio" name="sort" value="high" class="accent-[#738029] w-4 h-4"> 
                                     <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga Tertinggi</span>
                                 </label>
                             </div>
@@ -89,12 +90,12 @@
                             <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Rentang Harga</h3>
                             <div class="flex justify-between text-[#738029] font-bold text-xs mb-4">
                                 <span>Rp 0</span>
-                                <span>Rp 1jt+</span>
+                                <span id="priceMax">Rp 1jt+</span>
                             </div>
-                            <input type="range" min="0" max="1000000" step="10000" class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
+                            <input id="priceRange" type="range" min="0" max="1000000" step="10000" value="1000000" class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
                         </div>
 
-                        <button class="w-full py-3 text-xs font-bold uppercase tracking-widest text-stone-500 border-t border-stone-100 hover:text-red-500 transition mt-4">
+                        <button id="resetFilters" class="w-full py-3 text-xs font-bold uppercase tracking-widest text-stone-500 border-t border-stone-100 hover:text-red-500 transition mt-4">
                             Reset Filter
                         </button>
                     </div>
@@ -107,17 +108,19 @@
                     <h2 class="text-2xl font-serif text-[#5B2C04]">Katalog Produk</h2>
                     
                     <div class="relative group w-full md:w-80">
-                        <input type="text" placeholder="Cari produk kecantikan..." class="w-full pl-4 pr-10 py-3 rounded-full bg-white border border-stone-200 focus:outline-none focus:border-[#738029] focus:ring-1 focus:ring-[#738029] transition-all text-sm text-stone-600 shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#738029] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
-                        </svg>
+                        <input id="productSearch" type="text" placeholder="Cari produk kecantikan..." class="w-full pl-4 pr-10 py-3 rounded-full bg-white border border-stone-200 focus:outline-none focus:border-[#738029] focus:ring-1 focus:ring-[#738029] transition-all text-sm text-stone-600 shadow-sm">
+                        <a href="{{ url('/transaksi') }}" class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#738029] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
 
                 {{-- DYNAMIC GRID --}}
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 gap-6">
                     @forelse($products as $prod)
-                    <div class="product-card group" data-category="{{ $prod->category ?? 'uncategorized' }}">
+                    <div class="product-card group" data-category="{{ $prod->category ?? 'uncategorized' }}" data-price="{{ $prod->price }}" data-name="{{ strtolower($prod->name) }}">
                         <div class="bg-white rounded-[20px] p-4 border border-stone-100 shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                             
                             <div class="bg-[#F9F1E7] rounded-[15px] h-48 flex items-center justify-center mb-4 relative overflow-hidden">
@@ -147,7 +150,7 @@
                         </div>
                     </div>
                     @empty
-                    <div class="col-span-full py-20 text-center">
+                    <div class="col-span-full py-20 text-center empty-state">
                         <p class="text-stone-400 italic">Belum ada produk yang tersedia saat ini.</p>
                     </div>
                     @endforelse
@@ -155,4 +158,135 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryButtons = document.querySelectorAll('[data-filter]');
+            const searchInput = document.getElementById('productSearch');
+            const sortRadios = document.querySelectorAll('input[name="sort"]');
+            const priceRange = document.getElementById('priceRange');
+            const resetButton = document.getElementById('resetFilters');
+            const productGrid = document.getElementById('productGrid');
+            const productCards = Array.from(document.querySelectorAll('.product-card'));
+            const priceMaxLabel = document.getElementById('priceMax');
+            let activeCategory = 'all';
+            let searchTerm = '';
+            let activeSort = '';
+            let activeMaxPrice = 1000000;
+
+            function setActiveCategory(button) {
+                categoryButtons.forEach(btn => {
+                    btn.classList.remove('border-[#738029]', 'text-[#5B2C04]', 'bg-[#F9F1E7]');
+                });
+                if (button) {
+                    button.classList.add('border-[#738029]', 'text-[#5B2C04]', 'bg-[#F9F1E7]');
+                }
+            }
+
+            function updatePriceLabel() {
+                if (!priceMaxLabel) return;
+                priceMaxLabel.textContent = activeMaxPrice >= 1000000 ? 'Rp 1jt+' : 'Rp ' + activeMaxPrice.toLocaleString('id-ID');
+            }
+
+            function applyFilters() {
+                let visibleCount = 0;
+
+                productCards.forEach(card => {
+                    const name = card.dataset.name || '';
+                    const category = card.dataset.category || 'uncategorized';
+                    const price = Number(card.dataset.price || 0);
+                    let visible = true;
+
+                    if (activeCategory !== 'all' && category !== activeCategory) {
+                        visible = false;
+                    }
+                    if (searchTerm && !name.includes(searchTerm)) {
+                        visible = false;
+                    }
+                    if (price > activeMaxPrice) {
+                        visible = false;
+                    }
+
+                    card.style.display = visible ? '' : 'none';
+                    if (visible) visibleCount += 1;
+                });
+
+                sortProducts();
+
+                const emptyState = document.querySelector('.empty-state');
+                if (emptyState) {
+                    emptyState.classList.toggle('hidden', visibleCount > 0);
+                }
+            }
+
+            function sortProducts() {
+                if (!productGrid) return;
+                const visibleCards = productCards.filter(card => card.style.display !== 'none');
+                if (!visibleCards.length) return;
+
+                if (activeSort === 'low') {
+                    visibleCards.sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
+                } else if (activeSort === 'high') {
+                    visibleCards.sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
+                }
+
+                visibleCards.forEach(card => productGrid.appendChild(card));
+            }
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    activeCategory = this.dataset.filter || 'all';
+                    setActiveCategory(this);
+                    applyFilters();
+                });
+            });
+
+            if (searchInput) {
+                searchInput.addEventListener('input', function () {
+                    searchTerm = this.value.toLowerCase();
+                    applyFilters();
+                });
+            }
+
+            sortRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    activeSort = this.checked ? this.value : '';
+                    applyFilters();
+                });
+            });
+
+            if (priceRange) {
+                priceRange.addEventListener('input', function () {
+                    activeMaxPrice = Number(this.value) || 1000000;
+                    updatePriceLabel();
+                    applyFilters();
+                });
+            }
+
+            if (resetButton) {
+                resetButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    activeCategory = 'all';
+                    searchTerm = '';
+                    activeSort = '';
+                    activeMaxPrice = 1000000;
+
+                    if (searchInput) {
+                        searchInput.value = '';
+                    }
+                    sortRadios.forEach(radio => radio.checked = false);
+                    if (priceRange) {
+                        priceRange.value = activeMaxPrice;
+                    }
+                    updatePriceLabel();
+                    setActiveCategory(document.querySelector('[data-filter="all"]'));
+                    applyFilters();
+                });
+            }
+
+            setActiveCategory(document.querySelector('[data-filter="all"]'));
+            updatePriceLabel();
+            applyFilters();
+        });
+    </script>
 @endsection
