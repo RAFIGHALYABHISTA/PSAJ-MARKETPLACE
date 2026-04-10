@@ -77,7 +77,17 @@ class UserController extends Controller
         ]);
 
         $oldRole = $user->role;
-        $user->update($validated);
+
+        // Update name and email via Eloquent
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->save();
+
+        // Fix PostgreSQL enum - use parameter binding
+        \DB::update('UPDATE users SET role = ? WHERE id = ?', [
+            (string) $validated['role'],
+            $user->id
+        ]);
 
         $roleMessage = $oldRole !== $validated['role']
             ? " dengan role diubah dari {$oldRole} menjadi {$validated['role']}"
