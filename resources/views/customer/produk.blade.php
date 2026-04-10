@@ -109,7 +109,7 @@
                     
                     <div class="relative group w-full md:w-80">
                         <input id="productSearch" type="text" placeholder="Cari produk kecantikan..." class="w-full pl-4 pr-10 py-3 rounded-full bg-white border border-stone-200 focus:outline-none focus:border-[#738029] focus:ring-1 focus:ring-[#738029] transition-all text-sm text-stone-600 shadow-sm">
-                        <a href="{{ url('/transaksi') }}" class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                        <a href="{{  url('/transaksi') }}" class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#738029] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
                             </svg>
@@ -140,11 +140,11 @@
                                 
                                 <div class="mt-auto pt-3 border-t border-stone-50 flex items-center justify-between">
                                     <p class="font-serif text-lg text-[#5B2C04]">Rp {{ number_format($prod->price, 0, ',', '.') }}</p>
-                                    <button class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                                    <a href="{{  url('/transaksi') }}" class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                         </svg>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -290,3 +290,4 @@
         });
     </script>
 @endsection
+

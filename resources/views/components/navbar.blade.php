@@ -2,12 +2,21 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex h-20 items-center justify-between transition-all duration-500" id="nav-container">
             
-            <div class="flex items-center shrink-0 py-2">
+            <div class="flex items-center shrink-0 py-2 gap-3 mt-4">
                 <a href="{{ url('/') }}" class="block group">
                     <img id="nav-logo" src="{{ asset('images/logo.png') }}" 
                          alt="Sariayu Logo" 
                          class="h-20 md:h-24 w-auto object-contain transition-all duration-500 group-hover:scale-105" />
                 </a>
+
+                <button id="mobile-menu-button" type="button" onclick="toggleMobileMenu()"
+                        class="md:hidden inline-flex items-center justify-center p-2 rounded-full text-stone-600 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-green-700"
+                        aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="sr-only">Buka menu</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
 
             <ul id="nav-menu" class="hidden md:flex items-center space-x-10 transition-all duration-500 opacity-100">
@@ -85,5 +94,53 @@
                 @endif
             </div> 
         </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute inset-x-0 top-full z-40 bg-white border-t border-stone-200 shadow-lg">
+            <ul class="flex flex-col gap-4 px-6 py-5">
+                <li>
+                    <a href="{{ url('/') }}" class="block text-sm font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/about') }}" class="block text-sm font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors">
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/produk') }}" class="block text-sm font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors">
+                        Product
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/artikel') }}" class="block text-sm font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors">
+                        Artikel
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/testimoni') }}" class="block text-sm font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors">
+                        Testimoni
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/contact') }}" class="block text-sm font-bold uppercase tracking-[0.2em] text-stone-600 hover:text-green-800 transition-colors">
+                        Contact us
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const button = document.getElementById('mobile-menu-button');
+        if (!menu || !button) return;
+
+        const isHidden = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !isHidden);
+        menu.classList.toggle('block', isHidden);
+        button.setAttribute('aria-expanded', String(isHidden));
+    }
+</script>
