@@ -36,6 +36,7 @@
                     <thead class="bg-gray-50/50 dark:bg-slate-900/50 border-b border-gray-100 dark:border-slate-800 text-slate-400 text-[10px] uppercase tracking-widest font-bold">
                         <tr>
                             <th class="px-6 py-4">Informasi Afiliator</th>
+                            <th class="px-6 py-4">Role</th>
                             <th class="px-6 py-4">Total Pesanan</th>
                             <th class="px-6 py-4">Akumulasi Komisi</th>
                             <th class="px-6 py-4 text-right">Tindakan</th>
@@ -44,6 +45,14 @@
                     <tbody class="divide-y divide-gray-50 dark:divide-slate-800">
                         @forelse($users as $user)
                         <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                            @php
+                                $roleLabels = [
+                                    'superadmin' => ['bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300', 'Super Admin'],
+                                    'affiliator' => ['bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300', 'Afiliator'],
+                                    'customer' => ['bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300', 'Customer']
+                                ];
+                                $roleStyle = $roleLabels[$user->role] ?? $roleLabels['customer'];
+                            @endphp
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
                                     <div class="w-8 h-8 rounded bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-xs">
@@ -54,6 +63,11 @@
                                         <p class="text-[11px] text-slate-400 mt-1">{{ $user->email }}</p>
                                     </div>
                                 </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 rounded text-[10px] font-bold uppercase {{ $roleStyle[0] }}">
+                                    {{ $roleStyle[1] }}
+                                </span>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="text-xs font-bold text-slate-600 dark:text-slate-400">
@@ -67,16 +81,16 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex justify-end items-center space-x-3">
-                                    <a href="{{ route('admin.afiliator.edit', $user) }}" 
+                                    <a href="{{ route('admin.afiliator.edit', $user) }}"
                                        class="text-[10px] font-black uppercase tracking-tighter text-indigo-600 dark:text-indigo-400 hover:underline">
                                         Edit
                                     </a>
                                     <span class="text-gray-200 dark:text-slate-800">|</span>
-                                    <form action="{{ route('admin.afiliator.destroy', $user) }}" method="POST" class="inline">
+                                    <form action="{{ route('admin.afiliator.destroy', $user) }}" method="POST" class="inline" x-ref="deleteForm{{ $user->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" 
-                                                onclick="return confirm('Yakin ingin menghapus?')" 
+                                        <button type="button"
+                                                @click="$dispatch('confirm-delete', $refs.deleteForm{{ $user->id }})"
                                                 class="text-[10px] font-black uppercase tracking-tighter text-red-500 hover:text-red-700 transition-colors">
                                             Hapus
                                         </button>

@@ -17,14 +17,19 @@
 
     <div class="p-8 max-w-2xl mx-auto">
         @if ($errors->any())
-            <div class="mb-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-6 py-4 rounded-xl">
-                <p class="font-bold text-sm mb-2"><i class="fas fa-exclamation-circle mr-2"></i> Terdapat kesalahan:</p>
-                <ul class="list-disc list-inside text-xs space-y-1">
+        <div class="mb-6 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-xl p-4 flex items-start space-x-3">
+            <div class="shrink-0 w-10 h-10 bg-rose-100 dark:bg-rose-800/50 rounded-full flex items-center justify-center">
+                <i class="fas fa-exclamation-circle text-rose-600 dark:text-rose-400 text-lg"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-bold text-rose-800 dark:text-rose-300">Terjadi Kesalahan!</p>
+                <ul class="mt-1 text-xs text-rose-600 dark:text-rose-400 space-y-1">
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li><i class="fas fa-times-circle mr-1 text-[10px]"></i> {{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
+        </div>
         @endif
 
         <form action="{{ isset($product) ? route('admin.produk.update', $product) : route('admin.produk.store') }}" 
@@ -36,16 +41,36 @@
             @endif
 
             <div class="space-y-6">
+                <!-- Category Field -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                        Kategori Produk <span class="text-red-500">*</span>
+                    </label>
+                    <select name="category_id" 
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-white rounded-xl focus:ring-2 ring-indigo-500 outline-none transition"
+                            required>
+                        <option value="">-- Pilih Kategori --</option>
+                        @foreach(App\Models\Category::getDropdownOptions() as $id => $name)
+                            <option value="{{ $id }}" {{ old('category_id', $product->category_id ?? '') == $id ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <p class="text-xs text-slate-400 mt-2">
+                        <i class="fas fa-info-circle mr-1"></i> Pilih kategori yang sesuai untuk produk ini
+                    </p>
+                </div>
+
                 <!-- Description Field -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                        Deskripsi Produk <span class="text-red-500">*</span>
+                        Nama Produk <span class="text-red-500">*</span>
                     </label>
-                    <textarea name="description" 
+                    <textarea name="name" 
                               rows="4"
                               placeholder="Masukkan deskripsi lengkap produk..." 
                               class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition"
-                              required>{{ old('description', $product->description ?? '') }}</textarea>
+                              required>{{ old('name', $product->name ?? '') }}</textarea>
                 </div>
 
                 <!-- Price Field -->
@@ -98,8 +123,9 @@
                 <!-- Active Status Field -->
                 <div>
                     <label class="flex items-center">
-                        <input type="checkbox" 
-                               name="is_active" 
+                        <input type="hidden" name="is_active" value="0">
+                        <input type="checkbox"
+                               name="is_active"
                                value="1"
                                class="w-5 h-5 rounded bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-indigo-600 focus:ring-2 ring-indigo-500 cursor-pointer"
                                {{ old('is_active', $product->is_active ?? true) ? 'checked' : '' }}>
@@ -115,7 +141,7 @@
 
             <!-- Action Buttons -->
             <div class="flex gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
-                <a href="{{ route('admin.produk') }}" 
+                <a href="{{ route('admin.manajemen-produk') }}" 
                    class="flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 py-3 rounded-xl font-bold text-sm transition-colors text-center">
                     Batal
                 </a>

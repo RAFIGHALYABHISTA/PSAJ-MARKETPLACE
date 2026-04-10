@@ -153,13 +153,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         return view('admin.rekap-penjualan');
     })->name('rekap-penjualan');
 
-    Route::get('/manajemen-produk', function () {
-        return view('admin.manajemen-produk');
-    })->name('manajemen-produk');
+    Route::get('/manajemen-produk', [ProductController::class, 'manajemen'])->name('manajemen-produk');
 
-    Route::get('/katalog-produk', function () {
-        return view('admin.katalog-produk');
-    })->name('katalog-produk');
+    Route::get('/katalog-produk', [ProductController::class, 'katalog'])->name('katalog-produk');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

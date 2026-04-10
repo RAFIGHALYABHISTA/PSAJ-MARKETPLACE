@@ -62,17 +62,34 @@
     </nav>
 
     <div class="p-4 border-t border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-900/50">
-        <div class="flex items-center mb-4">
-            <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=6366f1&color=fff" class="w-9 h-9 rounded">
-            <div class="ml-3 overflow-hidden">
+        {{-- Theme Toggle --}}
+        <div class="mb-3">
+            <button @click="darkMode = !darkMode; localStorage.setItem('dark', darkMode)" 
+                    class="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all group">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3 group-hover:bg-indigo-200 dark:group-hover:bg-indigo-800/50 transition-colors">
+                        <i class="fas fa-moon text-indigo-600 dark:hidden text-sm"></i>
+                        <i class="fas fa-sun text-amber-500 hidden dark:block text-sm"></i>
+                    </div>
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300" x-text="darkMode ? 'Mode Terang' : 'Mode Gelap'"></span>
+                </div>
+                <div class="w-10 h-5 rounded-full bg-gray-300 dark:bg-indigo-600 relative transition-colors">
+                    <div class="w-4 h-4 rounded-full bg-white absolute top-0.5 left-0.5 dark:left-5 transition-all shadow-sm"></div>
+                </div>
+            </button>
+        </div>
+
+        <div class="flex items-center mb-3 p-2 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+            <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=6366f1&color=fff" class="w-9 h-9 rounded-md">
+            <div class="ml-3 overflow-hidden flex-1">
                 <p class="text-sm font-bold text-slate-700 dark:text-white truncate">{{ auth()->user()->name }}</p>
                 <p class="text-xs text-slate-400 truncate">{{ auth()->user()->email }}</p>
             </div>
         </div>
-        <form action="{{ route('admin.logout') }}" method="POST">
+        <form action="{{ route('admin.logout') }}" method="POST" x-ref="logoutForm" @submit.prevent="$dispatch('confirm-logout', $refs.logoutForm)">
             @csrf
-            <button type="submit" class="w-full flex items-center justify-center py-2 border border-red-200 text-red-600 rounded hover:bg-red-600 hover:text-white transition-all text-xs font-bold uppercase tracking-tighter">
-                Logout
+            <button type="submit" class="w-full flex items-center justify-center py-2 border border-red-200 dark:border-red-800/50 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white transition-all text-xs font-bold">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
             </button>
         </form>
     </div>

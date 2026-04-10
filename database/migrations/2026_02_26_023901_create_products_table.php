@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price', 12, 2);
             $table->string('image_url')->nullable();
             $table->integer('stock')->default(0);
+            $table->foreignId('category_id')->nullable()->after('id')->constrained('category')->onDelete('set null');
             $table->enum('status', ['Stok Cukup', 'Stok Menipis', 'Stok Habis'])->default('Stok Cukup');
             $table->integer('commission_percentage')->default(10);
             $table->timestamps();

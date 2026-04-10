@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -13,11 +14,12 @@ class Product extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'description',
+        'name',
         'price',
         'image_url',
         'stock',
         'is_active',
+        'category_id',
     ];
 
     /**
@@ -29,7 +31,16 @@ class Product extends Model
         'price' => 'decimal:2',
         'stock' => 'integer',
         'is_active' => 'boolean',
+        'category_id' => 'integer',
     ];
+
+    /**
+     * Get the category that owns the product.
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /**
      * Get all order items for this product.

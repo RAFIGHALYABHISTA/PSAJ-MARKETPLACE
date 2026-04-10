@@ -10,11 +10,6 @@
         </div>
         
         <div class="flex items-center space-x-4">
-            <button @click="darkMode = !darkMode; localStorage.setItem('dark', darkMode)" 
-                    class="p-2 text-slate-400 hover:text-indigo-600 transition-colors">
-                <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
-            </button>
-
             <button class="p-2 text-slate-400 hover:text-indigo-600 relative">
                 <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
                 <i class="fas fa-bell"></i>

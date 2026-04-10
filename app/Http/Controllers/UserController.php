@@ -37,14 +37,15 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
+            'role' => 'required|in:superadmin,affiliator,customer',
         ]);
 
         $validated['password'] = bcrypt($validated['password']);
-        
+
         User::create($validated);
 
         return redirect()->route('admin.afiliator')
-            ->with('success', 'Afiliator berhasil ditambahkan');
+            ->with('success', "✅ Afiliator '{$validated['name']}' berhasil ditambahkan sebagai {$validated['role']}!");
     }
 
     /**
@@ -72,12 +73,18 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required|in:superadmin,affiliator,customer',
         ]);
 
+        $oldRole = $user->role;
         $user->update($validated);
 
+        $roleMessage = $oldRole !== $validated['role']
+            ? " dengan role diubah dari {$oldRole} menjadi {$validated['role']}"
+            : '';
+
         return redirect()->route('admin.afiliator')
-            ->with('success', 'Afiliator berhasil diperbarui');
+            ->with('success', "✏️ Afiliator '{$user->name}' berhasil diperbarui{$roleMessage}!");
     }
 
     /**
@@ -85,9 +92,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $name = $user->name;
         $user->delete();
 
         return redirect()->route('admin.afiliator')
-            ->with('success', 'Afiliator berhasil dihapus');
+            ->with('success', "🗑️ Afiliator '{$name}' berhasil dihapus!");
     }
 }

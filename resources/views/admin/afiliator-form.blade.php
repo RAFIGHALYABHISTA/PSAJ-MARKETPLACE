@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.admin.header')
 
 @section('content')
 <div class="min-h-screen transition-colors duration-300 dark:bg-slate-950 bg-[#F8FAFC]">
@@ -54,12 +54,30 @@
                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                         Email <span class="text-red-500">*</span>
                     </label>
-                    <input type="email" 
-                           name="email" 
-                           placeholder="afiliator@example.com" 
+                    <input type="email"
+                           name="email"
+                           placeholder="afiliator@example.com"
                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition"
                            value="{{ old('email', $user->email ?? '') }}"
                            required>
+                </div>
+
+                <!-- Role Field -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                        Role <span class="text-red-500">*</span>
+                    </label>
+                    <select name="role"
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-white rounded-xl focus:ring-2 ring-indigo-500 outline-none transition"
+                            required>
+                        <option value="affiliator" {{ old('role', $user->role ?? '') == 'affiliator' ? 'selected' : '' }}>Afiliator</option>
+                        <option value="customer" {{ old('role', $user->role ?? '') == 'customer' ? 'selected' : '' }}>Customer</option>
+                        <option value="superadmin" {{ old('role', $user->role ?? '') == 'superadmin' ? 'selected' : '' }}>Super Admin</option>
+                    </select>
+                    <p class="text-xs text-slate-400 mt-2">
+                        <i class="fas fa-shield-alt mr-1"></i>
+                        <strong>Super Admin:</strong> Akses penuh dashboard | <strong>Afiliator:</strong> Bisa jual produk | <strong>Customer:</strong> Pembeli biasa
+                    </p>
                 </div>
 
                 @if(!isset($user))

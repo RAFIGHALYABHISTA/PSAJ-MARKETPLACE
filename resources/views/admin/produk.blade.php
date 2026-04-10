@@ -21,9 +21,15 @@
                 <i class="fas fa-search absolute left-4 top-3.5 text-slate-400 text-xs"></i>
             </div>
             <div class="flex space-x-2">
-                <button class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest hover:bg-gray-50 transition uppercase">
-                    Kategori <i class="fas fa-chevron-down ml-2"></i>
-                </button>
+                <select onchange="window.location.href='?kategori='+this.value" 
+                        class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest hover:bg-gray-50 transition uppercase outline-none cursor-pointer">
+                    <option value="">SEMUA KATEGORI</option>
+                    @foreach(App\Models\Category::getActiveCategories() as $category)
+                        <option value="{{ $category->id }}" {{ request('kategori') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
@@ -49,10 +55,15 @@
 
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-slate-800 dark:text-white leading-tight line-clamp-1 flex-1 pr-2">
-                            {{ $product->name ?? 'Produk Sariayu' }} 
+                        <div class="flex-1 pr-2">
+                            <span class="inline-block px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-[9px] font-bold uppercase tracking-tighter rounded-md mb-2">
+                                <i class="fas fa-tag mr-1"></i>{{ $product->category->name ?? 'Tanpa Kategori' }}
+                            </span>
+                            <h3 class="font-bold text-slate-800 dark:text-white leading-tight line-clamp-1">
+                                {{ $product->name ?? 'Produk Sariayu' }}
+                            </h3>
                             <span class="text-[10px] text-slate-300 font-mono block mt-1 uppercase">ID: {{ substr(base64_encode($product->id), 0, 8) }}</span>
-                        </h3>
+                        </div>
                     </div>
                     
                     <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 min-h-[2rem]">
@@ -75,12 +86,12 @@
                            class="flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-indigo-600 hover:text-white text-slate-600 dark:text-slate-300 text-center py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
                             Edit
                         </a>
-                        <form action="{{ route('admin.produk.destroy', $product) }}" method="POST" class="flex-1">
+                        <form action="{{ route('admin.produk.destroy', $product) }}" method="POST" class="flex-1" x-ref="deleteForm{{ $product->id }}" @submit.prevent="$dispatch('confirm-delete', $refs.deleteForm{{ $product->id }})">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Hapus produk ini?')" 
+                            <button type="submit"
                                     class="w-full bg-slate-50 dark:bg-slate-800/30 hover:bg-rose-500 hover:text-white text-rose-500 text-center py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
-                                Hapus
+                                <i class="fas fa-trash-alt mr-1"></i> Hapus
                             </button>
                         </form>
                     </div>
