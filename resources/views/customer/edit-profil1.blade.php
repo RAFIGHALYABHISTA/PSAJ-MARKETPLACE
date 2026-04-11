@@ -8,7 +8,7 @@
   <div class="w-full max-w-4xl bg-white rounded-[40px] shadow-[0_20px_60px_rgba(91,44,4,0.1)] border border-stone-200 overflow-hidden">
 
     <!-- HEADER -->
-    <div class="h-40 bg-[#FFEADB] relative flex items-end justify-center pb-6">
+    <div class="h-40 bg-[#FFEADB] relative flex items-end justify-center pb-8">
 
       <!-- BACK BUTTON -->
       <a href="{{ url('/edit-profil') }}" 
@@ -41,8 +41,8 @@
       <!-- FOTO PROFIL -->
       <div class="text-center">
         <div class="relative inline-block">
-          <img id="previewImage"
-               src="https://ui-avatars.com/api/?name=User&background=5B2C04&color=FFEADB"
+          <img src="https://ui-avatars.com/api/?name={{ auth()->check() ? auth()->user()->name : 'Guest' }}&background=5B2C04&color=FFEADB" 
+             alt="Profile"
                class="w-28 h-28 rounded-[30px] object-cover border-4 border-white shadow-xl">
 
           {{-- 

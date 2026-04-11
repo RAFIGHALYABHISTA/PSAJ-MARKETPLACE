@@ -14,7 +14,7 @@
 <!-- DEKORASI ATAS KANAN -->
 <img src="{{ asset('images/kanan-atas.png') }}" class="absolute top-0 right-0 w-60 opacity-90 pointer-events-none select-none">
 <!-- DEKORASI BAWAH KIRI -->
-{{-- <img src="{{ asset('images/kiri-bawah.png') }}" class="absolute bottom-0 left-0 w-60 opacity-90 pointer-events-none select-none"> --}}
+{{-- <img src="{{ asset('images/kiri-bawah.png') }}" class="absolute bottom-0 left-0 w-60 opacity-90 pointer-events-none select-none z-10"> --}}
     <div class="fixed top-6 right-6">
         <button @click="darkMode = !darkMode; localStorage.setItem('dark', darkMode)" 
                 class="p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-xl text-slate-600 dark:text-yellow-400 transition-all active:scale-90">
