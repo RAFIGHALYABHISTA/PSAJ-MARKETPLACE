@@ -55,6 +55,17 @@
           </div>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone-300 group-hover:text-white/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
         </a>
+        <a href="{{ url('/edit-profil') }}" class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-2xl bg-white flex items-center justify-center text-[#5B2C04] group-hover:bg-white/20 group-hover:text-white transition-colors">
+             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"  viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 00.12-.64l-1.92-3.32a.5.5 0 00-.6-.22l-2.39.96a7.028 7.028 0 00-1.63-.94l-.36-2.54a.5.5 0 00-.5-.42h-3.84a.5.5 0 00-.5.42l-.36 2.54c-.58.22-1.12.52-1.63.94l-2.39-.96a.5.5 0 00-.6.22L2.71 8.84a.5.5 0 00.12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94L2.83 14.52a.5.5 0 00-.12.64l1.92 3.32c.14.24.43.34.68.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.58-.22 1.12-.52 1.63-.94l2.39.96c.25.12.54.02.68-.22l1.92-3.32a.5.5 0 00-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z"/>
+            </svg>
+            </div>
+            <span class="text-sm font-bold text-stone-700 group-hover:text-white transition-colors tracking-wide">Pengaturan</span>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone-300 group-hover:text-white/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </a>
 
         @if(!in_array(auth()->user()->role, ['admin', 'superadmin', 'afiliator']))
           <a href="#" class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">

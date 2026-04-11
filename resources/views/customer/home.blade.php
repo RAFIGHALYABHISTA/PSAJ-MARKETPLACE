@@ -28,10 +28,10 @@
     </div>
 
 <div class="relative flex justify-center md:justify-end group">
-            <div class="absolute -inset-4 bg-green-700/10 rounded-[50px] blur-2xl group-hover:bg-green-700/20 transition duration-500"></div>
+            <div class="absolute -inset-4 bg-stone-100-700/10 rounded-[50px] blur-2xl  transition duration-500"></div>
 
-        <div class="rounded-[40px] overflow-hidden shadow-2xl relative">
-            <img src="/images/zahira.jpg" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition duration-700">
+        <div class="rounded-[40px] border-[12px] border-white overflow-hidden shadow-2xl relative">
+            <img src="/images/model4.jpg" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition duration-700">
         </div>
     </div>
 </section>
@@ -53,7 +53,7 @@
 
 {{-- INGREDIENTS SLIDER --}}
 <section class="relative bg-[#E9DADA] py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-    <img src="{{ asset('images/daun.png') }}" class="absolute top-0 right-0 w-28 sm:w-40 opacity-80 pointer-events-none">
+    <img src="{{ asset('images/daun.png') }}" class="absolute top-0 right-0 w-28 sm:w-60 opacity-80 pointer-events-none">
     <img src="{{ asset('images/daun1.png') }}" class="absolute bottom-0 left-0 w-32 sm:w-48 opacity-80 pointer-events-none">
 
     <div class="max-w-6xl mx-auto relative">
@@ -119,12 +119,12 @@
                 <div id="promoSlider" class="flex transition-all duration-700">
                     @foreach(['promo1.png', 'promo2.png', 'promo3.png'] as $index => $img)
                     <div class="min-w-full flex flex-col items-center gap-6 px-4 sm:px-0">
-                        <img src="{{ asset('images/'.$img) }}" class="w-full max-w-2xl h-[260px] sm:h-72 object-cover rounded-2xl shadow-md">
+                        <img src="{{ asset('images/'.$img) }}"  onclick="openPreview(this.src)" class="w-full max-w-2xl h-[260px] sm:h-72 object-cover rounded-2xl shadow-md cursor-pointer hover:scale-105 transition duration-500">
                     </div>
                     @endforeach
                 </div>
 
-                <div class="flex justify-center gap-3 mt-8">
+                <div class="flex justify-center gap-3 mt-8 mb-4">
                     @for($i=0; $i<3; $i++)
                     <button onclick="slidePromo({{ $i }})" class="dotPromo w-3 h-3 rounded-full bg-gray-400"></button>
                     @endfor
@@ -196,17 +196,24 @@
      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4 sm:px-6">
 
     <!-- POPUP BOX -->
-    <div class="rounded-2xl overflow-hidden shadow-xl w-full max-w-md ">
+    <div class="rounded-2xl overflow-hidden shadow-xl w-full max-w-md ml-5">
 
         <!-- GAMBAR IKLAN -->
-        <a href="#" class="block w-full h-full">
+        <a href="#">
             <img src="{{ asset('images/sariayu.png') }}"
                  class="w-auto h-120 object-cover">
         </a>
 
     </div>
 </div>
+<div id="imagePreview" 
+     class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50"
+     onclick="closePreview()">
 
+    <img id="previewImg" 
+         class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
+
+</div>
 <script>
     // --- Ingredient Slider ---
     let index = 0;
@@ -271,6 +278,15 @@
             if(popup) popup.style.display = "flex";
         }, 1000);
     };
+    function openPreview(src){
+    document.getElementById('previewImg').src = src;
+    document.getElementById('imagePreview').classList.remove('hidden');
+    document.getElementById('imagePreview').classList.add('flex');
+}
+
+function closePreview(){
+    document.getElementById('imagePreview').classList.add('hidden');
+}
 </script>
 
 @endsection

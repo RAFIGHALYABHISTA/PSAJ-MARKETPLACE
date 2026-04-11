@@ -6,20 +6,58 @@
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
     <!-- LEFT: IMAGE GALLERY -->
-    <div>
-      <div class="bg-white rounded-xl shadow-md p-4">
-        <img src="{{ asset('images/produk.png') }}"
-             class="w-full rounded-lg object-contain">
-      </div>
+  <div>
+  <!-- GAMBAR UTAMA -->
+  <div class="relative bg-white rounded-xl shadow-md p-4 group">
+    <img src="{{ asset('images/produk.png') }}"
+         class="w-full rounded-lg object-contain">
 
-      <!-- Thumbnails -->
-      <div class="flex gap-3 mt-4">
-        <img src="{{ asset('images/produk.png') }}"
-             class="w-16 h-16 rounded-lg border cursor-pointer">
-        <img src="{{ asset('images/produk.png') }}"
-             class="w-16 h-16 rounded-lg border cursor-pointer">
-      </div>
+    <!-- ICON MATA -->
+    <button onclick="openPreview('{{ asset('images/produk.png') }}')" 
+            class="absolute bottom-3 right-3 bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- THUMBNAIL -->
+  <div class="flex gap-3 mt-4">
+    
+    <div class="relative group">
+      <img src="{{ asset('images/produk.png') }}"
+           class="w-16 h-16 rounded-lg border cursor-pointer">
+
+      <button onclick="openPreview('{{ asset('images/produk.png') }}')" 
+              class="absolute bottom-1 right-1 bg-black/60 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+      </button>
     </div>
+    <div class="relative group">
+      <img src="{{ asset('images/zahira.jpg') }}"
+           class="w-16 h-16 rounded-lg border cursor-pointer">
+
+      <button onclick="openPreview('{{ asset('images/zahira.jpg') }}')" 
+              class="absolute bottom-1 right-1 bg-black/60 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</div>
 
     <!-- CENTER: PRODUCT INFO -->
     <div class="space-y-4">
@@ -48,7 +86,7 @@
         </button>
       </div>
       <!-- Description -->
-      {{-- <p id="deskripsi" class="tab-content text-sm text-gray-600 leading-relaxed">
+      <p id="deskripsi" class="tab-content text-sm text-gray-600 leading-relaxed">
         Sariayu Kenanga Refreshing Toner mengandung kenanga oil dan peppermint oil
         serta ekstrak gardenia sebagai antioksidan. Menyegarkan wajah, membantu
         menjaga kelembutan alami kulit wajah.
@@ -56,7 +94,7 @@
       <p id="spesifikasi" class="tab-content text-sm text-gray-600 leading-relaxed hidden ">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, totam atque ex illum rem nisi sit perspiciatis
         quo corrupti, facilis in cumque veniam commodi suscipit mollitia accusamus dolores consequatur doloribus?
-      </p> --}}
+      </p>
     </div>
     <!-- RIGHT: BUY CARD -->
     <div class="bg-white rounded-xl shadow-md p-6 h-fit space-y-5">
@@ -144,6 +182,15 @@
 
  
 </section>
+
+<!-- POPUP PREVIEW -->
+<div id="imagePreview" 
+     class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50"
+     onclick="closePreview()">
+
+  <img id="previewImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
+
+</div>
 <script>
   const tabs = document.querySelectorAll('.tab-btn');
   const contents = document.querySelectorAll('.tab-content');
@@ -183,7 +230,15 @@ metode.addEventListener("change", function() {
 });
   });
 
+function openPreview(src){
+  document.getElementById('previewImg').src = src;
+  document.getElementById('imagePreview').classList.remove('hidden');
+  document.getElementById('imagePreview').classList.add('flex');
+}
 
+function closePreview(){
+  document.getElementById('imagePreview').classList.add('hidden');
+}
 </script>
 
 @endsection

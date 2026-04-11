@@ -5,36 +5,36 @@
 @section('content')
 <div class="bg-[#F9F1E7] min-h-screen">
     
-    <section class="relative py-24 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <section class="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div class="relative z-10 space-y-6">
                 <span class="text-[#738029] font-bold uppercase tracking-[0.3em] text-xs">Warisan Kecantikan Nusantara</span>
-                <h1 class="text-5xl md:text-7xl font-serif text-[#5B2C04] leading-[1.1]">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif text-[#5B2C04] leading-tight sm:leading-[1.05]">
                     Merawat Pesona <br>
                     <span class="italic text-[#738029]">Wanita Indonesia</span>
                 </h1>
-                <p class="text-stone-600 leading-relaxed max-w-lg text-lg">
+                <p class="text-stone-600 leading-relaxed max-w-xl text-base sm:text-lg">
                     Berawal dari sebuah impian untuk melestarikan kearifan lokal, kami hadir membawa keajaiban rempah dan alam Indonesia dalam setiap sentuhan perawatan kecantikan Anda.
                 </p>
             </div>
-            <div class="relative">
-                <div class="relative z-10 rounded-t-full overflow-hidden border-[12px] border-white shadow-2xl">
+            <div class="relative flex justify-center md:justify-end">
+                <div class="relative z-10 rounded-t-full overflow-hidden border-[12px] border-white shadow-2xl max-w-full w-full md:w-[520px]">
                     <img src="https://images.unsplash.com/photo-1590439471364-192aa70c0b53?auto=format&fit=crop&q=80&w=800" 
-                         alt="Natural Ingredients" class="w-full h-[500px] object-cover">
+                         alt="Natural Ingredients" class="w-full h-[280px] sm:h-[360px] md:h-[500px] object-cover">
                 </div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#738029]/10 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-[#738029]/10 rounded-full blur-2xl"></div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 bg-white px-6">
+    <section class="py-16 sm:py-20 bg-stone-50 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-serif text-[#5B2C04]">Tiga Pilar Kami</h2>
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-serif text-[#5B2C04]">Tiga Pilar Kami</h2>
                 <div class="h-1 w-20 bg-[#738029] mx-auto mt-4"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div class="space-y-4 group">
                     <div class="w-16 h-16 bg-[#F9F1E7] rounded-full flex items-center justify-center mx-auto group-hover:bg-[#738029] transition-colors duration-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#738029] group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,16 +68,16 @@
         </div>
     </section>
 
-    <section class="py-24 px-6 bg-[#2D1B0E] text-white">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-[#2D1B0E] text-white">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
             <div class="w-full md:w-1/2">
                 <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" 
-                     alt="Founder" class="rounded-2xl grayscale hover:grayscale-0 transition duration-700 shadow-2xl shadow-black/50">
+                     alt="Founder" class="w-full h-[320px] sm:h-[380px] md:h-[450px] rounded-2xl grayscale hover:grayscale-0 transition duration-700 shadow-2xl shadow-black/50 object-cover">
             </div>
             <div class="w-full md:w-1/2 space-y-6">
-                <h2 class="text-4xl font-serif leading-tight italic text-[#738029]">"Cantik itu bukan hanya apa yang terlihat, tapi apa yang kita rasakan dari dalam."</h2>
+                <h2 class="text-3xl sm:text-4xl font-serif leading-tight italic text-[#738029]">"Cantik itu bukan hanya apa yang terlihat, tapi apa yang kita rasakan dari dalam."</h2>
                 <div class="h-1 w-12 bg-[#738029]"></div>
-                <p class="text-stone-400 text-lg leading-relaxed">
+                <p class="text-stone-400 text-base sm:text-lg leading-relaxed">
                     Kami percaya bahwa setiap wanita memiliki cahaya uniknya masing-masing. Melalui Sariayu, kami berkomitmen untuk mendampingi perjalanan kecantikan Anda dengan produk yang jujur, aman, dan berakar pada tradisi.
                 </p>
                 <div class="pt-4">
@@ -88,13 +88,13 @@
         </div>
     </section>
 
-    <section class="py-20 px-6 text-center">
+    <section class="py-16 sm:py-20 px-4 sm:px-6 bg-stone-50 text-center">
         <div class="max-w-3xl mx-auto space-y-8">
-            <h2 class="text-3xl md:text-4xl font-serif text-[#5B2C04]">Mulai Perjalanan Cantikmu Hari Ini</h2>
-            <p class="text-stone-500">Jelajahi koleksi terbaik kami yang dirancang khusus untuk kulit tropis Indonesia.</p>
-            <div class="flex justify-center gap-4">
-                <a href="{{ url('/produk') }}" class="bg-[#738029] text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[#5B2C04] transition shadow-lg">Lihat Koleksi</a>
-                <a href="{{ url('/') }}" class="bg-white border border-stone-200 text-stone-600 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-stone-50 transition">Kembali ke Beranda</a>
+            <h2 class="text-3xl sm:text-4xl font-serif text-[#5B2C04]">Mulai Perjalanan Cantikmu Hari Ini</h2>
+            <p class="text-stone-500 text-base sm:text-lg">Jelajahi produk kami yang dirancang khusus untuk kulit tropis Indonesia.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="{{ url('/produk') }}" class="w-full sm:w-auto bg-[#738029] text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-[#5B2C04] transition shadow-lg">Lihat produk</a>
+                <a href="{{ url('/') }}" class="w-full sm:w-auto bg-[#738029] text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-[#5B2C04] transition shadow-lg">Kembali ke Beranda</a>
             </div>
         </div>
     </section>
