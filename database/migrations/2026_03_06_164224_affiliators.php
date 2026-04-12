@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('referral_code')->unique();
             $table->decimal('total_commissions', 12, 2)->default(0);
-            $table->enum('status', ['aktif', 'nonaktif'])->default('active');
+            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
         });
     }

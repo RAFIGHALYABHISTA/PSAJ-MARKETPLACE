@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Afiliator\DashboardController as AfiliatorDashboardController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\ProductsController;
+use App\Http\Controllers\Afiliator\AfiliatorController;
 
 
 // ==================================
@@ -168,19 +169,19 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
 // Afiliator Routes
 Route::prefix('afiliator')->name('afiliator.')->group(function () {
-    Route::get('/', [AfiliatorDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/affiliator', [AfiliatorController::class, 'dashboard'])->name('dashboard');
     
-    Route::get('/riwayat-penjualan', [AfiliatorDashboardController::class, 'salesHistory'])->name('sales-history');
+    Route::get('/riwayat-penjualan', [AfiliatorController::class, 'salesHistory'])->name('sales-history');
     
-    Route::get('/commissions', [AfiliatorDashboardController::class, 'commissions'])->name('commissions');
+    Route::get('/commissions', [AfiliatorController::class, 'commissions'])->name('commissions');
     
     Route::post('/commissions/withdraw', function () {
         // placeholder: implement withdrawal logic in controller
         return redirect()->route('afiliator.commissions')->with('status', 'Permintaan penarikan dikirim.');
     })->name('commissions.withdraw');
 
-    Route::get('/register', [\App\Http\Controllers\AfiliatorController::class, 'showRegisterForm'])->name('register');
-    Route::post('/register', [\App\Http\Controllers\AfiliatorController::class, 'store'])->name('store'); // Tambahkan route ini
+    Route::get('/register', [AfiliatorController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AfiliatorController::class, 'store'])->name('store');
 
 
     Route::post('/logout', function () {

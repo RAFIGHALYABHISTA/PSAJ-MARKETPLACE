@@ -67,7 +67,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone-300 group-hover:text-white/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
         </a>
 
-        @if(!in_array(auth()->user()->role, ['admin', 'superadmin', 'afiliator']))
+        @if(!in_array(auth()->user()->role, ['admin', 'superadmin', 'affiliator']))
           <a href="#" class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 rounded-2xl bg-white flex items-center justify-center text-[#5B2C04] group-hover:bg-white/20 group-hover:text-white transition-colors">
@@ -97,7 +97,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </a>
           </div>
-        @elseif(in_array(auth()->user()->role, ['afiliator']))
+        @elseif(in_array(auth()->user()->role, ['affiliator']))
           <a href="{{ route('afiliator.dashboard') }}" class="flex items-center gap-4 p-5 rounded-[25px] bg-[#5B2C04] text-white shadow-xl shadow-orange-900/20 hover:bg-green-800 transition-all">
             <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" /></svg>

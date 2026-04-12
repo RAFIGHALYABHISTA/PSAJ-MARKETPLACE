@@ -15,7 +15,7 @@
             <h4 class="text-4xl font-sariayu-serif text-brand-text">{{ number_format($totalProductsSold) }}</h4>
             <div class="mt-4 inline-flex items-center px-3 py-1 rounded-full bg-brand-cream text-brand-olive text-xs font-medium">
                 <span class="w-2 h-2 bg-brand-olive rounded-full mr-2"></span>
-                Referral Aktif
+                Kode Referral: {{ $affiliator->referral_code ?? 'N/A' }}
             </div>
         </div>
 

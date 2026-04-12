@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Affiliator extends Model
 {
@@ -15,6 +16,7 @@ class Affiliator extends Model
         'bank_account_number',
         'bank_account_name',
         'status',
+        'referral_code',
     ];
 
     protected $casts = [
@@ -30,7 +32,7 @@ class Affiliator extends Model
 
     public function isActive(): bool
     {
-        return $this->status === 'active';
+        return $this->status === 'aktif';
     }
 
     public function isPending(): bool
@@ -41,5 +43,34 @@ class Affiliator extends Model
     public function isSuspended(): bool
     {
         return $this->status === 'suspended';
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($affiliator) {
+            // Kita ambil nama dari user yang sedang login
+            $userName = auth()->user()->name ?? 'USER';
+            
+            // Generate kode berdasarkan nama
+            $affiliator->referral_code = self::generateUniqueReferralCode($userName);
+        });
+    }
+
+    private static function generateUniqueReferralCode($name)
+    {
+        // 1. Bersihkan nama dari spasi dan ambil 3 huruf pertama (Contoh: "Budi Santoso" -> "BUD")
+        $cleanName = strtoupper(Str::slug($name, ''));
+        $prefix = substr($cleanName, 0, 3);
+        
+        // Jika nama terlalu pendek (kurang dari 3 huruf), tambahkan karakter X
+        $prefix = str_pad($prefix, 3, 'X');
+
+        do {
+            // 2. Tambahkan 4 karakter acak di belakangnya
+            // Hasil akhir contoh: BUD-A1Z9, SAR-K8W2
+            $code = $prefix . strtoupper(Str::random(4));
+        } while (self::where('referral_code', $code)->exists());
+
+        return $code;
     }
 }
