@@ -98,7 +98,7 @@
                     <div class="mb-6">
                         <label class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2 block">Kode Voucher</label>
                         <div class="flex gap-2">
-                            <input type="text" placeholder="Diskon" class="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#738029] transition">
+                            <input type="text" placeholder="Masukan kode voucher" class="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#738029] transition">
                             <button class="bg-stone-800 text-white px-4 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-[#5B2C04] transition">Apply</button>
                         </div>
                     </div>
@@ -116,7 +116,18 @@
                             <span>Diskon</span>
                             <span>-Rp 0</span>
                         </div>
+                        <label class="text-sm font-medium">Metode Pembayaran</label>
+                        <select id="metodePembayaran" class="w-full border rounded-lg px-3 py-2 mt-1">
+                        <option value="">Pilih metode pembayaran</option>
+                        <option value="qris">QRIS</option>
+                        <option value="transfer">Tunai</option>
+                        </select>
+                        <div id="qrisBox" class="hidden text-center">
+                            <p class="text-sm mb-2">Scan QRIS berikut:</p>
+                            <img src="{{ asset('images/zahira.jpg') }}" class="mx-auto w-40">
+                        </div>
                     </div>
+
 
                     <div class="flex justify-between items-end pt-6 mb-6">
                         <span class="text-stone-500 font-medium">Total Tagihan</span>
@@ -153,5 +164,19 @@
         let value = parseInt(input.value);
         input.value = value + 1;
     }
+    const metode = document.getElementById("metodePembayaran");
+    const qris = document.getElementById("qrisBox");
+
+    metode.addEventListener("change", function() {
+
+    // sembunyikan dulu
+    qris.classList.add("hidden");
+
+    // tampilkan sesuai pilihan
+    if (this.value === "qris") {
+        qris.classList.remove("hidden");
+    }
+
+    });
 </script>
 @endsection 

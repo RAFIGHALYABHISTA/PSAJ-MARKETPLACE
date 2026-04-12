@@ -45,6 +45,12 @@ Route::get('/artikel', function () {
 Route::get('/transaksi', function () {
     return view('customer.transaksi');
 })->name('customer.transaksi');
+Route::get('/edit-profil', function () {
+    return view('customer.edit-profil');
+})->name('customer.edit-profil');
+Route::get('/edit-profil1', function () {
+    return view('customer.edit-profil1');
+})->name('customer.edit-profil1');
 
 // ==================================
 // AUTH ROUTES (Guest only)
