@@ -182,9 +182,12 @@
             </div>
             
             <div class="mt-16 text-center">
-                <a href="{{ route('customer.produk') }}" class="inline-block border-b-2 border-green-700 text-green-800 font-bold pb-1 hover:text-green-600 hover:border-green-500 transition-all">
+                <a href="{{ route('customer.produk') }}" class="bg-green-700 text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-green-800 transition-all shadow-lg hover:shadow-green-900/20 active:scale-95">
+                    Lihat semua Produk Kami →
+                 </a>
+                {{-- <a href="{{ route('customer.produk') }}" class="inline-block border-b-2 border-green-700 text-green-800 font-bold pb-1 hover:text-green-600 hover:border-green-500 transition-all">
                     LIHAT SEMUA KOLEKSI
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>

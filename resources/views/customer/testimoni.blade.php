@@ -24,10 +24,10 @@
 
                 <!-- USER -->
                 <div class="flex items-center gap-4 mb-4">
-                    <img src="{{ asset('images/user1.jpg') }}"
+                    <img src="{{ asset('images/model1.jpg') }}"
                          class="w-12 h-12 rounded-full object-cover">
                     <div>
-                        <h4 class="font-semibold text-sm">Ayu Lestari</h4>
+                        <h4 class="font-semibold text-sm">Cak Sholeh</h4>
                         <p class="text-xs text-gray-500">Surabaya</p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
             <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
 
                 <div class="flex items-center gap-4 mb-4">
-                    <img src="{{ asset('images/user2.jpg') }}"
+                    <img src="{{ asset('images/model2.jpg') }}"
                          class="w-12 h-12 rounded-full object-cover">
                     <div>
                         <h4 class="font-semibold text-sm">Dewi Anggraeni</h4>
@@ -68,7 +68,7 @@
             <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
 
                 <div class="flex items-center gap-4 mb-4">
-                    <img src="{{ asset('images/user3.jpg') }}"
+                    <img src="{{ asset('images/model3.jpg') }}"
                          class="w-12 h-12 rounded-full object-cover">
                     <div>
                         <h4 class="font-semibold text-sm">Sinta Maharani</h4>
