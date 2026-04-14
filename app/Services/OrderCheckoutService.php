@@ -29,7 +29,7 @@ class OrderCheckoutService
             'referral_code'       => $request->referral_code,
             'commission_amount'   => $result['commission_amount'],
             'invoice_number'      => $this->generateInvoiceNumber(),
-            'payment_status'      => 'paid',
+            'payment_status'      => $request->payment_method === 'online' ? 'paid' : 'pending',
         ]);
 
         Payment::create([

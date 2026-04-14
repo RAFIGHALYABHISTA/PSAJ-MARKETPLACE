@@ -13,9 +13,11 @@ class RiwayatController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['orderItems.product', 'payment'])
+        // Mengambil data order milik user yang login
+        $orders = Order::with(['orderItems.product'])
             ->where('customer_id', auth()->id())
-            ->where('payment_status', '!=', 'pending') // exclude draft keranjang
+            // Sesuai permintaan: status yang sedang diproses (selain pending)
+            ->where('payment_status', '!=', 'pending')
             ->latest()
             ->paginate(10);
 

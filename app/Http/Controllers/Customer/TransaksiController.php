@@ -49,46 +49,37 @@ class TransaksiController extends Controller
         $checkoutService = app(OrderCheckoutService::class);
         $order = $checkoutService->processCheckout($order, $request);
 
-        return redirect()->route('customer.pesanan')
+        return redirect()->route('customer.riwayat')
             ->with('success', 'Pesanan berhasil dibuat! Silakan cek riwayat pesanan Anda.');
     }
 
     // TAMBAH method helper ini:
     private function createDraftOrderWithProduct(Product $product, int $qty)
-    {
-        $order = Order::firstOrCreate(
-            ['customer_id' => auth()->id(), 'payment_status' => 'pending'],
-            [
-                'total_product_price' => 0,
-                'commission_amount'   => 0,
-                'total_price'         => 0,
-                'payment_method'      => 'offline',
-                'invoice_number'      => 'DRAFT-' . auth()->id() . '-' . time(),
-            ]
-        );
+{
+    // ✅ Selalu buat order BARU, jangan firstOrCreate
+    $order = Order::create([
+        'customer_id'         => auth()->id(),
+        'payment_status'      => 'pending',
+        'total_product_price' => 0,
+        'commission_amount'   => 0,
+        'total_price'         => 0,
+        'payment_method'      => 'offline',
+        'invoice_number'      => 'DRAFT-' . auth()->id() . '-' . time(),
+    ]);
 
-        $item = OrderItem::where('order_id', $order->id)
-            ->where('product_id', $product->id)
-            ->first();
+    OrderItem::create([
+        'order_id'   => $order->id,
+        'product_id' => $product->id,
+        'quantity'   => $qty,
+        'price'      => $product->price,
+        'subtotal'   => $product->price * $qty,
+    ]);
 
-        if ($item) {
-            $item->quantity += $qty;
-            $item->subtotal = $item->quantity * $item->price;
-            $item->save();
-        } else {
-            OrderItem::create([
-                'order_id'   => $order->id,
-                'product_id' => $product->id,
-                'quantity'   => $qty,
-                'price'      => $product->price,
-                'subtotal'   => $product->price * $qty,
-            ]);
-        }
+    $order->load('orderItems');
+    $order->total_product_price = $order->orderItems->sum('subtotal');
+    $order->total_price = $order->total_product_price;
+    $order->save();
 
-        $order->total_product_price = $order->orderItems->sum('subtotal');
-        $order->total_price = $order->total_product_price;
-        $order->save();
-
-        return $order;
-    }
+    return $order;
+}
 }

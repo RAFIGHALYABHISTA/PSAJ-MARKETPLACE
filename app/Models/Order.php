@@ -37,6 +37,8 @@ class Order extends Model
         'total_product_price' => 'decimal:2',
         'commission_amount' => 'decimal:2',
         'total_price' => 'decimal:2',
+        'customer_id' => 'integer',
+        'total_price' => 'decimal:2',
     ];
 
     /**

@@ -54,6 +54,12 @@
             <span class="text-sm font-medium">Pencairan</span>
         </a>
 
+        <a href="{{ route('admin.withdrawals') }}" 
+           class="flex items-center px-3 py-2.5 rounded transition-colors group {{ request()->routeIs('admin.withdrawals') ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 hover:bg-gray-50 dark:text-slate-400 dark:hover:bg-slate-800' }}">
+            <i class="fas fa-money-bill-wave w-5 mr-3 text-gray-400 group-hover:text-slate-600"></i>
+            <span class="text-sm font-medium">Penarikan Komisi</span>
+        </a>
+
         <a href="{{ route('admin.pengaturan-komisi') }}" 
            class="flex items-center px-3 py-2.5 rounded transition-colors group {{ request()->routeIs('admin.pengaturan-komisi') ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 hover:bg-gray-50 dark:text-slate-400 dark:hover:bg-slate-800' }}">
             <i class="fas fa-cog w-5 mr-3 text-gray-400 group-hover:text-slate-600"></i>

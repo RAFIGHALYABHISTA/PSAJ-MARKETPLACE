@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\WithdrawalController;
 use App\Http\Controllers\Afiliator\AfiliatorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Customer\CheckoutController;
@@ -13,8 +14,10 @@ use App\Http\Controllers\Customer\KeranjangController;
 use App\Http\Controllers\Customer\ProductsController;
 use App\Http\Controllers\Customer\RiwayatController;
 use App\Http\Controllers\Customer\TransaksiController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\StorageController;
+use App\Http\Controllers\UserController;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,11 +38,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/transaksi/{product}/bayar', [TransaksiController::class, 'buyNow'])->name('customer.transaksi.bayar');
 
     // Tambah ini
-    Route::get('/checkout/riwayat/{order}', [CheckoutController::class, 'success'])->name('customer.riwayat');
+    // Route::get('/checkout/riwayat/{order}', [CheckoutController::class, 'success'])->name('customer.riwayat');
 
     Route::get('/check-referral', [CheckoutController::class, 'checkReferral'])->name('customer.check-referral');
 
-    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('customer.pesanan');
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('customer.riwayat');
+
+    Route::get('/get-order-count', function () {
+    if (Auth::check()) {
+        // Menghitung order milik user yang statusnya 'pending'
+        $count = Order::where('customer_id', Auth::id())
+                      ->where('payment_status', 'pending')
+                      ->count();
+        return response()->json(['total' => $count]);
+    }
+    return response()->json(['total' => 0]);
+})->name('order.count');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -173,6 +187,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ]
     ]);
 
+    Route::resource('withdrawals', WithdrawalController::class, [
+        'names' => [
+            'index' => 'withdrawals',
+            'create' => 'withdrawals.create',
+            'store' => 'withdrawals.store',
+            'show' => 'withdrawals.show',
+            'edit' => 'withdrawals.edit',
+            'update' => 'withdrawals.update',
+            'destroy' => 'withdrawals.destroy',
+        ],
+        'parameters' => [
+            'withdrawals' => 'withdrawal'
+        ]
+    ]);
+
     Route::get('/pengaturan-komisi', function () {
         return view('admin.pengaturan-komisi');
     })->name('pengaturan-komisi');
@@ -189,17 +218,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 // Afiliator Routes
-Route::prefix('afiliator')->name('afiliator.')->group(function () {
+Route::prefix('afiliator')->name('afiliator.')->middleware(['auth'])->group(function () {
     Route::get('/affiliator', [AfiliatorController::class, 'dashboard'])->name('dashboard');
+
+    // API endpoint for real-time dashboard data
+    Route::get('/api/dashboard-data', [AfiliatorController::class, 'getDashboardData'])->name('api.dashboard-data');
 
     Route::get('/riwayat-penjualan', [AfiliatorController::class, 'salesHistory'])->name('sales-history');
 
     Route::get('/commissions', [AfiliatorController::class, 'commissions'])->name('commissions');
 
-    Route::post('/commissions/withdraw', function () {
-        // placeholder: implement withdrawal logic in controller
-        return redirect()->route('afiliator.commissions')->with('status', 'Permintaan penarikan dikirim.');
-    })->name('commissions.withdraw');
+    Route::post('/commissions/withdraw', [AfiliatorController::class, 'withdraw'])->name('commissions.withdraw');
 
     Route::get('/register', [AfiliatorController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AfiliatorController::class, 'store'])->name('store');

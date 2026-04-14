@@ -5,54 +5,45 @@ namespace App\Http\Controllers\Afiliator;
 use App\Http\Controllers\Controller;
 use App\Models\Affiliator;
 use App\Models\User;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Withdrawal;
+use Carbon\Carbon;
 
 class AfiliatorController extends Controller
 {
     /**
-     * Show affiliator registration form
+     * Menampilkan form pendaftaran afiliator
      */
-
     public function showRegisterForm()
     {
-        $bank = ['BCA', 'MANDIRI', 'BRI', 'GOPAY'];
-        // Check if user already registered as affiliator
+        $bank = ['BCA', 'MANDIRI', 'BRI', 'GOPAY', 'DANA', 'OVO'];
+
+        // Cek jika user sudah terdaftar
         if (auth()->user()->affiliatorProfile()->exists()) {
-            return redirect()->route('home')->with('info', 'Anda sudah terdaftar sebagai affiliator');
+            return redirect()->route('afiliator.dashboard')->with('info', 'Anda sudah terdaftar sebagai afiliator');
         }
 
         return view('afiliator.register', compact('bank'));
     }
 
     /**
-     * Store affiliator registration
+     * Menyimpan data pendaftaran afiliator
      */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'phone' => 'required|string|min:10',
             'address' => 'required|string|min:10',
-            'bank_name' => 'required|string|min:3|max:50',
-            'bank_account_number' => 'required|string|min:5|max:20',
-            'bank_account_name' => 'required|string|min:3|max:100',
+            'bank_name' => 'required|string',
+            'bank_account_number' => 'required|string|min:5',
+            'bank_account_name' => 'required|string|min:3',
             'agree_terms' => 'accepted',
-        ], [
-            'phone.required' => 'Nomor telepon wajib diisi',
-            'phone.min' => 'Nomor telepon minimal 10 digit',
-            'address.required' => 'Alamat wajib diisi',
-            'address.min' => 'Alamat minimal 10 karakter',
-            'bank_name.required' => 'Nama bank wajib diisi',
-            'bank_account_number.required' => 'Nomor rekening wajib diisi',
-            'bank_account_name.required' => 'Nama pemilik rekening wajib diisi',
-            'agree_terms.accepted' => 'Anda harus menyetujui syarat dan ketentuan',
         ]);
 
         try {
             DB::beginTransaction();
 
-            // Create affiliator profile
             $affiliator = Affiliator::create([
                 'user_id' => auth()->id(),
                 'phone' => $validated['phone'],
@@ -60,28 +51,26 @@ class AfiliatorController extends Controller
                 'bank_name' => $validated['bank_name'],
                 'bank_account_number' => $validated['bank_account_number'],
                 'bank_account_name' => $validated['bank_account_name'],
-                'status' => 'aktif',
+                'status' => 'aktif', // atau 'pending' jika butuh approval admin
+                'referral_code' => strtoupper(substr(auth()->user()->name, 0, 3)) . rand(100, 999),
             ]);
 
-            // Update user role to affiliator
             auth()->user()->update(['role' => 'affiliator']);
 
             DB::commit();
 
-            return redirect()->route('afiliator.dashboard')
-                ->with('success', 'Pendaftaran berhasil! Akun Anda sedang menunggu persetujuan dari admin. Anda akan mendapatkan notifikasi ketika akun diaktifkan.');
+            return redirect()->route('afiliator.dashboard')->with('success', 'Pendaftaran berhasil!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withInput()->with('error','Terjadi kesalahan pada registrasi...');
+            return back()->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
     /**
-     * Show affiliator dashboard (protected route for affiliators only)
+     * Dashboard Utama Afiliator
      */
     public function dashboard()
     {
-
         $user = auth()->user();
         $affiliator = $user->affiliatorProfile;
 
@@ -89,106 +78,165 @@ class AfiliatorController extends Controller
             return redirect()->route('afiliator.register');
         }
 
-        // if ($affiliator->status === 'pending') {
-        //     return view('afiliator.waiting_approval'); // Buat view khusus "Mohon Tunggu"
-        // }
+        // Ambil data awal untuk render pertama (SSR)
+        $data = $this->calculateMetrics($user, $affiliator);
+        $chart = $this->getChartData($user);
 
-        // Get commissions and sales data
-        $allCommissions = $user->commissions()->get();
-        $totalCommissions = $allCommissions->where('status', 'approved')->sum('amount');
-        $pendingCommissions = $allCommissions->where('status', 'pending')->sum('amount');
+        return view('afiliator.dashboard', array_merge($data, $chart, [
+            'affiliator' => $affiliator,
+            'referralCode' => $affiliator->referral_code,
+        ]));
+    }
 
-        // Total products sold (sum of order items quantity from affiliated orders)
+    /**
+     * API untuk Update Dashboard Realtime (AJAX)
+     */
+    public function getDashboardData()
+    {
+        $user = auth()->user();
+        $affiliator = $user->affiliatorProfile;
+
+        if (!$affiliator) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $metrics = $this->calculateMetrics($user, $affiliator);
+        $chart = $this->getChartData($user);
+
+        return response()->json(array_merge($metrics, $chart));
+    }
+
+    /**
+     * Helper: Hitung Metrik Komisi & Penjualan
+     */
+    private function calculateMetrics($user, $affiliator)
+    {
+        $allCommissions = $user->commissions();
+        
+        // Komisi yang sudah disetujui
+        $totalApproved = (float) $allCommissions->where('status', 'approved')->sum('amount');
+
+        // Total yang ditarik (pending/approved/paid) untuk menghitung sisa saldo
+        $totalWithdrawn = (float) Withdrawal::where('affiliator_id', $affiliator->id)
+            ->whereIn('status', ['pending', 'approved', 'paid'])
+            ->sum('amount');
+
+        // Sisa Saldo Realtime
+        $availableBalance = $totalApproved - $totalWithdrawn;
+
+        // Produk terjual (Relasi orderItems)
         $totalProductsSold = $user->affiliatedOrders()
-            ->with('items')
+            ->with('orderItems')
             ->get()
-            ->flatMap->items
+            ->flatMap->orderItems
             ->sum('quantity');
 
-        // Commission this month
-        $currentMonthCommissions = $user->commissions()
+        // Komisi bulan ini
+        $currentMonthCommissions = (float) $user->commissions()
             ->where('status', 'approved')
             ->whereMonth('created_at', now()->month)
             ->whereYear('created_at', now()->year)
             ->sum('amount');
 
-        // Chart data - last 30 days
+        return [
+            'totalCommissions' => $availableBalance, // Tampil sebagai saldo tersedia
+            'totalProductsSold' => $totalProductsSold,
+            'currentMonthCommissions' => $currentMonthCommissions,
+        ];
+    }
+
+    /**
+     * Helper: Ambil data chart 7 hari terakhir
+     */
+    private function getChartData($user)
+    {
         $chartLabels = [];
         $chartData = [];
-        for ($i = 29; $i >= 0; $i--) {
+
+        for ($i = 6; $i >= 0; $i--) {
             $date = now()->subDays($i);
             $chartLabels[] = $date->format('d M');
 
             $salesCount = $user->affiliatedOrders()
-                ->with('items')
                 ->whereDate('created_at', $date)
+                ->with('orderItems')
                 ->get()
-                ->flatMap->items
+                ->flatMap->orderItems
                 ->sum('quantity');
 
             $chartData[] = $salesCount;
         }
 
-        return view('afiliator.dashboard', [
-            'affiliator' => $affiliator,
-            'totalCommissions' => $totalCommissions,
-            'pendingCommissions' => $pendingCommissions,
-            'totalProductsSold' => $totalProductsSold,
-            'currentMonthCommissions' => $currentMonthCommissions,
+        return [
             'chartLabels' => $chartLabels,
             'chartData' => $chartData,
-            'referralCode' => $affiliator->referral_code,
-        ]);
+        ];
     }
 
     /**
-     * Show sales history for affiliator
+     * Riwayat Penjualan
      */
     public function salesHistory()
     {
-        $user = auth()->user();
-
-        $salesHistory = $user->affiliatedOrders()
-            ->with(['customer', 'items.product'])
+        $salesHistory = auth()->user()->affiliatedOrders()
+            ->with(['customer', 'orderItems.product'])
             ->latest()
             ->paginate(20);
 
-        return view('afiliator.sales-history', [
-            'salesHistory' => $salesHistory,
-        ]);
+        return view('afiliator.sales-history', compact('salesHistory'));
     }
 
     /**
-     * Show commissions for affiliator
+     * Halaman Komisi & Penarikan
      */
     public function commissions()
     {
         $user = auth()->user();
-
-        // Get affiliator profile
         $affiliator = $user->affiliatorProfile;
 
-        // Available balance = approved commissions - withdrawals
-        $approvedCommissions = $user->commissions()
-            ->where('status', 'approved')
-            ->sum('amount');
+        // Hitung Saldo Tersedia
+        $metrics = $this->calculateMetrics($user, $affiliator);
 
-        $withdrawals = Withdrawal::where('affiliator_id', $affiliator->id)
-            ->whereIn('status', ['approved', 'paid'])
-            ->sum('amount');
-
-        $available = $approvedCommissions - $withdrawals;
-
-        // Commission history
-        $commissionHistory = $user->commissions()
-            ->with('order')
+        // Riwayat Penarikan (Menggunakan hasManyThrough yang sudah diperbaiki di Model User)
+        $commissionHistory = $user->withdrawals()
             ->latest()
             ->paginate(15);
 
         return view('afiliator.commissions', [
-            'available' => $available,
+            'available' => $metrics['totalCommissions'],
             'commissionHistory' => $commissionHistory,
             'affiliator' => $affiliator,
         ]);
+    }
+
+    /**
+     * Proses Request Penarikan (Withdraw)
+     */
+    public function withdraw(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:10000',
+        ]);
+
+        $user = auth()->user();
+        $affiliator = $user->affiliatorProfile;
+
+        // Validasi Saldo Lagi (Server Side)
+        $metrics = $this->calculateMetrics($user, $affiliator);
+
+        if ($request->amount > $metrics['totalCommissions']) {
+            return back()->with('error', 'Saldo komisi tidak mencukupi.');
+        }
+
+        Withdrawal::create([
+            'affiliator_id' => $affiliator->id,
+            'amount' => $request->amount,
+            'status' => 'pending',
+            'bank_name' => $affiliator->bank_name,
+            'bank_account_number' => $affiliator->bank_account_number,
+            'bank_account_name' => $affiliator->bank_account_name,
+        ]);
+
+        return back()->with('success', 'Permintaan penarikan telah dikirim.');
     }
 }

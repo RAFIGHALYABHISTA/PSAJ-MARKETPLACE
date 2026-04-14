@@ -32,7 +32,7 @@ class CheckoutController extends Controller
 
     public function success(Order $order)
     {
-    
+
         abort_if($order->customer_id !== auth()->id(), 403);
 
         return view('customer.riwayat', compact('order'));

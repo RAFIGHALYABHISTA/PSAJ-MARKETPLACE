@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -74,6 +75,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Commission::class, 'affiliator_id');
     }
+
+    /**
+     * Get all withdrawals for this user as an affiliator.
+     */
+    public function withdrawals(): HasManyThrough
+{
+    return $this->hasManyThrough(
+        Withdrawal::class, 
+        Affiliator::class,
+        'user_id',        // Foreign key di tabel affiliators
+        'affiliator_id',   // Foreign key di tabel withdrawals
+        'id',              // Local key di tabel users
+        'id'               // Local key di tabel affiliators
+    );
+}
 
     /**
      * Get all payments verified by this user.

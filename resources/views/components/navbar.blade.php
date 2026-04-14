@@ -63,7 +63,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25 a1.125 1.125 0 0 1-1.12-1.243l1.264-12 A1.125 1.125 0 0 1 5.513 7.5h12.974 c.576 0 1.059.435 1.119 1.007Z"/>
                     </svg>
-                    <span class="absolute -top-1 -right-1 bg-green-700 text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                    <span id="order-badge" class="absolute -top-1 -right-1 bg-green-700 text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full">0</span>
                 </a>
 
                 <button onclick="openProfile()" class="text-stone-600 hover:text-green-800 transition-all hover:-translate-y-0.5 focus:outline-none">
@@ -143,4 +143,22 @@
         menu.classList.toggle('block', isHidden);
         button.setAttribute('aria-expanded', String(isHidden));
     }
+
+    function refreshOrderCount() {
+    fetch('{{ route("order.count") }}')
+        .then(response => response.json())
+        .then(data => {
+            const badge = document.getElementById('order-badge');
+            if (badge) {
+                badge.innerText = data.total;
+                
+                // Opsional: Sembunyikan badge jika tidak ada order aktif
+                badge.style.display = data.total > 0 ? 'flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Panggil saat halaman pertama kali dimuat
+document.addEventListener('DOMContentLoaded', refreshOrderCount);
 </script>
