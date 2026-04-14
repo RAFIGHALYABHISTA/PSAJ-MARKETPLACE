@@ -82,10 +82,10 @@
                 </h4>
 
                 <ul class="space-y-4 text-sm text-stone-400">
-                    <li class="flex items-center gap-3">
+                    {{-- <li class="flex items-center gap-3">
                         <span class="w-2 h-2 bg-[#738029] rounded-full"></span>
                         Gratis Ongkir Seluruh Indonesia
-                    </li>
+                    </li> --}}
                     <li class="flex items-center gap-3">
                         <span class="w-2 h-2 bg-[#738029] rounded-full"></span>
                         100% Produk Original
