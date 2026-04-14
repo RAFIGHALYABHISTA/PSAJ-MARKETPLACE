@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('customer.keranjang');
     Route::post('/keranjang', [KeranjangController::class, 'store'])->name('customer.keranjang.store');
+    Route::post('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('customer.keranjang.checkout');
     Route::patch('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('customer.keranjang.update');
     Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('customer.keranjang.destroy');
 
@@ -31,7 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/transaksi/{product}/bayar', [TransaksiController::class, 'buyNow'])->name('customer.transaksi.bayar');
 
     // Tambah ini
-    Route::post('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('customer.keranjang.checkout');
     Route::get('/checkout/riwayat/{order}', [CheckoutController::class, 'success'])->name('customer.riwayat');
 
     Route::get('/check-referral', [CheckoutController::class, 'checkReferral'])->name('customer.check-referral');
