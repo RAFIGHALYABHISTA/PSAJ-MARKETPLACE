@@ -65,7 +65,7 @@ class KeranjangController extends Controller
 
         // Update total di order
         $order->load('orderItems');
-        $order->total_product_price = $item->sum('subtotal');
+        $order->total_product_price = $order->orderItems->sum('subtotal');
         $order->total_price = $order->total_product_price;
         $order->save();
 
@@ -80,7 +80,8 @@ class KeranjangController extends Controller
 
         // Update total order
         $order = $keranjang->order;
-        $order->total_product_price = $keranjang->sum('subtotal');
+        $order->load('orderItems');
+        $order->total_product_price = $order->orderItems->sum('subtotal');
         $order->total_price = $order->total_product_price;
         $order->save();
 
@@ -93,7 +94,8 @@ class KeranjangController extends Controller
         $keranjang->delete();
 
         // Update total order
-        $order->total_product_price = $keranjang->sum('subtotal');
+        $order->load('orderItems');
+        $order->total_product_price = $order->orderItems->sum('subtotal');
         $order->total_price = $order->total_product_price;
         $order->save();
 
@@ -112,7 +114,7 @@ class KeranjangController extends Controller
         $checkoutService = app(OrderCheckoutService::class);
         $order = $checkoutService->processCheckout($order, $request);
 
-        return redirect()->route('customer.checkout.success', $order->id)
+        return redirect()->route('customer.riwayat', $order->id)
             ->with('success', 'Checkout berhasil!');
     }
 }
