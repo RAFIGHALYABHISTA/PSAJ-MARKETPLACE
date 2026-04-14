@@ -5,7 +5,7 @@
 @section('content')
 <section class="w-full">
   <img src="{{ asset('images/beuty.png') }}"
-       class="w-full h-[400px] md:h-[500px] object-cover">
+       class="w-full  h-[300px] md:h-[500px] object-cover">
 </section>
 <section class="bg-[#E6D3B5] py-20 px-6 lg:px-12">
   <div class="max-w-6xl mx-auto space-y-28">
