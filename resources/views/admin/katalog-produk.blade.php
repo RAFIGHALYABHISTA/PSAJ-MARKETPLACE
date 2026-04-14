@@ -130,7 +130,9 @@
             <div class="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group cursor-pointer {{ $opacity }} {{ $isInactive ? 'grayscale-[0.3]' : '' }}">
                 <div class="h-48 bg-gradient-to-br {{ $cardStyles[$stockStatus][0] }} dark:from-slate-800 dark:to-slate-700 relative overflow-hidden">
                     <div class="flex items-center justify-center h-full">
-                        @if($product->image_url)
+                        @if($product->image)
+                            <img src="{{ route('storage.local', $product->image) }}" alt="{{ $product->name }}" class="h-full w-full object-contain p-4 {{ $isInactive ? 'grayscale' : '' }}">
+                        @elseif($product->image_url)
                             <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="h-full w-full object-cover {{ $isInactive ? 'grayscale' : '' }}">
                         @else
                             <i class="fas {{ $icons[$stockStatus] }} {{ $isInactive ? 'grayscale' : '' }} text-slate-400 text-5xl"></i>
