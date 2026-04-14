@@ -58,8 +58,8 @@
 
         <div class="w-full lg:w-1/2 p-10 lg:p-16 flex flex-col justify-center">
             <div class="mb-10 text-center lg:text-left">
-                <h2 class="text-2xl font-bold text-slate-800 dark:text-white uppercase tracking-tight">Sign In</h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Gunakan kredensial akun afiliator Anda.</p>
+                <h2 class="text-2xl font-bold text-slate-800 dark:text-white uppercase tracking-tight">Login</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Silahkan Login Menggunakan akun customer anda</p>
             </div>
 
             @if ($errors->any())
@@ -103,7 +103,7 @@
 
                 <button type="submit" 
                         class="w-full mt-2 py-4 bg-slate-800 dark:bg-white text-white dark:text-slate-900 text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 dark:hover:bg-slate-100 transition-all active:scale-[0.98] shadow-lg shadow-slate-200/50 dark:shadow-none">
-                    Masuk ke Sistem
+                    Login
                 </button>
             </form>
 

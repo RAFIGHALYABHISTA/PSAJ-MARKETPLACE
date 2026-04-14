@@ -53,8 +53,8 @@
 
         <div class="p-8 lg:p-16 flex flex-col justify-center">
             <div class="mb-10 text-center lg:text-left">
-                <h2 class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-2">Daftar Sekarang</h2>
-                <p class="text-slate-500 dark:text-slate-400 font-medium">Buat akun baru untuk menjadi afiliator.</p>
+                <h2 class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-2">Register</h2>
+                <p class="text-slate-500 dark:text-slate-400 font-medium">Buat akun baru untuk menjadi customer sariayu.</p>
             </div>
 
             @if ($errors->any())

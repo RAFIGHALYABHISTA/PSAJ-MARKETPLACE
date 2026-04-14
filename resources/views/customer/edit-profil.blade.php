@@ -69,8 +69,8 @@
                                     </svg>
                                 </div>
                                 <span
-                                    class="text-sm font-bold text-stone-700 group-hover:text-white transition-colors tracking-wide">Profil
-                                    Saya</span>
+                                    class="text-sm font-bold text-stone-700 group-hover:text-white transition-colors tracking-wide">Edit Profil</span>
+                                </span>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="w-4 h-4 text-stone-300 group-hover:text-white/50 transition-colors" fill="none"
@@ -78,7 +78,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
                         </a>
-                        <a href="javascript:void(0)" onclick="openSettings()"
+                        {{-- <a href="javascript:void(0)" onclick="openSettings()"
                             class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">
                             <div class="flex items-center gap-4">
                                 <div
@@ -97,7 +97,7 @@
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
-                        </a>
+                        </a> --}}
                         <!-- WISHLIST -->
                         @if (!in_array(auth()->user()->role, ['admin', 'superadmin']))
                             <a href="#"

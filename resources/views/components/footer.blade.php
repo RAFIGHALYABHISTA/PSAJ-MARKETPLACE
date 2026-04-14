@@ -60,17 +60,17 @@
                 <ul class="space-y-4 text-sm">
                     <li class="flex items-start gap-3">
                         <i class="fas fa-map-marker-alt mt-1 text-[#738029]"></i>
-                        <span>Jakarta, Indonesia</span>
+                        <span>Jl. Keputih Tegal No.54 60111 Sukolilo Jawa Timur </span>
                     </li>
                     <li class="flex items-center gap-3">
                         <i class="fas fa-envelope text-[#738029]"></i>
-                        <a href="mailto:info@sariayu.com" class="hover:text-white transition">
-                            info@sariayu.com
+                        <a href="mailto:Sariayusmk10@gmail.com" class="hover:text-white transition">
+                            Sariayusmk10@gmail.com
                         </a>
                     </li>
                     <li class="flex items-center gap-3">
                         <i class="fas fa-phone text-[#738029]"></i>
-                        <span>+62 123 4567 890</span>
+                        <span>+62 858-5396-8818</span>
                     </li>
                 </ul>
             </div>
@@ -105,10 +105,10 @@
 
         <!-- BOTTOM -->
         <div class="border-t border-stone-800 mt-16 pt-6 text-center text-xs text-stone-500 tracking-wider">
-            <p>&copy; 2026 Sariayu Martha Tilaar. Seluruh Hak Cipta Dilindungi.</p>
-            <p class="mt-2">
+            <p>&copy; 2026 Sariayu smkn 10 sby. Seluruh Hak Cipta Dilindungi.</p>
+            {{-- <p class="mt-2">
                 Handcrafted with <span class="text-[#738029]">♥</span> for Local Beauty
-            </p>
+            </p> --}}
         </div>
 
     </div>
