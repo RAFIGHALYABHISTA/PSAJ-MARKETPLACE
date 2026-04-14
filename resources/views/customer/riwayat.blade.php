@@ -127,10 +127,10 @@
                         </div>
                     </div>
                     <div class="group relative overflow-hidden rounded-xl border border-emerald-200 bg-white shadow-sm">
-                        <img src="/storage/{{ $order->payment->proof_image }}"
+                        <img src="{{ asset('storage/' . $order->payment->proof_image) }}"
                              alt="Bukti Pembayaran"
                              class="w-full h-48 object-cover">
-                        <a href="/storage/{{ $order->payment->proof_image }}" target="_blank"
+                        <a href="{{ asset('storage/' . $order->payment->proof_image) }}" target="_blank"
                            class="absolute inset-0 bg-emerald-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <span class="bg-white text-emerald-800 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
                                 <i class="fas fa-expand mr-2"></i> Lihat Full Size

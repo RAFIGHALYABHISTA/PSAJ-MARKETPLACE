@@ -164,7 +164,7 @@
                                 <div
                                     class="bg-[#F9F1E7] rounded-[15px] h-40 sm:h-48 flex items-center justify-center mb-4 relative overflow-hidden">
                                     {{-- Handling Image Realtime --}}
-                                    <img src="{{ Str::startsWith($prod->image, 'http') ? $prod->image : ($prod->image ? '/storage/' . $prod->image : asset('storage/' . $prod->image)) }}"
+                                    <img src="{{ Str::startsWith($prod->image, 'http') ? $prod->image : asset($prod->image) }}"
                                         alt="{{ $prod->name }}"
                                         class="h-32 sm:h-36 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
 

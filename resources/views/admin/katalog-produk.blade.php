@@ -131,7 +131,7 @@
                 <div class="h-48 bg-gradient-to-br {{ $cardStyles[$stockStatus][0] }} dark:from-slate-800 dark:to-slate-700 relative overflow-hidden">
                     <div class="flex items-center justify-center h-full">
                         @if($product->image)
-                            <img src="/storage/{{ $product->image }}" alt="{{ $product->name }}" class="h-full w-full object-contain p-4 {{ $isInactive ? 'grayscale' : '' }}">
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="h-full w-full object-contain p-4 {{ $isInactive ? 'grayscale' : '' }}">
                         @elseif($product->image_url)
                             <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="h-full w-full object-cover {{ $isInactive ? 'grayscale' : '' }}">
                         @else

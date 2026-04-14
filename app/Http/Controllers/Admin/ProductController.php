@@ -111,8 +111,10 @@ class ProductController extends Controller
 
             // Handle image upload
             if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('products', 'public');
-                $validated['image'] = $imagePath;
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/products'), $imageName);
+                $validated['image'] = 'images/products/' . $imageName;
             }
 
             $product = Product::create($validated);
@@ -237,13 +239,15 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 // Delete old image if exists
                 if ($product->image && !Str::startsWith($product->image, 'http')) {
-                    $oldImagePath = storage_path('app/public/' . $product->image);
+                    $oldImagePath = public_path($product->image);
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }
                 }
-                $imagePath = $request->file('image')->store('products', 'public');
-                $validated['image'] = $imagePath;
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/products'), $imageName);
+                $validated['image'] = 'images/products/' . $imageName;
             }
 
             $oldName = $product->name;
