@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="border-t border-gray-100 dark:border-slate-800 pt-6 space-y-3">
-                            @if(auth()->user()->role === 'afiliator')
+                            @if(auth()->user()->role === 'affiliator')
                             <div class="pt-3">
                                 <p class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase mb-3">Akses Cepat</p>
                                 <a href="{{ route('home') }}" class="block px-4 py-2.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 rounded-lg text-xs font-bold hover:bg-emerald-100 transition text-center">

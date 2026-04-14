@@ -23,6 +23,7 @@ class Order extends Model
         'total_price',
         'payment_method',
         'payment_status',
+        'payment_proof',
         'pickup_status',
         'invoice_number',
     ];
@@ -51,7 +52,7 @@ class Order extends Model
      */
     public function affiliator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'affiliator_id');
+        return $this->belongsTo(User::class, 'affiliator_id', 'user_id');
     }
 
     /**

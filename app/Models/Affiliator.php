@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Affiliator extends Model
@@ -12,6 +13,7 @@ class Affiliator extends Model
         'user_id',
         'phone',
         'address',
+        'total_commissions',
         'bank_name',
         'bank_account_number',
         'bank_account_name',
@@ -28,6 +30,16 @@ class Affiliator extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function commissions(): HasMany
+    {
+        return $this->hasMany(Commission::class);
+    }
+
+    public function withdrawals(): HasMany
+    {
+        return $this->hasMany(Withdrawal::class);
     }
 
     public function isActive(): bool

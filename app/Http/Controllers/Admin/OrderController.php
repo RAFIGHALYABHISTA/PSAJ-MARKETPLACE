@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliator;
+use App\Models\Commission;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -95,4 +97,31 @@ class OrderController extends Controller
         return redirect()->route('admin.orders')
             ->with('success', 'Pesanan berhasil dihapus');
     }
+
+    public function confirmPayment(Order $order)
+{
+    // Update payment record
+    $payment = $order->payment;
+    if ($payment) {
+        $payment->update([
+            'status'      => 'verified',
+            'paid_at'     => now(),
+            'verified_by' => auth()->id(),
+        ]);
+    }
+
+    // Update order
+    $order->update(['payment_status' => 'paid']);
+
+    // Proses komisi affiliator
+    if ($order->affiliator_id && $order->commission_amount > 0) {
+        Commission::where('order_id', $order->id)
+            ->update(['status' => 'approved']);
+
+        Affiliator::where('user_id', $order->affiliator_id)
+            ->increment('total_commissions', $order->commission_amount);
+    }
+
+    return redirect()->back()->with('success', 'Pembayaran berhasil dikonfirmasi!');
+}
 }

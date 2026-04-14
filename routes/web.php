@@ -1,23 +1,44 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\CommissionController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Afiliator\DashboardController as AfiliatorDashboardController;
-use App\Http\Controllers\Customer\HomeController;
-use App\Http\Controllers\Customer\ProductsController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Afiliator\AfiliatorController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Customer\CheckoutController;
+use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\KeranjangController;
+use App\Http\Controllers\Customer\ProductsController;
+use App\Http\Controllers\Customer\RiwayatController;
+use App\Http\Controllers\Customer\TransaksiController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 
 // ==================================
 // PUBLIC ROUTES (Customer)
 // ==================================
 
+Route::middleware('auth')->group(function () {
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('customer.keranjang');
+    Route::post('/keranjang', [KeranjangController::class, 'store'])->name('customer.keranjang.store');
+    Route::patch('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('customer.keranjang.update');
+    Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('customer.keranjang.destroy');
+
+    route::get('/transaksi', [TransaksiController::class, 'index'])->name('customer.transaksi');
+    Route::get('/transaksi/{product}', [TransaksiController::class, 'show'])->name('customer.transaksi.show');
+    Route::post('/transaksi/{product}/bayar', [TransaksiController::class, 'buyNow'])->name('customer.transaksi.bayar');
+
+    // Tambah ini
+    Route::post('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('customer.keranjang.checkout');
+    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('customer.checkout.success');
+
+    Route::get('/check-referral', [CheckoutController::class, 'checkReferral'])->name('customer.check-referral');
+
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('customer.riwayat');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -27,13 +48,11 @@ Route::get('/about', function () {
     return view('customer.about');
 })->name('customer.about');
 
-Route::get('/keranjang', function () {
-    return view('customer.keranjang');
-})->name('customer.keranjang');
-
 Route::get('/testimoni', function () {
     return view('customer.testimoni');
 })->name('customer.testimoni');
+
+
 
 Route::get('/contact', function () {
     return view('customer.contact');
@@ -43,9 +62,6 @@ Route::get('/artikel', function () {
     return view('customer.artikel');
 })->name('customer.artikel');
 
-Route::get('/transaksi', function () {
-    return view('customer.transaksi');
-})->name('customer.transaksi');
 Route::get('/edit-profil', function () {
     return view('customer.edit-profil');
 })->name('customer.edit-profil');
@@ -59,10 +75,10 @@ Route::get('/edit-profil1', function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
-    
+
     Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register.store');
-    
+
     // Alias untuk /regis
     Route::get('/regis', function () {
         return redirect()->route('auth.register');
@@ -122,6 +138,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ]
     ]);
 
+    Route::patch('/orders/{order}/confirm-payment', [OrderController::class, 'confirmPayment'])
+        ->name('admin.orders.confirm-payment');
+
     Route::resource('transaksi-qris', PaymentController::class, [
         'names' => [
             'index' => 'transaksi-qris',
@@ -170,11 +189,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 // Afiliator Routes
 Route::prefix('afiliator')->name('afiliator.')->group(function () {
     Route::get('/affiliator', [AfiliatorController::class, 'dashboard'])->name('dashboard');
-    
+
     Route::get('/riwayat-penjualan', [AfiliatorController::class, 'salesHistory'])->name('sales-history');
-    
+
     Route::get('/commissions', [AfiliatorController::class, 'commissions'])->name('commissions');
-    
+
     Route::post('/commissions/withdraw', function () {
         // placeholder: implement withdrawal logic in controller
         return redirect()->route('afiliator.commissions')->with('status', 'Permintaan penarikan dikirim.');
@@ -188,4 +207,3 @@ Route::prefix('afiliator')->name('afiliator.')->group(function () {
         return redirect('/');
     })->name('logout');
 });
-

@@ -17,8 +17,8 @@ class ProductController extends Controller
         $query = Product::with('category');
 
         // Filter by category
-        if ($request->filled('kategori')) {
-            $query->where('category_id', $request->kategori);
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
         }
 
         $products = $query->paginate(12);

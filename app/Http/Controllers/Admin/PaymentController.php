@@ -58,8 +58,10 @@ class PaymentController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Payment $payment)
-    {
-        return view('admin.payment-form', ['payment' => $payment]);
+    { {
+            $payment->load(['order.customer', 'order.orderItems.product', 'order.affiliator', 'verifiedBy']);
+            return view('admin.transaksi-qris-detail', compact('payment'));
+        }
     }
 
     /**
@@ -76,10 +78,8 @@ class PaymentController extends Controller
             $validated['verified_by'] = auth()->id();
         }
 
-        $payment->update($validated);
-
-        return redirect()->route('admin.transaksi-qris')
-            ->with('success', 'Status pembayaran berhasil diperbarui');
+        $payment->update(['status' => $request->status]);
+        return redirect()->back()->with('success', 'Status pembayaran diperbarui.');
     }
 
     /**

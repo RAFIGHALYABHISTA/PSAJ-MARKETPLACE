@@ -10,9 +10,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->take(6)->get(); 
-
-        // Kirim ke view customer
+        $products = Product::with('category')->get();
         return view('customer.produk', compact('products'));
     }
 }
