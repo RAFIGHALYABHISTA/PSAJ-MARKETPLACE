@@ -24,29 +24,30 @@
 
     <div class="w-full max-w-[1100px] grid grid-cols-1 lg:grid-cols-2 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl shadow-indigo-200/50 dark:shadow-none overflow-hidden border border-gray-100 dark:border-slate-800">
         
-        <div class="hidden lg:flex flex-col justify-between p-12 bg-gradient-to-br from-indigo-600 to-violet-800 relative overflow-hidden text-white">
-            <div class="absolute top-[-10%] right-[-10%] w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-[-5%] left-[-5%] w-48 h-48 bg-indigo-400/20 rounded-full blur-2xl"></div>
+        <div class="hidden lg:flex flex-col justify-between p-12 bg-slate-100 dark:bg-slate-800/50 relative overflow-hidden text-white">
+            <div class="absolute top-[-10%] right-[-10%] w-64 h-64  border-slate-200 dark:border-slate-700 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-[-5%] left-[-5%] w-48 h-48 border-slate-200 dark:border-slate-700 rounded-full opacity-50"></div>
 
-            <div class="relative z-10">
-                <div class="flex items-center space-x-3 mb-8">
-                    <span class="bg-yellow-400 text-indigo-900 p-2 rounded-xl font-black italic">SS</span>
-                    <h2 class="text-2xl font-bold tracking-tight text-white">Sariayu <span class="text-yellow-400">Smega</span></h2>
-                </div>
-                <h1 class="text-4xl font-black leading-tight mb-4">Wujudkan Jiwa <br> <span class="text-yellow-400 font-serif italic">Entrepreneur</span> Muda</h1>
-                <p class="text-indigo-100/80 leading-relaxed max-w-sm">Platform Kalibrasi Entrepreneurship Eksklusif SMKN 10. Kelola tokomu, raih komisimu.</p>
+                 <div class="relative z-10 flex justify-between items-center text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] font-mono">
+                <span>Platform Kalibrasi</span>
+                <span>v1.0 / 2026</span>
             </div>
 
-            <div class="relative z-10">
-                <div class="flex items-center space-x-4 p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                    <div class="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-indigo-900 font-bold">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm font-bold">Official Partnership</p>
-                        <p class="text-xs text-indigo-100/60">Sariayu Martha Tilaar x Smega</p>
-                    </div>
-                </div>
+            <div class="relative z-10 flex-1 flex flex-col items-center justify-center py-6">
+                
+                <img src="{{ asset('img/smk.png') }}" 
+                     alt="Sariayu x Smega Logo" 
+                     class="w-[90%] max-h-[320px] object-contain drop-shadow-xl group-hover:scale-[1.03] transition-transform duration-700 ease-out">
+                
+                <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-10 uppercase tracking-[0.4em] font-bold border-t border-slate-200 dark:border-slate-700 pt-6">
+                    Official Partnership
+                </p>
+            </div>
+
+            <div class="relative z-10 text-center">
+                <p class="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed uppercase tracking-widest font-medium">
+                    © SMKN 10 Surabaya <span class="mx-1">|</span> Powered by Sariayu
+                </p>
             </div>
         </div>
 
@@ -131,13 +132,13 @@
                 <div class="flex items-start space-x-2 ml-1">
                     <input type="checkbox" id="agree" name="agree" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:bg-slate-800 dark:border-slate-700 transition-all mt-1">
                     <label for="agree" class="text-sm font-medium text-slate-500 dark:text-slate-400">
-                        Saya setuju dengan <a href="#" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Syarat & Ketentuan</a>
+                        Saya setuju dengan <a href="#" class=" dark:text-slate-400 font-bold hover:underline">Syarat & Ketentuan</a>
                     </label>
                 </div>
 
                 <button type="submit" 
-                        class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-[0.98] flex items-center justify-center space-x-2">
-                    <span>Daftar Sekarang</span>
+                        class="w-full py-4 bg-slate-800  dark:text-slate-400 text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 dark:hover:bg-slate-100 transition-all active:scale-[0.98] shadow-lg shadow-slate-200/50 dark:shadow-none">
+                    <span>Masuk Sekarang</span>
                     <i class="fas fa-arrow-right text-xs"></i>
                 </button>
             </form>
