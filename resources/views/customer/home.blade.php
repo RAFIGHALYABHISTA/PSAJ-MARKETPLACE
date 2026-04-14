@@ -149,7 +149,7 @@
                 @forelse($products as $p)
                 <div class="bg-white rounded-[30px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 border border-stone-100 group">
                     <div class="bg-stone-50 rounded-[20px] mb-4 overflow-hidden h-48 flex items-center justify-center">
-                        <img src="{{ Str::startsWith($p->image, 'http') ? $p->image : asset('storage/' . $p->image) }}"
+                        <img src="{{ $p->image ? asset($p->image) : ($p->image_url ?? asset('images/produk.png')) }}"
                              class="max-h-full max-w-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
                     </div>
 

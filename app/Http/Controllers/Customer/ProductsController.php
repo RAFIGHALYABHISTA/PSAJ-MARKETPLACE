@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product; // Ini kuncinya, ambil data dari model yang sama dengan admin
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -11,6 +12,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::with('category')->get();
-        return view('customer.produk', compact('products'));
+        $categories = Category::all();
+        return view('customer.produk', compact('products', 'categories'));
     }
 }

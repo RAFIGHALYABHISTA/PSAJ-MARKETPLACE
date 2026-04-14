@@ -10,7 +10,7 @@
         <div class="space-y-4">
             <div class="relative bg-white rounded-xl shadow-md p-4 group overflow-hidden">
                 <img id="mainImage"
-                     src="{{ $product->image_url ?? asset('images/produk.png') }}"
+                     src="{{ $product->image ? asset($product->image) : ($product->image_url ?? asset('images/produk.png')) }}"
                      class="w-full rounded-lg object-cover h-[320px] sm:h-[360px]">
 
                 <button onclick="openPreview(document.getElementById('mainImage').src)"
@@ -25,7 +25,7 @@
             {{-- Thumbnail --}}
             <div class="flex gap-3 overflow-x-auto pb-2">
                 <div class="relative group shrink-0">
-                    <img src="{{ $product->image_url ?? asset('images/produk.png') }}"
+                    <img src="{{ $product->image ? asset($product->image) : ($product->image_url ?? asset('images/produk.png')) }}"
                          onclick="changeImage(this.src)"
                          class="w-16 h-16 rounded-lg border cursor-pointer hover:border-[#738029] transition">
                 </div>
@@ -194,7 +194,7 @@
             @forelse($rekomendasi as $prod)
             <a href="{{ route('customer.transaksi.show', $prod->id) }}"
                class="bg-white rounded-xl p-4 shadow-sm border border-stone-100 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
-                <img src="{{ $prod->image_url ?? asset('images/produk.png') }}"
+                <img src="{{ $prod->image ? asset($prod->image) : ($prod->image_url ?? asset('images/produk.png')) }}"
                      class="h-28 mx-auto object-contain mix-blend-multiply group-hover:scale-105 transition duration-300">
                 <p class="text-xs text-[#9C4A1A] font-bold uppercase tracking-wider mt-2">{{ $prod->category?->name }}</p>
                 <p class="text-sm font-medium text-[#5B2C04] mt-1 line-clamp-2">{{ $prod->name }}</p>

@@ -253,7 +253,7 @@ class ProductController extends Controller
             $oldName = $product->name;
             $product->update($validated);
 
-            return redirect()->route('admin.produk')
+            return redirect()->route('admin.manajemen-produk')
                 ->with('success', "✏️ Produk '{$oldName}' berhasil diperbarui!");
         } catch (\Exception $e) {
             return redirect()->back()
@@ -271,10 +271,10 @@ class ProductController extends Controller
             $name = $product->name;
             $product->delete();
 
-            return redirect()->route('admin.produk')
+            return redirect()->route('admin.manajemen-produk')
                 ->with('success', "🗑️ Produk '{$name}' berhasil dihapus dari katalog!");
         } catch (\Exception $e) {
-            return redirect()->route('admin.produk')
+            return redirect()->route('admin.manajemen-produk')
                 ->with('error', '❌ Gagal menghapus produk: ' . $e->getMessage());
         }
     }

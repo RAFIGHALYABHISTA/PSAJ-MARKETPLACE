@@ -28,36 +28,26 @@
     <section class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-stone-100 px-4 sm:px-6 lg:px-6 shadow-sm">
         <div class="max-w-7xl mx-auto py-4 overflow-x-auto no-scrollbar">
             <div class="flex md:justify-center gap-3 md:gap-4 min-w-max md:min-w-0">
-                @php
-                    $categories = [
-                        ['id' => 'all', 'name' => 'Semua', 'icon' => 'M4 6h16M4 12h16M4 18h16'],
-                        [
-                            'id' => 'skincare',
-                            'name' => 'Skin Care',
-                            'icon' => 'M12 3c2.755 0 5 2.245 5 5 0 3.866-5 8-5 8s-5-4.134-5-8c0-2.755 2.245-5 5-5z',
-                        ],
-                        ['id' => 'body-care', 'name' => 'Body Care', 'icon' => 'M9 2h6v4H9zM7 6h10v14H7z'],
-                        ['id' => 'decorative', 'name' => 'Decorative', 'icon' => 'M7 21h10l-1-7H8l-1 7zM12 3v11'],
-                        [
-                            'id' => 'hair-care',
-                            'name' => 'Hair Care',
-                            'icon' => 'M12 2a6 6 0 016 6c0 4-6 12-6 12S6 12 6 8a6 6 0 016-6z',
-                        ],
-                        ['id' => 'makeup-base', 'name' => 'Make Up Base', 'icon' => 'M8 3h8l-1 10H9L8 3zM7 21h10'],
-                    ];
-                @endphp
-
+                <button data-filter="all"
+                    class="group flex items-center gap-2 px-5 py-2.5 rounded-full border border-transparent hover:border-[#738029]/30 hover:bg-[#F9F1E7] transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-stone-400 group-hover:text-[#738029] transition-colors" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <span class="text-sm font-medium text-stone-600 group-hover:text-[#5B2C04]">Semua</span>
+                </button>
                 @foreach ($categories as $cat)
-                    <button data-filter="{{ $cat['id'] }}"
+                    <button data-filter="{{ $cat->name }}"
                         class="group flex items-center gap-2 px-5 py-2.5 rounded-full border border-transparent hover:border-[#738029]/30 hover:bg-[#F9F1E7] transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="h-5 w-5 text-stone-400 group-hover:text-[#738029] transition-colors" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="{{ $cat['icon'] }}" />
+                                d="M7 21h10l-1-7H8l-1 7zM12 3v11" />
                         </svg>
-                        <span
-                            class="text-sm font-medium text-stone-600 group-hover:text-[#5B2C04]">{{ $cat['name'] }}</span>
+                        <span class="text-sm font-medium text-stone-600 group-hover:text-[#5B2C04]">{{ $cat->name }}</span>
                     </button>
                 @endforeach
             </div>
@@ -156,7 +146,7 @@
                 {{-- DYNAMIC GRID --}}
                 <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     @forelse($products as $prod)
-                        <div class="product-card group" data-category="{{ $prod->category ?? 'uncategorized' }}"
+                        <div class="product-card group" data-category="{{ $prod->category?->name ?? 'uncategorized' }}"
                             data-price="{{ $prod->price }}" data-name="{{ strtolower($prod->name) }}">
                             <div
                                 class="bg-white rounded-[20px] p-4 border border-stone-100 shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
@@ -187,16 +177,22 @@
                                         class="text-sm font-bold text-[#5B2C04] leading-snug mb-2 line-clamp-2 uppercase tracking-tighter">
                                         {{ $prod->name }}</h3>
 
-                                    <div class="mt-auto pt-3 border-t border-stone-50 flex items-center justify-between">
-                                        <p class="font-serif text-lg text-[#5B2C04]">Rp
-                                            {{ number_format($prod->price, 0, ',', '.') }}</p>
+                                    <div class="mt-auto pt-3 border-t border-stone-50 space-y-2">
+                                        <div class="flex items-center justify-between">
+                                            <p class="font-serif text-lg text-[#5B2C04]">Rp
+                                                {{ number_format($prod->price, 0, ',', '.') }}</p>
+                                            <p class="text-xs font-medium {{ $prod->stock > 0 ? 'text-[#738029]' : 'text-red-500' }}">
+                                                Stok: {{ $prod->stock }} pcs
+                                            </p>
+                                        </div>
                                         <a href="{{ route('customer.transaksi.show', $prod->id) }}"
-                                            class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                                            class="w-full py-2 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center gap-2 text-sm font-medium">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 4v16m8-8H4" />
                                             </svg>
+                                            Beli
                                         </a>
                                     </div>
                                 </div>
