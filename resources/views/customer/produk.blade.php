@@ -75,51 +75,54 @@
                         <span class="text-stone-400 transition-transform group-open:rotate-180">▼</span>
                     </summary>
 
-                    <div class="p-6 space-y-8 border-t border-stone-100">
-                        <div>
-                            <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Kategori Cepat</h3>
-                            <div class="space-y-2">
-                                <a href="#"
-                                    class="block w-full text-center rounded-lg border border-stone-200 py-2.5 text-sm text-stone-600 hover:border-[#738029] hover:text-[#738029] hover:bg-[#F9F1E7] transition-all">New
-                                    Arrival</a>
-                                <a href="#"
-                                    class="block w-full text-center rounded-lg border border-stone-200 py-2.5 text-sm text-stone-600 hover:border-[#738029] hover:text-[#738029] hover:bg-[#F9F1E7] transition-all">Best
-                                    Seller</a>
-                            </div>
-                        </div>
+                    {{-- <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Kategori Cepat</h3>
+                    <div class="space-y-2">
+                        <a href="#"
+                            class="block w-full text-center rounded-lg border border-stone-200 py-2.5 text-sm text-stone-600 hover:border-[#738029] hover:text-[#738029] hover:bg-[#F9F1E7] transition-all">New
+                            Arrival</a>
+                        <a href="#"
+                            class="block w-full text-center rounded-lg border border-stone-200 py-2.5 text-sm text-stone-600 hover:border-[#738029] hover:text-[#738029] hover:bg-[#F9F1E7] transition-all">Best
+                            Seller</a>
+                    </div> --}}
+                    <div class="p-5 space-y-5 border-t border-stone-100">
 
-                        <div>
-                            <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Urutkan</h3>
-                            <div class="space-y-3">
-                                <label class="flex items-center gap-3 cursor-pointer group">
-                                    <input type="radio" name="sort" value="low" class="accent-[#738029] w-4 h-4">
-                                    <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga
-                                        Terendah</span>
-                                </label>
-                                <label class="flex items-center gap-3 cursor-pointer group">
-                                    <input type="radio" name="sort" value="high" class="accent-[#738029] w-4 h-4">
-                                    <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">Harga
-                                        Tertinggi</span>
-                                </label>
-                            </div>
-                        </div>
+    <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-stone-400 mb-3">Urutkan</h3>
+        <div class="space-y-2">
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="radio" name="sort" value="low" class="accent-[#738029] w-4 h-4">
+                <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">
+                    Harga Terendah
+                </span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="radio" name="sort" value="high" class="accent-[#738029] w-4 h-4">
+                <span class="text-sm text-stone-600 group-hover:text-[#738029] transition">
+                    Harga Tertinggi
+                </span>
+            </label>
+        </div>
+    </div>
 
-                        <div>
-                            <h3 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-4">Rentang Harga</h3>
-                            <div class="flex justify-between text-[#738029] font-bold text-xs mb-4">
-                                <span>Rp 0</span>
-                                <span id="priceMax">Rp 1jt+</span>
-                            </div>
-                            <input id="priceRange" type="range" min="0" max="1000000" step="10000"
-                                value="1000000"
-                                class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
-                        </div>
+    <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-stone-400 mb-3">Rentang Harga</h3>
 
-                        <button id="resetFilters"
-                            class="w-full py-3 text-xs font-bold uppercase tracking-widest text-stone-500 border-t border-stone-100 hover:text-red-500 transition mt-4">
-                            Reset Filter
-                        </button>
-                    </div>
+        <div class="flex justify-between text-[#738029] font-semibold text-[11px] mb-2">
+            <span>Rp 0</span>
+            <span id="priceMax">Rp 1jt+</span>
+        </div>
+
+        <input id="priceRange" type="range" min="0" max="1000000" step="10000"
+            value="1000000"
+            class="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-[#738029]">
+    </div>
+
+    <button id="resetFilters"
+        class="w-full pt-3 text-[11px] font-bold uppercase tracking-widest text-stone-500 border-t border-stone-100 hover:text-red-500 transition">
+        Reset Filter
+    </button>
+
+</div>
                 </details>
             </div>
 
@@ -127,19 +130,14 @@
             <div class="flex-1">
                 <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
                     <h2 class="text-2xl font-serif text-[#5B2C04]">Katalog Produk</h2>
-
                     <div class="relative group w-full md:w-80">
-                        <input id="productSearch" type="text" placeholder="Cari produk kecantikan..."
-                            class="w-full pl-4 pr-10 py-3 rounded-full bg-white border border-stone-200 focus:outline-none focus:border-[#738029] focus:ring-1 focus:ring-[#738029] transition-all text-sm text-stone-600 shadow-sm">
-                        <a href="#"
-                            class="w-8 h-8 rounded-full border border-stone-200 text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#738029] transition-colors"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z" />
-                            </svg>
-                        </a>
+                            <input id="productSearch" type="text" placeholder="Cari produk kecantikan..." class="w-full pl-4 pr-12 py-3 rounded-full bg-white border border-stone-200  focus:outline-none focus:border-[#738029] focus:ring-1 focus:ring-[#738029] transition-all text-sm text-stone-600 shadow-sm">
+                            <!-- ICON -->
+                            <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2  w-8 h-8 rounded-full border border-stone-200  text-stone-400 hover:bg-[#738029] hover:border-[#738029] hover:text-white transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z" />
+                                </svg>
+                            </button>
                     </div>
                 </div>
 

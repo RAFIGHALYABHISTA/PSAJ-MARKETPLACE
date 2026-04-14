@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- HERO SECTION --}}
-<section class="bg-[#FFEADB] w-full px-4 sm:px-6 lg:px-16 py-14 sm:py-16 grid gap-10 md:grid-cols-2 items-center overflow-hidden">
+<section class="bg-[#F9F1E7] w-full px-4 sm:px-6 lg:px-16 py-14 sm:py-16 grid gap-10 md:grid-cols-2 items-center overflow-hidden">
     <div class="space-y-6 animate-fade-in-left">
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#5B2C04] leading-tight">
             Temukan <br>
@@ -133,16 +133,16 @@
 
         {{-- REALTIME PRODUCT SECTION --}}
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-6">
+            <div class="flex flex-col lg:flex-row justify-center items-start lg:items-end mb-12 gap-6">
                 <div>
                     <h2 class="text-3xl sm:text-4xl font-serif text-[#5B2C04] mb-2">Koleksi Kami</h2>
                     <p class="text-stone-500 text-base sm:text-lg italic">Pilih perawatan terbaik untuk pancaran kulit sehatmu.</p>
                 </div>
-
+{{-- 
                 <div class="flex flex-wrap justify-start gap-3 p-1 bg-stone-200 rounded-full">
                     <button class="bg-[#B96710] text-white px-5 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-bold shadow-lg shadow-orange-900/20 hover:scale-105 transition">NEW PRODUCT</button>
                     <button class="text-stone-600 px-5 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-bold hover:bg-stone-300 transition">BEST SELLER</button>
-                </div>
+                </div> --}}
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">

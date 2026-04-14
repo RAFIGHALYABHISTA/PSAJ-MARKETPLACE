@@ -133,7 +133,7 @@
                 {{-- QRIS Box --}}
                 <div id="qrisBox" class="hidden text-center pt-2 space-y-2">
                     <p class="text-xs text-stone-400 uppercase tracking-wider font-bold">Scan QRIS:</p>
-                    <img src="{{ asset('images/zahira.jpg') }}" class="mx-auto w-36 rounded-xl border border-stone-100 shadow-sm">
+                    <img src="{{ asset('img/qris.jpeg') }}" class="mx-auto w-36 rounded-xl border border-stone-100 shadow-sm">
                     <div class="text-left">
                         <label class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1 block">Upload Bukti Bayar</label>
                         <input type="file" id="paymentProof" accept="image/*"

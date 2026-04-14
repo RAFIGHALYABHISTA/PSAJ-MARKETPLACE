@@ -8,15 +8,6 @@
                          alt="Sariayu Logo" 
                          class="h-20 md:h-24 w-auto object-contain transition-all duration-500 group-hover:scale-105" />
                 </a>
-
-                <button id="mobile-menu-button" type="button" onclick="toggleMobileMenu()"
-                        class="md:hidden inline-flex items-center justify-center p-2 rounded-full text-stone-600 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-green-700"
-                        aria-expanded="false" aria-controls="mobile-menu">
-                    <span class="sr-only">Buka menu</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
             </div>
 
             <ul id="nav-menu" class="hidden md:flex items-center space-x-10 transition-all duration-500 opacity-100">
@@ -72,6 +63,15 @@
                     </svg>
                 </button>
 
+                <button id="mobile-menu-button" type="button" onclick="toggleMobileMenu()"
+                        class="md:hidden inline-flex items-center justify-center p-2 rounded-full text-stone-600 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-green-700"
+                        aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="sr-only">Buka menu</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
                 <div class="h-6 w-px bg-stone-200 hidden sm:block"></div>
 
                 @if (auth()->check())
@@ -88,7 +88,7 @@
                         </form>
                     </div>
                 @else
-                    <a href="{{ url('/login') }}" class="px-7 py-2.5 rounded-full bg-green-800 text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-green-900 transition-all shadow-lg shadow-green-900/20 active:scale-95">
+                    <a href="{{ url('/login') }}" class="hidden md:inline-flex px-7 py-2.5 rounded-full bg-green-800 text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-green-900 transition-all shadow-lg shadow-green-900/20 active:scale-95">
                         Masuk
                     </a>
                 @endif

@@ -202,7 +202,7 @@
                                 <div id="qrisBox" class="hidden text-center pt-2 space-y-3">
                                     <p class="text-xs text-stone-400 uppercase tracking-wider font-bold">Scan QRIS berikut:
                                     </p>
-                                    <img src="{{ asset('images/zahira.jpg') }}"
+                                    <img src="{{ asset('img/qris.jpeg') }}"
                                         class="mx-auto w-40 rounded-xl border border-stone-100 shadow-sm">
                                     <p class="text-xs text-stone-500">Total: <span class="font-bold text-[#738029]">Rp
                                             {{ number_format($subtotal, 0, ',', '.') }}</span></p>

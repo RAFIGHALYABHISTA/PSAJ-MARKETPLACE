@@ -2,7 +2,7 @@
 
 @section('title', 'Tentang Kami - Sariayu')
 
-@section('content')
+@section('content' )
 <section class="w-full">
   <img src="{{ asset('images/beuty.png') }}"
        class="w-full  h-[300px] md:h-[500px] object-cover">

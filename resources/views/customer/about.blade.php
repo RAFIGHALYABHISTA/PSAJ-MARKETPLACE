@@ -5,27 +5,38 @@
 @section('content')
 <div class="bg-[#F9F1E7] min-h-screen">
     
-    <section class="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <div class="relative z-10 space-y-6">
-                <span class="text-[#738029] font-bold uppercase tracking-[0.3em] text-xs">Warisan Kecantikan Nusantara</span>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif text-[#5B2C04] leading-tight sm:leading-[1.05]">
-                    Merawat Pesona <br>
-                    <span class="italic text-[#738029]">Wanita Indonesia</span>
-                </h1>
-                <p class="text-stone-600 leading-relaxed max-w-xl text-base sm:text-lg">
-                    Berawal dari sebuah impian untuk melestarikan kearifan lokal, kami hadir membawa keajaiban rempah dan alam Indonesia dalam setiap sentuhan perawatan kecantikan Anda.
-                </p>
-            </div>
-            <div class="relative flex justify-center md:justify-end">
-                <div class="relative z-10 rounded-t-full overflow-hidden border-[12px] border-white shadow-2xl max-w-full w-full md:w-[520px]">
-                    <img src="https://images.unsplash.com/photo-1590439471364-192aa70c0b53?auto=format&fit=crop&q=80&w=800" 
-                         alt="Natural Ingredients" class="w-full h-[280px] sm:h-[360px] md:h-[500px] object-cover">
-                </div>
-                <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-[#738029]/10 rounded-full blur-2xl"></div>
-            </div>
+ <section class="relative py-10 sm:py-14 px-4 sm:px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-center">
+        
+        <!-- TEXT -->
+        <div class="relative z-10 space-y-4">
+            <span class="text-[#738029] font-bold uppercase tracking-[0.25em] text-[15px]">
+                Warisan Kecantikan Nusantara
+            </span>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif text-[#5B2C04] leading-tight">
+                Merawat Pesona <br>
+                <span class="italic text-[#738029]">Wanita Indonesia</span>
+            </h1>
+
+            <p class="text-stone-600 leading-relaxed max-w-lg text-sm sm:text-base">
+                Berawal dari sebuah impian untuk melestarikan kearifan lokal, kami hadir membawa keajaiban rempah dan alam Indonesia dalam setiap sentuhan perawatan kecantikan Anda.
+            </p>
         </div>
-    </section>
+
+        <!-- IMAGE -->
+        <div class="relative flex justify-center md:justify-end">
+            <div class="relative z-10 rounded-t-full overflow-hidden border-[8px] border-white shadow-xl w-full md:w-[460px]">
+                <img src="https://images.unsplash.com/photo-1590439471364-192aa70c0b53?auto=format&fit=crop&q=80&w=800" 
+                     alt="Natural Ingredients"
+                     class="w-full h-[240px] sm:h-[300px] md:h-[420px] object-cover">
+            </div>
+
+            <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-[#738029]/10 rounded-full blur-2xl"></div>
+        </div>
+
+    </div>
+</section>
 
     <section class="py-16 sm:py-20 bg-stone-50 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">

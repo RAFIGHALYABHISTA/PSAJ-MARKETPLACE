@@ -3,14 +3,17 @@
 @section('title', 'Daftar Sebagai Affiliator - Sariayu Smega')
 
 @section('content')
-    <div class="min-h-screen bg-[#F9F1E7] dark:bg-stone-950 py-16 px-6">
+    <div class="min-h-screen bg-[#F9F1E7]  py-16 px-6" >
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16">
-                <span
-                    class="inline-block px-4 py-1.5 bg-[#738029]/10 text-[#738029] rounded-full text-xs font-black uppercase tracking-[0.2em] mb-4">
-                    Exclusive Opportunity
-                </span>
-                <h1 class="text-5xl font-serif text-[#2D1B0E] dark:text-white mb-6">
+                {{-- <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#738029] mx-auto mb-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 12h3.75M9 15h3.75M3 12h.008v.008H3V12zm0 3h.008v.008H3V15zm0 3h.008v.008H3v-.008zm0 3h.008v.008H3v-.008zM12 12h.008v.008H12V12zm0 3h.008v.008H12V15zm0 3h.008v.008H12v-.008zm0 3h.008v.008H12v-.008zM15 12h3.75M15 15h3.75M21 12h.008v.008H21V12zm0 3h.008v.008H21V15zm0 3h.008v.008H21V18zm0 3h.008v.008H21V21z" />
+                    </svg>
+                </span> --}}
+                <h1 class="text-5xl font-serif text-[#2D1B0E] dark:text-dark mb-6">
                     Jadi Bagian dari <br><span class="italic text-[#738029]">Sariayu Smega</span>
                 </h1>
                 <p class="text-stone-600 dark:text-stone-400 max-w-xl mx-auto leading-relaxed">
@@ -35,7 +38,7 @@
             </div>
 
             <div
-                class="bg-white dark:bg-stone-900 rounded-[2rem] shadow-2xl shadow-stone-200/50 dark:shadow-none border border-stone-100 dark:border-stone-800 overflow-hidden">
+                class="bg-[#FFF8F0] rounded-[2rem] shadow-lg border border-[#E6D3B5] overflow-hidden">
                 <div class="bg-[#2D1B0E] px-10 py-8 text-white relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-[#738029]/20 rounded-full -mr-16 -mt-16 blur-2xl"></div>
                     <h2 class="text-2xl font-serif relative z-10">Formulir Kemitraan</h2>
@@ -81,7 +84,7 @@
                                 <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Nama
                                     Afiliator</label>
                                 <input type="text" value="{{ auth()->user()->name }}" disabled
-                                    class="w-full px-5 py-3.5 bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl text-stone-500 font-medium">
+                                    class="w-full px-4 py-3 bg-[#F3E6D4] border border-[#E6D3B5] rounded-xl text-[#8B7355]">
                             </div>
 
                             <div class="space-y-2">
@@ -89,14 +92,14 @@
                                     No. HP <span class="text-red-500">*</span></label>
                                 <input type="tel" name="phone" placeholder="08..." value="{{ old('phone') }}"
                                     required
-                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl focus:ring-2 ring-[#738029]/20 focus:border-[#738029] outline-none transition-all @error('phone') border-red-500 @enderror">
+                                    class="w-full px-4 py-3 bg-white border border-[#E6D3B5] rounded-xl focus:border-[#738029] focus:ring-1 focus:ring-[#738029]/30 outline-none @error('phone') border-red-500 @enderror">
                             </div>
 
                             <div class="md:col-span-2 space-y-2">
                                 <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Alamat
                                     Domisili Lengkap <span class="text-red-500">*</span></label>
                                 <textarea name="address" rows="2" required placeholder="Sebutkan jalan, nomor, dan kecamatan..."
-                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl focus:ring-2 ring-[#738029]/20 focus:border-[#738029] outline-none transition-all @error('address') border-red-500 @enderror">{{ old('address') }}</textarea>
+                                    class="w-full px-4 py-3 bg-white border border-[#E6D3B5] rounded-xl focus:border-[#738029] focus:ring-1 focus:ring-[#738029]/30 outline-none @error('address') border-red-500 @enderror">{{ old('address') }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -114,7 +117,7 @@
                                 <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Nama Bank
                                     / Dompet Digital <span class="text-red-500">*</span></label>
                                 <select name="bank_name" id="bank_name" required
-                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl outline-none @error('bank_name') border-red-500 @enderror">
+                                    class="w-full px-4 py-3 bg-white border border-[#E6D3B5] rounded-xl focus:border-[#738029] outline-none @error('bank_name') border-red-500 @enderror">
                                     <option value="">Pilih Bank / Dompet Digital</option>
                                     @foreach ($bank as $bank)
                                         <option value="{{ $bank }}">{{ $bank }}</option>
@@ -126,14 +129,14 @@
                                     Rekening / No HP <span class="text-red-500">*</span></label>
                                 <input type="text" name="bank_account_number" placeholder="Nomor akun..."
                                     value="{{ old('bank_account_number') }}" required
-                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl outline-none @error('bank_account_number') border-red-500 @enderror">
+                                    class="w-full px-4 py-3 bg-white border border-[#E6D3B5] rounded-xl focus:border-[#738029] outline-none @error('bank_account_number') border-red-500 @enderror">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[11px] font-bold text-stone-500 uppercase tracking-tight ml-1">Nama
                                     Pemilik Rekening <span class="text-red-500">*</span></label>
                                 <input type="text" name="bank_account_name" placeholder="Nama sesuai rekening..."
                                     value="{{ old('bank_account_name') }}" required
-                                    class="w-full px-5 py-3.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl outline-none @error('bank_account_name') border-red-500 @enderror">
+                                    class="w-full px-4 py-3 bg-white border border-[#E6D3B5] rounded-xl focus:border-[#738029] outline-none @error('bank_account_name') border-red-500 @enderror">
                             </div>
                         </div>
                     </div>
@@ -159,7 +162,8 @@
 
                     <div class="pt-10 flex flex-col md:flex-row gap-4">
                         <a href="{{ route('home') }}"
-                            class="flex-1 px-8 py-4 border-2 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 rounded-2xl font-bold text-sm text-center hover:bg-stone-50 transition-all uppercase tracking-widest">
+                            class="flex-1 py-3 border border-[#E6D3B5] bg-red-400 text-white rounded-xl text-center hover:bg-red-600 transition">
+                        
                             Batal
                         </a>
                         <button type="submit"
@@ -172,7 +176,7 @@
 
             <div class="mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div
-                    class="bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm p-8 rounded-3xl border border-white dark:border-stone-800">
+                    class="bg-[#2D1B0E] backdrop-blur-sm p-8 rounded-3xl border border-white dark:border-stone-800">
                     <div
                         class="w-12 h-12 bg-[#738029] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-[#738029]/30">
                         <i class="fas fa-magic"></i>
@@ -183,7 +187,7 @@
                 </div>
 
                 <div
-                    class="bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm p-8 rounded-3xl border border-white dark:border-stone-800">
+                    class="bg-[#2D1B0E] backdrop-blur-sm p-8 rounded-3xl border border-white dark:border-stone-800">
                     <div
                         class="w-12 h-12 bg-yellow-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-yellow-600/30">
                         <i class="fas fa-university"></i>
