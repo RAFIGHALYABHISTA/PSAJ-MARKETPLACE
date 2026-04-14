@@ -114,6 +114,32 @@
                     </div>
                 </div>
 
+                {{-- Bukti Bayar Section --}}
+                @if($order->payment && $order->payment->proof_image)
+                <div class="px-6 py-4 bg-emerald-50/30 border-t border-emerald-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-receipt text-white text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Bukti Pembayaran</p>
+                            <p class="text-[10px] text-emerald-600">Dikirim: {{ $order->payment->paid_at ? $order->payment->paid_at->format('d M Y, H:i') : $order->created_at->format('d M Y, H:i') }}</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-xl border border-emerald-200 bg-white shadow-sm">
+                        <img src="{{ asset('storage/' . $order->payment->proof_image) }}"
+                             alt="Bukti Pembayaran"
+                             class="w-full h-48 object-cover">
+                        <a href="{{ asset('storage/' . $order->payment->proof_image) }}" target="_blank"
+                           class="absolute inset-0 bg-emerald-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="bg-white text-emerald-800 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+                                <i class="fas fa-expand mr-2"></i> Lihat Full Size
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                @endif
+
             </div>
             @empty
             <div class="bg-white rounded-3xl p-16 border border-stone-100 shadow-sm text-center">

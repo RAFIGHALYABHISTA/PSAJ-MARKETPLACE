@@ -32,8 +32,9 @@
         </div>
         @endif
 
-        <form action="{{ isset($product) ? route('admin.produk.update', $product) : route('admin.produk.store') }}" 
-              method="POST" 
+        <form action="{{ isset($product) ? route('admin.produk.update', $product) : route('admin.produk.store') }}"
+              method="POST"
+              enctype="multipart/form-data"
               class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-8 shadow-sm">
             @csrf
             @if(isset($product))
@@ -91,19 +92,29 @@
                     </div>
                 </div>
 
-                <!-- Image URL Field -->
+                <!-- Image Upload Field -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                        URL Gambar
+                        Upload Gambar Produk <span class="text-red-500">*</span>
                     </label>
-                    <input type="url" 
-                           name="image_url" 
-                           placeholder="https://example.com/image.jpg" 
-                           class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-white placeholder-slate-400 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition"
-                           value="{{ old('image_url', $product->image_url ?? '') }}">
+                    <div class="relative">
+                        <input type="file"
+                               name="image"
+                               accept="image/*"
+                               class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white file:text-xs file:font-bold hover:file:bg-indigo-700 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition"
+                               @if(!isset($product)) required @endif>
+                    </div>
                     <p class="text-xs text-slate-400 mt-2">
-                        <i class="fas fa-info-circle mr-1"></i> Gunakan URL lengkap (https://...)
+                        <i class="fas fa-info-circle mr-1"></i> Format: JPG, PNG, WEBP (Max 2MB)
                     </p>
+                    @if(isset($product) && $product->image)
+                    <div class="mt-3 flex items-center gap-3">
+                        <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
+                             alt="Current image"
+                             class="w-16 h-16 object-cover rounded-lg border border-gray-200">
+                        <p class="text-xs text-slate-500">Gambar saat ini (biarkan kosong jika tidak ingin mengubah)</p>
+                    </div>
+                    @endif
                 </div>
 
                 <!-- Stock Field -->
