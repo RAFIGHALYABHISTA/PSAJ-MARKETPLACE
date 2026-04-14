@@ -15,11 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['customer', 'affiliator', 'orderItems'])
-            ->latest()
-            ->paginate(15);
-
-        return view('admin.orders', ['orders' => $orders]);
+        return redirect()->route('admin.transaksi-qris');
     }
 
     /**
@@ -83,8 +79,8 @@ class OrderController extends Controller
 
         $order->update($validated);
 
-        return redirect()->route('admin.orders')
-            ->with('success', 'Pesanan berhasil diperbarui');
+        return redirect()->back()
+            ->with('success', 'Status pengambilan berhasil diperbarui');
     }
 
     /**

@@ -78,7 +78,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone-300 group-hover:text-white/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
 
-          <a href="{{ route('customer.riwayat') }}" class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">
+          <a href="{{ route('customer.pesanan') }}" class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 rounded-2xl bg-white flex items-center justify-center text-[#5B2C04] group-hover:bg-white/20 group-hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.12-2.59c-.18-.23-.48-.29-.74-.12-.26.16-.34.5-.18.77l2.91 3.59c.15.19.42.31.67.31.25 0 .52-.12.67-.31l3.59-4.58c.16-.27.08-.61-.18-.77-.27-.17-.56-.11-.74.12z" /></svg>

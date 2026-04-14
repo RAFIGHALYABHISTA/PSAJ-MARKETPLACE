@@ -49,7 +49,8 @@ class TransaksiController extends Controller
         $checkoutService = app(OrderCheckoutService::class);
         $order = $checkoutService->processCheckout($order, $request);
 
-        return redirect()->route('customer.checkout.success', $order->id);
+        return redirect()->route('customer.pesanan')
+            ->with('success', 'Pesanan berhasil dibuat! Silakan cek riwayat pesanan Anda.');
     }
 
     // TAMBAH method helper ini:

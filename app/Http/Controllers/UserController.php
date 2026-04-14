@@ -77,14 +77,35 @@ class UserController extends Controller
         ]);
 
         $oldRole = $user->role;
-        $user->update($validated);
+        $newRole = $validated['role'];
 
-        $roleMessage = $oldRole !== $validated['role']
-            ? " dengan role diubah dari {$oldRole} menjadi {$validated['role']}"
+        // Update user data
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role = $newRole;
+        $user->save();
+
+        // If role changed from affiliator to non-affiliator, delete affiliator data
+        $affiliatorDeleted = false;
+        if ($oldRole === 'affiliator' && $newRole !== 'affiliator') {
+            $deletedCount = \App\Models\Affiliator::where('user_id', $user->id)->delete();
+            $affiliatorDeleted = $deletedCount > 0;
+        }
+
+        $roleMessage = $oldRole !== $newRole
+            ? " dengan role diubah dari {$oldRole} menjadi {$newRole}"
             : '';
 
+        $affiliatorMessage = $affiliatorDeleted ? ' Data affiliator terkait telah dihapus.' : '';
+
+        // If role changed from affiliator, redirect to home instead of affiliator list
+        if ($oldRole === 'affiliator' && $newRole !== 'affiliator') {
+            return redirect()->route('home')
+                ->with('success', "✏️ User '{$user->name}' berhasil diubah ke role {$newRole}.{$affiliatorMessage}");
+        }
+
         return redirect()->route('admin.afiliator')
-            ->with('success', "✏️ Afiliator '{$user->name}' berhasil diperbarui{$roleMessage}!");
+            ->with('success', "✏️ Afiliator '{$user->name}' berhasil diperbarui{$roleMessage}!{$affiliatorMessage}");
     }
 
     /**

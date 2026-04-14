@@ -27,17 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('customer.keranjang.update');
     Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('customer.keranjang.destroy');
 
-    route::get('/transaksi', [TransaksiController::class, 'index'])->name('customer.transaksi');
     Route::get('/transaksi/{product}', [TransaksiController::class, 'show'])->name('customer.transaksi.show');
     Route::post('/transaksi/{product}/bayar', [TransaksiController::class, 'buyNow'])->name('customer.transaksi.bayar');
 
     // Tambah ini
     Route::post('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('customer.keranjang.checkout');
-    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('customer.checkout.success');
+    Route::get('/checkout/riwayat/{order}', [CheckoutController::class, 'success'])->name('customer.riwayat');
 
     Route::get('/check-referral', [CheckoutController::class, 'checkReferral'])->name('customer.check-referral');
 
-    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('customer.riwayat');
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('customer.pesanan');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -139,7 +138,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     ]);
 
     Route::patch('/orders/{order}/confirm-payment', [OrderController::class, 'confirmPayment'])
-        ->name('admin.orders.confirm-payment');
+        ->name('orders.confirm-payment');
 
     Route::resource('transaksi-qris', PaymentController::class, [
         'names' => [

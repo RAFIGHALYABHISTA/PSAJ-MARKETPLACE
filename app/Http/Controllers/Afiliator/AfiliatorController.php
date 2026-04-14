@@ -17,7 +17,7 @@ class AfiliatorController extends Controller
 
     public function showRegisterForm()
     {
-        $bank = ['BCA', 'Mandiri', 'BRI', 'GoPay'];
+        $bank = ['BCA', 'MANDIRI', 'BRI', 'GOPAY'];
         // Check if user already registered as affiliator
         if (auth()->user()->affiliatorProfile()->exists()) {
             return redirect()->route('home')->with('info', 'Anda sudah terdaftar sebagai affiliator');
@@ -72,7 +72,7 @@ class AfiliatorController extends Controller
                 ->with('success', 'Pendaftaran berhasil! Akun Anda sedang menunggu persetujuan dari admin. Anda akan mendapatkan notifikasi ketika akun diaktifkan.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withInput()->with('error', 'Terjadi kesalahan saat mendaftar sebagai affiliator. Silakan coba lagi.');
+            return back()->withInput()->with('error','Terjadi kesalahan pada registrasi...');
         }
     }
 

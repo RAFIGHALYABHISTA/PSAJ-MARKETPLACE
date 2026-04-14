@@ -35,6 +35,6 @@ class CheckoutController extends Controller
     
         abort_if($order->customer_id !== auth()->id(), 403);
 
-        return view('customer.checkout-success', compact('order'));
+        return view('customer.riwayat', compact('order'));
     }
 }
