@@ -14,12 +14,15 @@ use App\Http\Controllers\Customer\ProductsController;
 use App\Http\Controllers\Customer\RiwayatController;
 use App\Http\Controllers\Customer\TransaksiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\Route;
 
 
 // ==================================
 // PUBLIC ROUTES (Customer)
 // ==================================
+
+Route::get('storage/{path}', [StorageController::class, 'image'])->where('path', '.*')->name('storage.image');
 
 Route::middleware('auth')->group(function () {
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('customer.keranjang');

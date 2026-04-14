@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -102,11 +103,17 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric|min:0',
-                'image_url' => 'nullable|url',
+                'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'stock' => 'required|integer|min:0',
                 'is_active' => 'boolean',
                 'category_id' => 'required|exists:category,id',
             ]);
+
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('products', 'public');
+                $validated['image'] = $imagePath;
+            }
 
             $product = Product::create($validated);
 
@@ -220,11 +227,24 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric|min:0',
-                'image_url' => 'nullable|url',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'stock' => 'required|integer|min:0',
                 'is_active' => 'boolean',
                 'category_id' => 'required|exists:category,id',
             ]);
+
+            // Handle image upload if new file provided
+            if ($request->hasFile('image')) {
+                // Delete old image if exists
+                if ($product->image && !Str::startsWith($product->image, 'http')) {
+                    $oldImagePath = storage_path('app/public/' . $product->image);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+                $imagePath = $request->file('image')->store('products', 'public');
+                $validated['image'] = $imagePath;
+            }
 
             $oldName = $product->name;
             $product->update($validated);
