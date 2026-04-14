@@ -52,7 +52,7 @@ class Order extends Model
      */
     public function affiliator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'affiliator_id', 'user_id');
+        return $this->belongsTo(User::class, 'affiliator_id', 'id');
     }
 
     /**

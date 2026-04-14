@@ -11,13 +11,16 @@ class StorageController extends Controller
     {
         $fullPath = 'public/' . $path;
 
-        if (!Storage::exists($fullPath)) {
+        if (!Storage::disk('public')->exists($path)) {
             abort(404);
         }
 
-        $file = Storage::get($fullPath);
-        $mimeType = Storage::mimeType($fullPath);
+        $file = Storage::disk('public')->get($path);
+        $mimeType = Storage::disk('public')->mimeType($path);
 
-        return response($file, 200)->header('Content-Type', $mimeType);
+        return response($file, 200)
+            ->header('Content-Type', $mimeType)
+            ->header('Cache-Control', 'public, max-age=31536000')
+            ->header('Access-Control-Allow-Origin', '*');
     }
 }

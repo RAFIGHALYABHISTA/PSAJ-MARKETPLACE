@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 // PUBLIC ROUTES (Customer)
 // ==================================
 
-Route::get('storage/{path}', [StorageController::class, 'image'])->where('path', '.*')->name('storage.image');
+Route::get('storage/{path}', [StorageController::class, 'image'])->where('path', '.*')->name('storage.local')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 Route::middleware('auth')->group(function () {
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('customer.keranjang');
