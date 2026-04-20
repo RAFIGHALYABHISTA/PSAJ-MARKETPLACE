@@ -137,7 +137,7 @@
                 </div>
 
                 <button type="submit" 
-                        class="w-full py-4 bg-slate-800  dark:text-slate-400 text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 dark:hover:bg-slate-100 transition-all active:scale-[0.98] shadow-lg shadow-slate-200/50 dark:shadow-none">
+                        class="w-full py-4 bg-slate-800 dark:bg-white text-white dark:text-slate-900 text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-slate-900 dark:hover:bg-slate-100 transition-all active:scale-[0.98] shadow-lg shadow-slate-200/50 dark:shadow-none">
                     <span>Masuk Sekarang</span>
                     <i class="fas fa-arrow-right text-xs"></i>
                 </button>

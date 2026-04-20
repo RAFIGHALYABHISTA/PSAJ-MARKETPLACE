@@ -73,9 +73,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('auth.authenticate') }}" method="POST" class="space-y-5">
-                @csrf
-                
+            <form action="{{ route('auth.authenticate') }}" method="POST" class="space-y-5"> @csrf
                 <div class="space-y-1.5">
                     <label class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Alamat Email</label>
                     <input type="email" name="email" placeholder="nama@email.com" value="{{ old('email') }}"
