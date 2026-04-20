@@ -59,21 +59,21 @@
                             <div class="space-y-1">
                                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Metode</p>
                                 <div>
-                                    <span class="px-2.5 py-1 rounded-full text-[10px] font-black border uppercase shadow-sm
-                                        {{ $payment->order->payment_method === 'online' ? 'text-blue-600 bg-blue-50 border-blue-100' : 'text-stone-600 bg-stone-50 border-stone-100' }}">
+                                    <span class="px-2.5 py-1 rounded-full text-[10px] bg-slate-800 dark:bg-white text-white dark:text-slate-900 text-xs font-black uppercase
+                                        {{ $payment->order->payment_method === 'online' ? 'bg-indigo-600 dark:bg-indigo-400' : 'bg-slate-800 dark:bg-white' }}">
                                         {{ $payment->order->payment_method === 'online' ? 'QRIS' : 'Tunai' }}
                                     </span>
                                 </div>
                             </div>
                             <div class="space-y-1">
                                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Status Bayar</p>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-black border uppercase shadow-sm {{ $statusStyle[$payment->status] ?? '' }}">
+                                <span class="px-2.5 py-1 rounded-full text-[10px] bg-slate-800 dark:bg-white text-white dark:text-slate-900 text-xs font-black uppercase{{ $statusStyle[$payment->status] ?? '' }}">
                                     {{ $payment->status }}
                                 </span>
                             </div>
                             <div class="space-y-1">
                                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Status Ambil</p>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-black border uppercase shadow-sm {{ $pickupStyle[$payment->order->pickup_status] ?? '' }}">
+                                <span class="px-2.5 py-1 rounded-full text-[10px] bg-slate-800 dark:bg-white text-white dark:text-slate-900 text-xs font-black uppercase {{ $pickupStyle[$payment->order->pickup_status] ?? '' }}">
                                     {{ $payment->order->pickup_status }}
                                 </span>
                             </div>
