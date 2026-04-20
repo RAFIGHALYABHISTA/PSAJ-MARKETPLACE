@@ -95,18 +95,17 @@
             </div>
             <span class="text-sm font-bold uppercase tracking-widest">Affiliator Dashboard</span>
           </a>
-        @endif
-
         @else
         <div class="mt-8 p-6 rounded-[30px] bg-[#FFEADB] border border-[#5B2C04]/10 relative overflow-hidden group">
             <div class="absolute top-[-20px] right-[-20px] w-20 h-20 bg-green-700/10 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
             <h4 class="text-[#5B2C04] font-serif text-lg mb-1">Daftar Afiliator</h4>
             <p class="text-[11px] text-[#5B2C04]/70 mb-4 uppercase tracking-wider font-bold">Gabung & Dapatkan Komisi</p>
             <a href="{{route('afiliator.register')}}" class="inline-flex items-center gap-2 text-xs font-bold text-green-800 hover:gap-3 transition-all">
-                Mulai Sekarang 
+                Mulai Sekarang
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </a>
           </div>
+        @endif
         @endif
 
         <div class="pt-8">

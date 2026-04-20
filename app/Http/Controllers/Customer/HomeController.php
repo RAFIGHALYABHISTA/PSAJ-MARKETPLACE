@@ -3,18 +3,31 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product; // Ini kuncinya, ambil data dari model yang sama dengan admin
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Ambil data produk (sama seperti yang dilakukan admin)
-        // Kamu bisa tambah filter, misal cuma ambil 4 produk terbaru
-        $products = Product::latest()->take(4)->get(); 
-
-        // Kirim ke view customer
+        $products = Product::latest()->take(4)->get();
         return view('customer.home', compact('products'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->route('customer.edit-profil')
+            ->with('success', '✅ Profil berhasil diperbarui!');
     }
 }

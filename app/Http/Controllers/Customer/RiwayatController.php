@@ -16,8 +16,6 @@ class RiwayatController extends Controller
         // Mengambil data order milik user yang login
         $orders = Order::with(['orderItems.product'])
             ->where('customer_id', auth()->id())
-            // Sesuai permintaan: status yang sedang diproses (selain pending)
-            ->where('payment_status', '!=', 'pending')
             ->latest()
             ->paginate(10);
 

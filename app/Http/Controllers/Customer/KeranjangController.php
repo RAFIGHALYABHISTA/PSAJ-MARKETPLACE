@@ -16,7 +16,7 @@ class KeranjangController extends Controller
         $keranjang = OrderItem::with('product.category')
             ->whereHas('order', function ($q) {
                 $q->where('customer_id', auth()->id())
-                    ->where('payment_status', 'pending');
+                    ->where('invoice_number', 'like', 'DRAFT-%');
             })
             ->get();
 

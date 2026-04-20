@@ -84,6 +84,7 @@ Route::get('/edit-profil', function () {
 Route::get('/edit-profil1', function () {
     return view('customer.edit-profil1');
 })->name('customer.edit-profil1');
+Route::post('/edit-profil/update', [HomeController::class, 'updateProfile'])->name('customer.profile.update');
 
 // ==================================
 // AUTH ROUTES (Guest only)

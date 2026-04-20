@@ -122,7 +122,7 @@
                             </a>
 
                             <!-- PESANAN -->
-                            <a href="{{ route('customer.pesanan') }}"
+                            <a href="{{ route('customer.riwayat') }}"
                                 class="group flex items-center justify-between p-4 rounded-[25px] bg-stone-50 hover:bg-[#5B2C04] transition-all duration-300 border border-stone-100">
                                 <div class="flex items-center gap-4">
                                     <div

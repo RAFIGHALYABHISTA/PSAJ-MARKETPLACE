@@ -81,7 +81,7 @@
                     @foreach($order->orderItems as $item)
                     <div class="px-6 py-4 flex items-center gap-4 hover:bg-stone-50/30 transition-colors">
                         <div class="shrink-0 bg-[#F9F1E7] w-16 h-16 rounded-2xl flex items-center justify-center border border-stone-100 shadow-inner">
-                            <img src="{{ Str::startsWith($item->product->image, 'http') ? $item->product->image : asset('storage/' . $item->product->image) }}"
+                            <img src="{{ $item->product->image ? asset($item->product->image) : ($item->product->image_url ?? asset('images/produk.png')) }}"
                                  alt="{{ $item->product->name }}"
                                  class="w-12 h-12 object-contain mix-blend-multiply">
                         </div>
